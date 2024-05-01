@@ -1,3 +1,21 @@
+<?php
+include('conexao.inc.php');
+
+if($_POST) {
+    $bd = new BD();
+
+    if($bd->selectLinhas('login','login',"login ='".$_POST['login']. "' and senha = '".md5($_POST['senha'])."'") == 1) {
+      Header("Location: home.php");
+    } else {
+      ?>
+        <div class="alert alert-danger text-center">
+          Login Ou Senha Invalidos
+        </div>
+      <?php
+    }
+} 
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -24,7 +42,7 @@
         </div>
         
         <div class="my-3 mx-auto p-0 text-center" id="troca_cad">
-            <div class="w-75 btn btn-success">Logar</div>
+            <button type="submit" class="w-75 btn btn-success">Logar</button>
         </div>
     </form>
 

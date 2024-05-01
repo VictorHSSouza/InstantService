@@ -22,6 +22,12 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function selectLinhas($campo,$tb,$where = true) {
+            $sql = "SELECT $campo FROM $tb WHERE $where";
+            $stmt = $this->pdo->query($sql);
+            return $stmt->rowCount();
+        }
+
         public function insert($tb,$indice,$valor) {
             $sql = "INSERT INTO $tb ($indice) VALUES($valor)";
             $stmt = $this->pdo->prepare($sql);
@@ -38,6 +44,10 @@
             $sql = "DELETE FROM $tb WHERE $where";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
+        }
+
+        public function ultimoId() {
+            return $this->pdo->lastInsertId();
         }
     }
 ?>
