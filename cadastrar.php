@@ -18,8 +18,8 @@ if($_POST) {
     $bd->insert('cadastro_cliente',$indice,$valor);
 
     if(md5($_POST['senha']) == md5($_POST['senha2'])) {
-        $indice = "tipo,login,senha,idcliente";
-        $valor = "'U','".$_POST['login']."','".md5($_POST['senha'])."', ". PDO::lastInsertId();
+        $indice = "tipo,login,senha,id_cliente";
+        $valor = "'U','".$_POST['login']."','".md5($_POST['senha'])."', ". $bd->ultimoId();
         $bd->insert('login',$indice,$valor);
     }
     Header("Location: index.php");
@@ -73,8 +73,8 @@ if($_POST) {
                     </div>
 
                     <div class="mt-2 mb-3 col-12 mx-auto row p-0">
-                        <label for="nascimento" class="col mb-2 p-0 my-auto text-start">Nascimento:</label>
-                        <input type="date" id="nascimento" name="nascimento" class="col-12 p-1" required> 
+                        <label for="data_nascimento" class="col mb-2 p-0 my-auto text-start">Nascimento:</label>
+                        <input type="date" id="data_nascimento" name="data_nascimento" class="col-12 p-1" required> 
                     </div>
                 </div>
 

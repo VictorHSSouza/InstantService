@@ -1,8 +1,14 @@
 function troca_cad() {
-    document.getElementById("cad1").setAttribute("style","display: none;");
-    document.getElementById("troca_cad").setAttribute("style","display: none;");
-    document.getElementById("submit").setAttribute("style","display: true;");
-    document.getElementById("cad2").setAttribute("style","display: true;");
+    if(document.getElementById("nome").value && document.getElementById("sobrenome").value && document.getElementById("email").value 
+    && document.getElementById("cpf").value && document.getElementById("data_nascimento").value) {
+        document.getElementById("cad1").setAttribute("style","display: none;");
+        document.getElementById("troca_cad").setAttribute("style","display: none;");
+        document.getElementById("submit").setAttribute("style","display: true;");
+        document.getElementById("cad2").setAttribute("style","display: true;");
+    } else {
+        alert('todos os campos abaixo devem ser preenchidos')
+    }
+        
 }
 
 function mascara_cpf()
