@@ -24,7 +24,7 @@
         </div>
         
         <div class="my-3 mx-auto p-0 text-center" id="troca_cad">
-            <div class="w-75 btn btn-success">Cadastrar</div>
+            <div class="w-75 btn btn-success">Logar</div>
         </div>
     </form>
 

@@ -15,11 +15,11 @@ if($_POST) {
             $valor = $valor.", '$value'";
         }
     }
-    $bd->insert('cadastro_usuario',$indice,$valor);
+    $bd->insert('cadastro_cliente',$indice,$valor);
 
     if(md5($_POST['senha']) == md5($_POST['senha2'])) {
-        $indice = "tipo,login,senha";
-        $valor = "'U','".$_POST['login']."','".md5($_POST['senha'])."'";
+        $indice = "tipo,login,senha,idcliente";
+        $valor = "'U','".$_POST['login']."','".md5($_POST['senha'])."', ". PDO::lastInsertId();
         $bd->insert('login',$indice,$valor);
     }
     Header("Location: index.php");
@@ -68,8 +68,8 @@ if($_POST) {
                     </div>
 
                     <div class="mt-2 mb-3 col-12 mx-auto row p-0">
-                        <label for="cpf" class="col mb-2 p-0 my-auto text-start">Cpf:</label>
-                        <input type="text" id="cpf" name="cpf" class="col-12 p-1" required> 
+                        <label for="cpf" class="col mb-2 p-0 my-auto text-start">CPF:</label>
+                        <input type="text" id="cpf" name="cpf" class="col-12 p-1" oninput="mascara_cpf()" onkeypress="return somente_numeros(event)" required> 
                     </div>
 
                     <div class="mt-2 mb-3 col-12 mx-auto row p-0">
