@@ -1,0 +1,12 @@
+A fazer: 
+
+Geral:
+    criar o design definitivo para a tela:
+        index.php
+        cadastrar.php
+
+
+cadastrar.php:
+    fazer mascara js para o cpf
+    fazer mascara para não permitif a funcionalidade do troca_cad caso todos os dados da pagina 1 não sejam preenchidos
+
