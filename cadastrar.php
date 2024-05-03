@@ -96,10 +96,11 @@ if($_POST) {
                 </div>
 
                 <div class="my-3 mx-auto p-0 text-center" id="troca_cad">
-                    <div onclick="troca_cad()" class="w-75 btn btn-success">Cadastrar</div>
+                    <div onclick="troca_cad()" class="w-75 btn btn-success">Próximo</div>
                 </div>
 
                 <div class="my-3 mx-auto p-0 text-center" id="submit" style="display: none;">
+                    <div class="btn btn-success" onclick="voltar_cad()"><</div>
                     <button type="submit" class="w-75 btn btn-success">Cadastrar</button>
                 </div>   
             </form>

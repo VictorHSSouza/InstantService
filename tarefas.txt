@@ -1,9 +1,8 @@
 O que foi feito:
 
 all.js:
-    mascara para o cpf
-    mascara para input aceitar somente numeros
-
+    mascara_data // mascara para a data de nascimento
+    mascara_email // mascara para o email
 
 
 A fazer: 
@@ -15,6 +14,6 @@ Geral:
 
 
 cadastrar.php:
-    fazer mascara para não permitir a funcionalidade do troca_cad caso todos os dados da pagina 1 não sejam preenchidos.
-    fazer mascara para não permitir datas de nascimento depois do dia atual.
+    Ser possivel se cadastrar como profissional
+    Mensagem para cada input individualmente 
 

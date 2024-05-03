@@ -46,7 +46,7 @@ if($_POST) {
                 </div>
 
                 <div class="mb-4">
-                    <a href="cadastrar.php" class="text-decoration-none">Não possui uma conta? cadastrar.</a>
+                    <a href="cadastrar.php" class="text-decoration-none">Não possui uma conta? Cadastrar.</a>
                 </div>
 
             </form>
