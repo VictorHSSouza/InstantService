@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 04/05/2024 às 02:15
--- Versão do servidor: 8.2.0
--- Versão do PHP: 8.2.13
+-- Tempo de geração: 04-Maio-2024 às 21:38
+-- Versão do servidor: 8.0.31
+-- versão do PHP: 8.0.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,12 +20,11 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `instant_service`
 --
-CREATE DATABASE instant_service;
-use instant_service;
+
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cadastro_profissional`
+-- Estrutura da tabela `cadastro_profissional`
 --
 
 DROP TABLE IF EXISTS `cadastro_profissional`;
@@ -47,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `cadastro_profissional` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cadastro_usuario`
+-- Estrutura da tabela `cadastro_usuario`
 --
 
 DROP TABLE IF EXISTS `cadastro_usuario`;
@@ -63,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `cadastro_usuario` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Despejando dados para a tabela `cadastro_usuario`
+-- Extraindo dados da tabela `cadastro_usuario`
 --
 
 INSERT INTO `cadastro_usuario` (`id_cliente`, `nome`, `sobrenome`, `email`, `sexo`, `data_nascimento`, `cpf`) VALUES
@@ -74,7 +73,7 @@ INSERT INTO `cadastro_usuario` (`id_cliente`, `nome`, `sobrenome`, `email`, `sex
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `estados`
+-- Estrutura da tabela `estados`
 --
 
 DROP TABLE IF EXISTS `estados`;
@@ -85,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `estados` (
 ) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Despejando dados para a tabela `estados`
+-- Extraindo dados da tabela `estados`
 --
 
 INSERT INTO `estados` (`id_estado`, `nome_estado`) VALUES
@@ -120,7 +119,31 @@ INSERT INTO `estados` (`id_estado`, `nome_estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `login`
+-- Estrutura da tabela `habilidades_profissionais`
+--
+
+DROP TABLE IF EXISTS `habilidades_profissionais`;
+CREATE TABLE IF NOT EXISTS `habilidades_profissionais` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `habilidade` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `habilidades_profissionais`
+--
+
+INSERT INTO `habilidades_profissionais` (`id`, `habilidade`) VALUES
+(1, 'Manutenção de Computadores'),
+(2, 'Montagem de Computadores'),
+(3, 'Recuperação de Dados e Backup'),
+(4, 'Manutenção em impressoras'),
+(5, 'Manutenção elétrica');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `login`
 --
 
 DROP TABLE IF EXISTS `login`;
@@ -134,13 +157,28 @@ CREATE TABLE IF NOT EXISTS `login` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Despejando dados para a tabela `login`
+-- Extraindo dados da tabela `login`
 --
 
 INSERT INTO `login` (`id_login`, `id_usuario`, `login`, `senha`, `tipo`) VALUES
 (1, 1, 'VictorHss', '202cb962ac59075b964b07152d234b70', 'U'),
 (2, 2, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'U'),
 (3, 3, 'Victorhss363', '202cb962ac59075b964b07152d234b70', 'U');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `relacao_profissional_habilidade`
+--
+
+DROP TABLE IF EXISTS `relacao_profissional_habilidade`;
+CREATE TABLE IF NOT EXISTS `relacao_profissional_habilidade` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_usuario` int UNSIGNED NOT NULL,
+  `id_habilidade` int UNSIGNED NOT NULL,
+  `data` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

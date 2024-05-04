@@ -1,8 +1,45 @@
 <?php
 
 require('teste_login.inc.php');
+$bd = new BD();
+if($bd->selectLinhas('*', 'cadastro_profissional', 'id_usuario = ' . $_SESSION['id_usuario']) == 1 && $bd->selectLinhas('*', 'cadastro_profissional', 'status_cadastro = 0 and id_usuario = ' . $_SESSION['id_usuario']) == 1) {
+    ?>
+    <!doctype html>
+    <html lang="en">
+        <head>
+            <!-- Required meta tags -->
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
 
-if(isset($_POST['cep'])) {
+            <!-- Bootstrap CSS -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            <link rel="stylesheet" href="assets/css/style.css">
+        
+        </head>
+        <body class="bg-light">
+            <div class="m-0 p-0 text-center my-5">
+                <h1 class="mb-5">Cadastro de Profissional</h1>
+
+                <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" class="row container w-40 m-auto py-2 h5 border px-5 border-5 rounded-3 border-dark"> 
+
+                    <div>
+                        <label>Adicione o seu currículo em pdf: </label>
+                        <input class="mt-2" type="file" name="imgadd" id="a" accept=".pdf" require>
+                    </div>
+                
+                    <div class="my-3 mx-auto p-0 text-center cad2">
+                        <button type="submit" class="w-75 btn btn-success">Enviar</button>
+                    </div>
+
+                </form>
+            </div>
+            <script src="assets/js/all.js"> </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        </body>
+    </html>
+    <?php
+}
+elseif(isset($_POST['cep'])) {
     $bd = new BD();
 
     $indice = 'id_usuario';
