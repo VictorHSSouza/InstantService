@@ -19,7 +19,8 @@
         public function select($campo,$tb,$where = true) {
             $sql = "SELECT $campo FROM $tb WHERE $where";
             $stmt = $this->pdo->query($sql);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if($this->selectLinhas($campo,$tb,$where) == 1)return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+            else return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function selectLinhas($campo,$tb,$where = true) {

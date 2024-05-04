@@ -3,6 +3,10 @@ O que foi feito:
 all.js:
     mascara_data // mascara para a data de nascimento
     mascara_email // mascara para o email
+    mascara_cep // mascara para o cep
+
+cadastro_profissional.php:
+    feita a primeira parte do formulario
 
 
 A fazer: 
@@ -12,10 +16,14 @@ Geral:
         index.php
         cadastrar.php
         
-    automatizar select caso venha uma consulta abrir-la direto
+
 
 
 cadastrar.php:
-    Ser possivel se cadastrar como profissional
     Mensagem para cada input individualmente 
 
+
+cadastro_profissional.php:
+    fazer a segunda parte:
+        select habilidades com ajax
+        anexar arquivo do curriculo

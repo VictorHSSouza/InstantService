@@ -5,7 +5,7 @@ if($_POST) {
     $bd = new BD();
 
     if($bd->selectLinhas('login','login',"login ='".$_POST['login']. "' and senha = '".md5($_POST['senha'])."'") == 1) {
-        $consulta = $bd->select('login, senha, tipo, id_usuario', 'login', "login ='".$_POST['login']. "' and senha = '".md5($_POST['senha'])."'")[0];
+        $consulta = $bd->select('login, senha, tipo, id_usuario', 'login', "login ='".$_POST['login']. "' and senha = '".md5($_POST['senha'])."'");
         session_start();
 
         $_SESSION['login'] = $consulta['login'];

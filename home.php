@@ -1,6 +1,13 @@
 <?php
 
 require('teste_login.inc.php');
+if(isset($_GET['cad_prof'])) {
+    ?>
+        <div class="alert alert-success text-center">
+            Cadastro realizado com sucesso. Seu curriculo foi enviado.
+        </div>
+    <?php
+}
 
 ?>
 
