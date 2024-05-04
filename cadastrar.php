@@ -15,10 +15,10 @@ if($_POST) {
             $valor = $valor.", '$value'";
         }
     }
-    $bd->insert('cadastro_cliente',$indice,$valor);
+    $bd->insert('cadastro_usuario',$indice,$valor);
 
     if(md5($_POST['senha']) == md5($_POST['senha2'])) {
-        $indice = "tipo,login,senha,id_cliente";
+        $indice = "tipo,login,senha,id_usuario";
         $valor = "'U','".$_POST['login']."','".md5($_POST['senha'])."', ". $bd->ultimoId();
         $bd->insert('login',$indice,$valor);
     }
@@ -35,14 +35,15 @@ if($_POST) {
 
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="assets/css/style.css">
+    
     </head>
     <body class="bg-light">
         <div class="m-0 p-0 text-center my-5">
             <h1 class="mb-5">Cadastro de Usuário</h1>
 
-            <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" class="row container w-25 m-auto p-0 h5 border px-3 border-5 rounded-3 border-dark">
-                <div id="cad1">
+            <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" class="row container w-40 m-auto py-2 h5 border px-5 border-5 rounded-3 border-dark">
+                <div id="cad1" class="p-0">
                     <div class="mt-3 mb-3 col-12 mx-auto row p-0">
                         <label for="nome" class="col mb-2 p-0 my-auto text-start">Nome:</label>
                         <input type="text" id="nome" name="nome" class="col-12 p-1" required>
@@ -73,7 +74,7 @@ if($_POST) {
                     </div>
 
                     <div class="mt-2 mb-3 col-12 mx-auto row p-0">
-                        <label for="data_nascimento" class="col mb-2 p-0 my-auto text-start">Nascimento:</label>
+                        <label for="data_nascimento" class="col mb-2 p-0 my-auto text-start">Data de Nascimento:</label>
                         <input type="date" id="data_nascimento" name="data_nascimento" class="col-12 p-1" required> 
                     </div>
                 </div>
@@ -103,6 +104,11 @@ if($_POST) {
                     <div class="btn btn-success" onclick="voltar_cad()"><</div>
                     <button type="submit" class="w-75 btn btn-success">Cadastrar</button>
                 </div>   
+
+                <div class="mb-4">
+                    <a href="index.php" class="text-decoration-none">Já possui uma conta? Entrar.</a>
+                </div>
+
             </form>
         </div>
         <script src="assets/js/all.js"> </script>

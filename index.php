@@ -5,14 +5,25 @@ if($_POST) {
     $bd = new BD();
 
     if($bd->selectLinhas('login','login',"login ='".$_POST['login']. "' and senha = '".md5($_POST['senha'])."'") == 1) {
-      Header("Location: home.php");
+        $consulta = $bd->select('login, senha, tipo, id_usuario', 'login', "login ='".$_POST['login']. "' and senha = '".md5($_POST['senha'])."'")[0];
+        session_start();
+
+        $_SESSION['login'] = $consulta['login'];
+        $_SESSION['senha'] = $consulta['senha'];
+        $_SESSION['tipo'] = $consulta['tipo'];
+        $_SESSION['id_usuario'] = $consulta['id_usuario'];
+
+        Header("Location: home.php");
+
     } else {
         ?>
             <div class="alert alert-danger text-center">
-                Login Ou Senha Invalidos
+                Login e/ou Senha Invalidos
             </div>
         <?php
     }
+
+    
 } 
 ?>
 
@@ -25,12 +36,13 @@ if($_POST) {
 
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <link rel="stylesheet" href="assets/css/style.css"> 
 
     </head>
     <body class="bg-light">
         <div class="m-0 p-0 text-center my-5">
             <h1 class="mb-5">Login</h1>
-            <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" class="row container w-25 m-auto p-0 h5 border px-3 border-5 rounded-3 border-dark">  
+            <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" class="row container w-40 m-auto py-2 h5 border px-5  border-5 rounded-3 border-dark">  
                 <div class="mt-3 mb-3 col-12 mx-auto row p-0">
                     <label for="login" class="col mb-2 p-0 my-auto text-start">Login:</label>
                     <input type="text" id="login" name="login" class="col-12 p-1" required> 

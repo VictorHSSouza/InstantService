@@ -11,6 +11,8 @@ Geral:
     criar o design definitivo para a tela:
         index.php
         cadastrar.php
+        
+    automatizar select caso venha uma consulta abrir-la direto
 
 
 cadastrar.php:

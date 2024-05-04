@@ -1,6 +1,6 @@
 function troca_cad() {
-    if(/* document.getElementById("nome").value && document.getElementById("sobrenome").value && document.getElementById("email").value 
-    && document.getElementById("cpf").value && document.getElementById("data_nascimento").value && document.getElementById("cpf").value.length == 14 && mascara_email(document.getElementById("email").value)*/ true && mascara_data(document.getElementById("data_nascimento").value)) {
+    if(document.getElementById("nome").value && document.getElementById("sobrenome").value && document.getElementById("email").value 
+    && document.getElementById("cpf").value && document.getElementById("data_nascimento").value && document.getElementById("cpf").value.length == 14 && mascara_email(document.getElementById("email").value) && mascara_data(document.getElementById("data_nascimento").value)) {
         document.getElementById("cad1").setAttribute("style","display: none;"); 
         document.getElementById("troca_cad").setAttribute("style","display: none;");
         document.getElementById("submit").setAttribute("style","display: true;");
@@ -25,26 +25,43 @@ function mascara_cpf()
     cpf=cpf.slice(0,14)
     console.log(cpf)
     document.getElementById("cpf").value= cpf
-    var tel_formatado = document.getElementById("cpf").value
-    if (tel_formatado[3]!=".")
+    var cpf_formatado = document.getElementById("cpf").value
+    if (cpf_formatado[3]!=".")
     {
-        if(tel_formatado[3]!=undefined)
+        if(cpf_formatado[3]!=undefined)
         {
-            document.getElementById("cpf").value=tel_formatado.slice(0,3)+"."+ tel_formatado[3]; 
+            document.getElementById("cpf").value=cpf_formatado.slice(0,3)+"."+ cpf_formatado[3]; 
         }
     }
-    if (tel_formatado[7]!=".")
+    if (cpf_formatado[7]!=".")
     {
-        if(tel_formatado [7]!=undefined)
+        if(cpf_formatado [7]!=undefined)
         {
-            document.getElementById("cpf").value=tel_formatado.slice(0,7)+"."+tel_formatado[7]
+            document.getElementById("cpf").value=cpf_formatado.slice(0,7)+"."+cpf_formatado[7]
         }
     }
-    if (tel_formatado[11]!="-")
+    if (cpf_formatado[11]!="-")
     {
-        if(tel_formatado [11]!= undefined )
+        if(cpf_formatado [11]!= undefined )
         {
-            document.getElementById("cpf").value=tel_formatado.slice(0,11)+ "-" + tel_formatado[11]
+            document.getElementById("cpf").value=cpf_formatado.slice(0,11)+ "-" + cpf_formatado[11]
+        }
+    }
+}
+
+function mascara_cep()
+{
+    var cep = document.getElementById("cep").value
+    console.log(cep)
+    cep=cep.slice(0,9)
+    console.log(cep)
+    document.getElementById("cep").value= cep
+    var cep_formatado = document.getElementById("cep").value
+    if (cep_formatado[5]!="-")
+    {
+        if(cep_formatado [5]!=undefined)
+        {
+            document.getElementById("cep").value=cep_formatado.slice(0,5)+"-"+cep_formatado[5]
         }
     }
 }
