@@ -2,7 +2,32 @@
 
 require('teste_login.inc.php');
 $bd = new BD();
-if($bd->selectLinhas('*', 'cadastro_profissional', 'id_usuario = ' . $_SESSION['id_usuario']) == 1 && $bd->selectLinhas('*', 'cadastro_profissional', 'status_cadastro = 0 and id_usuario = ' . $_SESSION['id_usuario']) == 1) {
+
+if(isset($_POST['cadfim'])) {
+    var_dump($_FILES);
+    if($_FILES['pdfadd']['name']) {
+        $uploaddir = 'assets/arquivos/';
+        $filename = basename($_FILES['pdfadd']['name']);
+        $arquivo = $uploaddir . $filename;
+        //echo $arquivo;
+        if (!move_uploaded_file($_FILES['pdfadd']['tmp_name'], $arquivo)) {
+            echo "erro";
+        }
+    }
+
+    $bd->update('cadastro_profissional',"status_cadastro = 1","id_usuario = ".$_SESSION['id_usuario']);
+    Header("Location: home.php?cad_prof=1");
+} elseif($bd->selectLinhas('*', 'cadastro_profissional', 'id_usuario = ' . $_SESSION['id_usuario']) == 1 && $bd->selectLinhas('*', 'cadastro_profissional', 'status_cadastro = 0 and id_usuario = ' . $_SESSION['id_usuario']) == 1) {
+    $habilidades = $bd->select("id,habilidade","habilidades");
+    $habilidades_cad = $bd->select("GROUP_CONCAT(id_habilidade) as habilidades","profissional_habilidades","id_profissional=".$_SESSION['id_usuario']);
+
+    if(isset($habilidades_cad['habilidades'])) {
+        $habilidades_cad = explode(",",$habilidades_cad['habilidades']);
+        $new_habilidades_cad = [];
+        foreach($habilidades_cad as  $valor) {
+            $new_habilidades_cad[$valor] = 0;
+        }
+    }
     ?>
     <!doctype html>
     <html lang="en">
@@ -20,11 +45,44 @@ if($bd->selectLinhas('*', 'cadastro_profissional', 'id_usuario = ' . $_SESSION['
             <div class="m-0 p-0 text-center my-5">
                 <h1 class="mb-5">Cadastro de Profissional</h1>
 
-                <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" class="row container w-40 m-auto py-2 h5 border px-5 border-5 rounded-3 border-dark"> 
+                <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" class="row container w-40 m-auto py-2 h5 border px-5 border-5 rounded-3 border-dark" enctype="multipart/form-data"> 
+                    
+                    <div id="habilidades" class="mt-2 mb-3 col-12 mx-auto row p-0">
+                        <div class="fw-bold"> Habilidades </div>
+                        <div class="fs-6 text-start mt-3">Clique nas habilidades que voce possui:</div>
+
+                        <div class="text-start row">
+                            <?php
+                                foreach($habilidades as $values) {
+                                    $stts = (isset($new_habilidades_cad[$values['id']]))?'none':'true';
+                                    ?>
+                                        <div class="m-1 btn btn-success col" id="habilidade<?=$values['id']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id_usuario']?>,<?=$values['id']?>,'0')"><?=$values['habilidade']?></div>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+
+                        <div class="fs-6 text-start mt-3">Suas habilidades:</div>
+                        <div class="border mt-1 text-start" style="min-height: 200px ;">
+                            <?php
+                                $habilidades = $bd->select("id,habilidade","habilidades");
+
+                                
+                                foreach($habilidades as $values) {
+                                    $stts = (!isset($new_habilidades_cad[$values['id']]))?'none':'true';
+                                    ?>
+                                        <div class="m-1 btn btn-success col" id="habilidade_cad<?=$values['id']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id_usuario']?>,<?=$values['id']?>,'1')"><?=$values['habilidade']?></div>
+                                    <?php
+                                }
+                            ?>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="cadfim" value="cadfim">
 
                     <div>
                         <label>Adicione o seu currículo em pdf: </label>
-                        <input class="mt-2" type="file" name="imgadd" id="a" accept=".pdf" require>
+                        <input class="mt-2" type="file" name="pdfadd" id="a" accept=".pdf" require>
                     </div>
                 
                     <div class="my-3 mx-auto p-0 text-center cad2">
@@ -33,13 +91,13 @@ if($bd->selectLinhas('*', 'cadastro_profissional', 'id_usuario = ' . $_SESSION['
 
                 </form>
             </div>
-            <script src="assets/js/all.js"> </script>
+            <script src="assets/js/ajax.js"></script>
+            <script src="assets/js/all.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
         </body>
     </html>
     <?php
-}
-elseif(isset($_POST['cep'])) {
+} elseif(isset($_POST['cep'])) {
     $bd = new BD();
 
     $indice = 'id_usuario';
@@ -55,8 +113,8 @@ elseif(isset($_POST['cep'])) {
 
     $bd->insert('cadastro_profissional',$indice,$valor);
 
-    Header("Location: home.php?cad_prof=1");
-} else {
+    Header("Location: ".$_SERVER['PHP_SELF']);
+} elseif($bd->selectLinhas("id","cadastro_profissional","id_usuario = ".$_SESSION['id_usuario']) == 0) {
     
     ?>
     <!doctype html>
@@ -128,6 +186,31 @@ elseif(isset($_POST['cep'])) {
                     </div>
 
                 </form>
+            </div>
+            <script src="assets/js/all.js"> </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        </body>
+    </html>
+    <?php
+} else {
+    ?>
+    <!doctype html>
+    <html lang="en">
+        <head>
+            <!-- Required meta tags -->
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+            <!-- Bootstrap CSS -->
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+            <link rel="stylesheet" href="assets/css/style.css">
+        
+        </head>
+        <body class="bg-light">
+            <div class="m-0 p-0 text-center my-5">
+                <h1 class="mb-5">Cadastro de Profissional</h1>
+
+                
             </div>
             <script src="assets/js/all.js"> </script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

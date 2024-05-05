@@ -16,7 +16,7 @@
             }     
         }
 
-        public function select($campo,$tb,$where = true) {
+        public function select($campo,$tb,$where = true,$order_by = "") {
             $sql = "SELECT $campo FROM $tb WHERE $where";
             $stmt = $this->pdo->query($sql);
             if($this->selectLinhas($campo,$tb,$where) == 1)return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
