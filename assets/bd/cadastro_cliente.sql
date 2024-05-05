@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 04-Maio-2024 às 21:38
--- Versão do servidor: 8.0.31
--- versão do PHP: 8.0.26
+-- Tempo de geração: 05/05/2024 às 02:47
+-- Versão do servidor: 8.2.0
+-- Versão do PHP: 8.2.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,11 +20,13 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `instant_service`
 --
+create database instant_service;
+use instant_service;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cadastro_profissional`
+-- Estrutura para tabela `cadastro_profissional`
 --
 
 DROP TABLE IF EXISTS `cadastro_profissional`;
@@ -41,12 +43,20 @@ CREATE TABLE IF NOT EXISTS `cadastro_profissional` (
   `status_ativo` tinyint(1) NOT NULL,
   `status_cadastro` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `cadastro_profissional`
+--
+
+INSERT INTO `cadastro_profissional` (`id`, `id_usuario`, `id_estado`, `cep`, `logradouro`, `numero`, `complemento`, `bairro`, `cidade`, `status_ativo`, `status_cadastro`) VALUES
+(2, 2, 9, '11111-111', 'rua a', '54', 'ghm', 'nygjfbgvfm', 'ksxfgh', 0, 1),
+(3, 4, 9, '11111-111', 'rua a', '696', 'ghm', 'ghghj', 'ghm', 0, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cadastro_usuario`
+-- Estrutura para tabela `cadastro_usuario`
 --
 
 DROP TABLE IF EXISTS `cadastro_usuario`;
@@ -59,21 +69,22 @@ CREATE TABLE IF NOT EXISTS `cadastro_usuario` (
   `data_nascimento` date NOT NULL,
   `cpf` char(14) NOT NULL,
   PRIMARY KEY (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `cadastro_usuario`
+-- Despejando dados para a tabela `cadastro_usuario`
 --
 
 INSERT INTO `cadastro_usuario` (`id_cliente`, `nome`, `sobrenome`, `email`, `sexo`, `data_nascimento`, `cpf`) VALUES
 (1, 'dsad', 'dsadasda', 'victorhenriquesantanasouza@gmail.com', 'F', '2024-05-07', '151.960.406-84'),
 (2, 'dsad', 'dsadasda', 'asda@adsa.con', 'F', '2003-10-14', '151.960.406-84'),
-(3, 'dsadasd', 'dsadasda', 'victorhenriquesantanasouza@gmail.com', 'F', '1988-03-04', '151.960.406-84');
+(3, 'dsadasd', 'dsadasda', 'victorhenriquesantanasouza@gmail.com', 'F', '1988-03-04', '151.960.406-84'),
+(4, 'nome', 'ffe', 'f@gr.g', 'M', '2007-07-11', '111.111.111-11');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `estados`
+-- Estrutura para tabela `estados`
 --
 
 DROP TABLE IF EXISTS `estados`;
@@ -84,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `estados` (
 ) ENGINE=MyISAM AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `estados`
+-- Despejando dados para a tabela `estados`
 --
 
 INSERT INTO `estados` (`id_estado`, `nome_estado`) VALUES
@@ -119,31 +130,32 @@ INSERT INTO `estados` (`id_estado`, `nome_estado`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `habilidades_profissionais`
+-- Estrutura para tabela `habilidades`
 --
 
-DROP TABLE IF EXISTS `habilidades_profissionais`;
-CREATE TABLE IF NOT EXISTS `habilidades_profissionais` (
+DROP TABLE IF EXISTS `habilidades`;
+CREATE TABLE IF NOT EXISTS `habilidades` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `habilidade` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `habilidades_profissionais`
+-- Despejando dados para a tabela `habilidades`
 --
 
-INSERT INTO `habilidades_profissionais` (`id`, `habilidade`) VALUES
+INSERT INTO `habilidades` (`id`, `habilidade`) VALUES
 (1, 'Manutenção de Computadores'),
 (2, 'Montagem de Computadores'),
 (3, 'Recuperação de Dados e Backup'),
 (4, 'Manutenção em impressoras'),
-(5, 'Manutenção elétrica');
+(5, 'Manutenção elétrica'),
+(6, 'Manutenção de rede');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `login`
+-- Estrutura para tabela `login`
 --
 
 DROP TABLE IF EXISTS `login`;
@@ -154,31 +166,43 @@ CREATE TABLE IF NOT EXISTS `login` (
   `senha` varchar(255) NOT NULL,
   `tipo` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`id_login`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Extraindo dados da tabela `login`
+-- Despejando dados para a tabela `login`
 --
 
 INSERT INTO `login` (`id_login`, `id_usuario`, `login`, `senha`, `tipo`) VALUES
 (1, 1, 'VictorHss', '202cb962ac59075b964b07152d234b70', 'U'),
 (2, 2, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'U'),
-(3, 3, 'Victorhss363', '202cb962ac59075b964b07152d234b70', 'U');
+(3, 3, 'Victorhss363', '202cb962ac59075b964b07152d234b70', 'U'),
+(4, 4, 'abcd', '202cb962ac59075b964b07152d234b70', 'U');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `relacao_profissional_habilidade`
+-- Estrutura para tabela `profissional_habilidades`
 --
 
-DROP TABLE IF EXISTS `relacao_profissional_habilidade`;
-CREATE TABLE IF NOT EXISTS `relacao_profissional_habilidade` (
+DROP TABLE IF EXISTS `profissional_habilidades`;
+CREATE TABLE IF NOT EXISTS `profissional_habilidades` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_usuario` int UNSIGNED NOT NULL,
+  `id_profissional` int UNSIGNED NOT NULL,
   `id_habilidade` int UNSIGNED NOT NULL,
   `data` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `profissional_habilidades`
+--
+
+INSERT INTO `profissional_habilidades` (`id`, `id_profissional`, `id_habilidade`, `data`) VALUES
+(23, 4, 5, '2024-05-04'),
+(22, 4, 4, '2024-05-04'),
+(20, 2, 3, '2024-05-04'),
+(21, 4, 1, '2024-05-04'),
+(19, 2, 1, '2024-05-04');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

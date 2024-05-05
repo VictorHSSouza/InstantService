@@ -207,9 +207,10 @@ if(isset($_POST['cadfim'])) {
         
         </head>
         <body class="bg-light">
-            <div class="m-0 p-0 text-center my-5">
-                <h1 class="mb-5">Cadastro de Profissional</h1>
-
+            <div class="position-absolute top-50 start-50 translate-middle m-0 p-0 text-center container-fluid">
+                <div class="mb-5 display-3">O seu cadastro já foi concluído</div>
+                <h4 class="m-0">Nosso time irá analisar seu perfil. Aguarde futuras respostas!</h4>
+                <button type="button" class="mt-5 btn btn-dark"><a class="text-decoration-none text-white" href="home.php">Voltar</a></button>
                 
             </div>
             <script src="assets/js/all.js"> </script>
