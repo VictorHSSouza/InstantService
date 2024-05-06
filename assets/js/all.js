@@ -107,11 +107,12 @@ function mascara_email(email) {
 
 function mascara_data(data)
 {
-    var data_atual = new Date().toLocaleDateString();
 
+    var data_atual = new Date().toLocaleDateString();
+   
     const split_atual = data_atual.split("/", 3);
     const split_data = data.split("-", 3);
 
-    if(((split_atual[2]-16)>split_data[0]) || ((split_atual[2]-16) === split_data[0] && split_atual[1]>split_data[1]) || (split_atual[1] === split_data[1] && split_atual[0]>split_data[2]) || split_atual[0] === split_data[2]) return true
+    if(((split_atual[2]-16)>split_data[0]) || ((split_atual[2]-16) === split_data[0] && split_atual[1]>split_data[1]) || ((split_atual[2]-16) === split_data[0] && split_atual[1] === split_data[1] && split_atual[0]>split_data[2]) || ((split_atual[2]-16) === split_data[0] && split_atual[1] === split_data[1] && split_atual[0] === split_data[2])) return true
     else return false;
 }
