@@ -28,20 +28,11 @@ cadastro_profissional.php:
     fazer a segunda parte:
         anexar arquivo do curriculo
         habilitar cadastro apenas se o proficional possuir alguma habilidade
+    
+    colocar botão para anexar foto
 
     mudar consulta para:
         SELECT IFNULL(P.ID_HABILIDADE,0) AS HABILIDADES
         FROM habilidades H
         LEFT JOIN profissional_habilidades P ON H.ID = P.ID_HABILIDADE AND P.ID_USUARIO = 5
         ORDER BY '';
-
-
-
-
-
-
-
-
-
-
-

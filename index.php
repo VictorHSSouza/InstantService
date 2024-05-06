@@ -40,9 +40,9 @@ if($_POST) {
 
     </head>
     <body class="bg-light">
-        <div class="m-0 p-0 text-center my-5">
+        <div class="m-0 p-0 text-center my-5 row">
             <h1 class="mb-5">Login</h1>
-            <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" class="row container w-40 m-auto py-2 h5 border px-5  border-5 rounded-3 border-dark">  
+            <form action="<?=$_SERVER['PHP_SELF']?>" method="POST" class="row container col col-sm-4 col-11 m-auto py-2 h5 border px-5  border-5 rounded-3 border-dark">  
                 <div class="mt-3 mb-3 col-12 mx-auto row p-0">
                     <label for="login" class="col mb-2 p-0 my-auto text-start">Login:</label>
                     <input type="text" id="login" name="login" class="col-12 p-1" required> 
