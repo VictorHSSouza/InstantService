@@ -1,0 +1,18 @@
+{
+    
+    "require": {
+        "monolog/monolog": "^2.9"
+    },
+    "authors": [
+        {
+            "name": "Instantservice",
+            "email": "instantservice@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "MF\\": "vendor/MF/"
+        }
+    }
+}
