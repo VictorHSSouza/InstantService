@@ -13,16 +13,40 @@ Class Route extends Bootstrap {
             'action' => 'index'
         );
 
+        $routes['login'] = array(
+            'route' => '/login',
+            'controller' => 'loginController',
+            'action' => 'login'
+        );
+
+        $routes['logar'] = array(
+            'route' => '/logar',
+            'controller' => 'loginController',
+            'action' => 'logar'
+        );
+
+        $routes['cadastrar'] = array(
+            'route' => '/cadastrar',
+            'controller' => 'cadastrarController',
+            'action' => 'cadastrar'
+        );
+
+        $routes['registrar'] = array(
+            'route' => '/registrar',
+            'controller' => 'cadastrarController',
+            'action' => 'registrar'
+        );
+
         $routes['profissional'] = array(
             'route' => '/profissional',
             'controller' => 'profissionalController',
             'action' => 'profissional'
         );
 
-        $routes['teste'] = array(
-            'route' => '/teste',
-            'controller' => 'testeController',
-            'action' => 'teste'
+        $routes['avaliar'] = array(
+            'route' => '/avaliar',
+            'controller' => 'avaliarController',
+            'action' => 'avaliar'
         );
 
         $this->setRoutes($routes);

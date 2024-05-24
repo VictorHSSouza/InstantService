@@ -40,5 +40,9 @@ abstract class Model {
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
     }
+
+    public function lastId() {
+        return $this->db->insert_id;
+    }
 }
 
