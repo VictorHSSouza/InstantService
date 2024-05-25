@@ -12,7 +12,7 @@ Class Route extends Bootstrap {
             'controller' => 'indexController',
             'action' => 'index'
         );
-
+        //
         $routes['login'] = array(
             'route' => '/login',
             'controller' => 'loginController',
@@ -36,13 +36,31 @@ Class Route extends Bootstrap {
             'controller' => 'cadastrarController',
             'action' => 'registrar'
         );
-
+        //
         $routes['profissional'] = array(
             'route' => '/profissional',
             'controller' => 'profissionalController',
             'action' => 'profissional'
         );
 
+        $routes['profissional_cadastro'] = array(
+            'route' => '/profissional_cadastro',
+            'controller' => 'profissionalController',
+            'action' => 'profissional_cadastro'
+        );
+
+        $routes['profissional_habilidades_cadastro'] = array(
+            'route' => '/profissional_habilidades_cadastro',
+            'controller' => 'profissionalController',
+            'action' => 'profissional_habilidades_cadastro'
+        );
+
+        $routes['profissional_habilidades'] = array(
+            'route' => '/profissional_habilidades',
+            'controller' => 'profissionalController',
+            'action' => 'profissional_habilidades'
+        );
+        //
         $routes['avaliar'] = array(
             'route' => '/avaliar',
             'controller' => 'avaliarController',

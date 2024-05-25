@@ -4,39 +4,45 @@ namespace App\Models;
 use MF\Model\Model;
 
 class Profissional extends Model{
-    public function list_profissional() {  
+    protected $tb = "cadastro_profissional";
+
+    /*public function list_profissional() {  
         $query = "SELECT * FROM cadastro_profissional";
         $retorno = $this->db->query($query)->fetch_all(MYSQLI_ASSOC);
         return $retorno;
-    }
+    }*/
 
-    public function cadastrar_profissional() {
-        if(isset($_POST['cadfim'])) {
-            var_dump($_FILES);
-            if($_FILES['pdfadd']['name']) {
-                $uploaddir = 'assets/arquivos/';
-                $filename = basename($_FILES['pdfadd']['name']);
-                $arquivo = $uploaddir . $filename;
-                //echo $arquivo;
-                if (!move_uploaded_file($_FILES['pdfadd']['tmp_name'], $arquivo)) {
-                    echo "erro";
-                }
+    public function pg_profissional($id) {
+        if($this->rows("status_ativo,status_cadastro",$this->tb,"id_usuario = $id")) {
+            $info = $this->select("status_ativo,status_cadastro",$this->tb,"id_usuario = $id")[0];
+            if($info['status_ativo'] == 0 && $info['status_cadastro'] == 0) {
+                return 2;
+            } elseif($info['status_ativo'] == 0 && $info['status_cadastro'] == 1) {
+                return 3;
+            } elseif($info['status_ativo'] == 1 && $info['status_cadastro'] == 1) {
+                return 4;
             }
-        
-            $this->update('cadastro_profissional',"status_cadastro = 1","id_usuario = ".$_SESSION['id_usuario']);
-            Header("Location: home.php?cad_prof=1");
-        } elseif($this->rows('*', 'cadastro_profissional', 'id_usuario = ' . $_SESSION['id_usuario']) == 1 && $this->rows('*', 'cadastro_profissional', 'status_cadastro = 0 and id_usuario = ' . $_SESSION['id_usuario']) == 1) {
-            $habilidades = $this->select("id,habilidade","habilidades");
-            $habilidades_cad = $this->select("GROUP_CONCAT(id_habilidade) as habilidades","profissional_habilidades","id_profissional=".$_SESSION['id_usuario']);
-        
-            if(isset($habilidades_cad['habilidades'])) {
-                $habilidades_cad = explode(",",$habilidades_cad['habilidades']);
-                $new_habilidades_cad = [];
-                foreach($habilidades_cad as  $valor) {
-                    $new_habilidades_cad[$valor] = 0;
-                }
-            }
+        } else {
+            return 1;
         }
     }
+
+    public function cadastrar_profissional($valores) {
+        $indice = 'id_usuario';
+        $valor = $_SESSION['id'];
+
+        foreach($valores as $key => $value) {
+            $indice =  $indice.", $key";
+            $valor = ($key == 'id_estado')?$valor.", $value":$valor.", '$value'";
+        }
+
+        $indice = $indice.", status_ativo, status_cadastro";
+        $valor = $valor.", 0, 0";
+
+        $this->insert($this->tb,$indice,$valor);
+    }
+
+    public function status_cadastro_profissional($id) {    
+        $this->update($this->tb,"status_cadastro = 1","id_usuario = $id");
+    }
 }
-/**/

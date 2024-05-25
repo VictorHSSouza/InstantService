@@ -27,7 +27,7 @@ function cad_habilidade(id_profissional,id_habilidade,status_habilidade){
     }	
 
     // ACONTECERÁ ASSIM QUE O EVENTO FOR CHAMADO	
-    //alert("ajax.php?cad_habilidade=1&id_profissional="+id_profissional+"&id_habilidade="+id_habilidade+"&status_habilidade="+status_habilidade); 
-    xhttp.open("GET","ajax.php?cad_habilidade=1&id_profissional="+id_profissional+"&id_habilidade="+id_habilidade+"&status_habilidade="+status_habilidade,true);         //solicitação
+    //alert("/profissional_habilidades_cadastro?cad_habilidade=1&id_profissional="+id_profissional+"&id_habilidade="+id_habilidade+"&status_habilidade="+status_habilidade); 
+    xhttp.open("GET","/profissional_habilidades_cadastro?cad_habilidade=1&id_profissional="+id_profissional+"&id_habilidade="+id_habilidade+"&status_habilidade="+status_habilidade,true);         //solicitação
     xhttp.send(null);
 }

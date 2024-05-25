@@ -1,0 +1,48 @@
+<?php 
+    $habilidades = $this->view->dados;
+?>
+
+<div class="m-0 p-0 text-center my-5">
+    <h1 class="mb-5">Cadastro de Profissional</h1>
+
+    <form action="/profissional_habilidades" method="POST" class="row container w-40 m-auto py-2 h5 border px-5 border-5 rounded-3 border-dark" enctype="multipart/form-data"> 
+        
+        <div id="habilidades" class="mt-2 mb-3 col-12 mx-auto row p-0">
+            <div class="fw-bold"> Habilidades </div>
+            <div class="fs-6 text-start mt-3">Clique nas habilidades que voce possui:</div>
+
+            <div class="text-start row">
+                <?php
+                    foreach($habilidades['habilidades'] as $values) {
+                        $stts = (isset($habilidades['habilidades_prof'][$values['id']]))?'none':'true';
+                        ?>
+                            <div class="m-1 btn btn-success col" id="habilidade<?=$values['id']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id']?>,<?=$values['id']?>,'0')"><?=$values['habilidade']?></div>
+                        <?php
+                    }
+                ?>
+            </div>
+
+            <div class="fs-6 text-start mt-3">Suas habilidades:</div>
+            <div class="border mt-1 text-start" style="min-height: 200px ;">
+                <?php
+                    foreach($habilidades['habilidades'] as $values) {
+                        $stts = (!isset($habilidades['habilidades_prof'][$values['id']]))?'none':'true';
+                        ?>
+                            <div class="m-1 btn btn-success col" id="habilidade_cad<?=$values['id']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id']?>,<?=$values['id']?>,'1')"><?=$values['habilidade']?></div>
+                        <?php
+                    }
+                ?>
+            </div>
+        </div>
+
+        <div>
+            <label>Adicione o seu currículo em pdf: </label>
+            <input class="mt-2" type="file" name="pdfadd" id="a" accept=".pdf" >
+        </div>
+    
+        <div class="my-3 mx-auto p-0 text-center cad2">
+            <button type="submit" class="w-75 btn btn-success">Enviar</button>
+        </div>
+
+    </form>
+</div>

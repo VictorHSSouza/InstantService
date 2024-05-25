@@ -1,0 +1,56 @@
+<div class="m-0 p-0 text-center my-5">
+    <h1 class="mb-5">Cadastro de Profissional</h1>
+
+    <form action="profissional_cadastro" method="POST" class="row container w-40 m-auto py-2 h5 border px-5 border-5 rounded-3 border-dark"> 
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0">
+            <label for="cep" class="col mb-2 p-0 my-auto text-start">CEP:</label>
+            <input type="text" id="cep" name="cep" class="col-12 p-1" oninput="mascara_cep()" onkeypress="return somente_numeros(event)" required> 
+        </div>
+
+        <div class="mt-3 mb-3 col-12 mx-auto row p-0">
+            <label for="logradouro" class="col mb-2 p-0 my-auto text-start">Logradouro:</label>
+            <input type="text" id="logradouro" name="logradouro" class="col-12 p-1" required>
+        </div>
+
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0">
+            <label for="numero" class="col mb-2 p-0 my-auto text-start">Numero:</label>
+            <input type="number" id="numero" name="numero" class="col-12 p-1" onkeypress="return somente_numeros(event)" required>
+        </div>
+
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0">
+            <label for="complemento" class="col mb-2 p-0 my-auto text-start">Complemento:</label>
+            <input type="complemento" id="complemento" name="complemento" class="col-12 p-1" required> 
+        </div>
+
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0">
+            <label for="bairro" class="col mb-2 p-0 my-auto text-start">Bairro:</label>
+            <input type="text" id="bairro" name="bairro" class="col-12 p-1" required> 
+        </div>
+
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0">
+            <label for="cidade" class="col mb-2 p-0 my-auto text-start">Cidade:</label>
+            <input type="text" id="cidade" name="cidade" class="col-12 p-1" required> 
+        </div>
+
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0">
+            <label class="col mb-2 p-0 my-auto text-start" for="id_estado">
+                Estado:
+            </label>
+
+            <select class="col-12 p-1" name="id_estado" id="id_estado">
+                <?php
+                foreach ($this->view->dados['estados'] as $value) {
+                    ?> 
+                    <option value="<?=$value['id_estado']?>"><?=$value['nome_estado']?></option>                             
+                    <?php
+                }
+                ?>
+            </select>
+        </div>
+
+        <div class="my-3 mx-auto p-0 text-center cad2">
+            <button type="submit" class="w-75 btn btn-success">Cadastrar</button>
+        </div>
+
+    </form>
+</div>

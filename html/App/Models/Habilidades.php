@@ -8,9 +8,8 @@ class Habilidades extends Model{
     protected $tb = "habilidades";
 
     public function list_habilidades() {  
-        $campo = "id,habilidade";
-        $retorno = $this->select($campo,$this->tb);
-        return $retorno;
+        $habilidades = $this->select("id,habilidade",$this->tb);
+        return $habilidades;
     }
 }
 /**/
