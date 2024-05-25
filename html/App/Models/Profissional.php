@@ -6,12 +6,6 @@ use MF\Model\Model;
 class Profissional extends Model{
     protected $tb = "cadastro_profissional";
 
-    /*public function list_profissional() {  
-        $query = "SELECT * FROM cadastro_profissional";
-        $retorno = $this->db->query($query)->fetch_all(MYSQLI_ASSOC);
-        return $retorno;
-    }*/
-
     public function pg_profissional($id) {
         if($this->rows("status_ativo,status_cadastro",$this->tb,"id_usuario = $id")) {
             $info = $this->select("status_ativo,status_cadastro",$this->tb,"id_usuario = $id")[0];

@@ -67,6 +67,12 @@ Class Route extends Bootstrap {
             'action' => 'avaliar'
         );
 
+        $routes['avaliar_profissional'] = array(
+            'route' => '/avaliar_profissional',
+            'controller' => 'avaliarController',
+            'action' => 'avaliar_profissional'
+        );
+
         $this->setRoutes($routes);
     }  
 }

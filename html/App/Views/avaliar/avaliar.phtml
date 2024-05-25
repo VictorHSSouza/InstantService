@@ -1,0 +1,12 @@
+<?php
+    $avaliacao = $this->view->dados;
+?>
+<div class="m-0 p-0 text-center my-5 row">
+    <h1 class="mb-5">Avaliar Curriculos de Profissionais</h1>
+
+    <div class="row d-flex justify-content-center">
+        <?php foreach($avaliacao as $value) { ?>
+            <a href="/avaliar_profissional?id=<?=$value['id_usuario']?>" class="col-2 m-2 btn bg-dark-subtle"><span class="h5">Avaliar: <?=$value['nome_completo']?></span></a>    
+        <?php } ?>
+    </div>
+</div>
