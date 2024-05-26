@@ -36,7 +36,7 @@ class Profissional extends Model{
         $this->insert($this->tb,$indice,$valor);
     }
 
-    public function status_cadastro_profissional($id) {    
-        $this->update($this->tb,"status_cadastro = 1","id_usuario = $id");
+    public function status_cadastro_profissional($id,$filename = "") {    
+        $this->update($this->tb,"status_cadastro = 1, nome_curriculo = '$filename' ","id_usuario = $id");
     }
 }

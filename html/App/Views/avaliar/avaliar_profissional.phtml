@@ -1,0 +1,35 @@
+<?php
+    $avaliacao = $this->view->dados;
+?>
+<div class="m-0 p-0 text-center row my-5">
+    <h1 class="mb-5">Avaliar Curriculo de <?=$avaliacao['nome_completo']?></h1>
+
+    <div class="col-4"></div>
+    <div class="text-start col m-0">
+        <div class="h3">Email:  <?=$avaliacao['email']?></div>
+        <div class="h3">Data de nascimento:  <?=$avaliacao['data_nascimento']?></div>
+        <div class="h3">Estado:  <?=$avaliacao['estado']?></div>
+        <div class="h3">Cidade:  <?=$avaliacao['cidade']?></div>
+        <div class="h3">Nome_curriculo: <?=$avaliacao['nome_curriculo']?></div>
+    </div>
+</div>
+
+<div class="m-0 p-0 text-center my-5">
+    <h1 class="mb-5">Enviar mensagem</h1>
+
+    <div> 
+        <form action="avaliar_envio?id=<?=$avaliacao['id_usuario']?>" method="POST">
+            <textarea name="msg" class="container form-control"><?=$avaliacao['mensagem']?></textarea>
+
+            <div class="mt-3">
+                <input class="form-check-input" type="checkbox" name="status" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Tornar Profissional
+                </label>
+            </div>
+
+            <button type="submit" class="mt-3 btn btn-success"> Enviar Avaliação </button>
+        </form>
+        
+    </div> 
+</div>

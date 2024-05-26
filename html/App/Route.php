@@ -36,6 +36,12 @@ Class Route extends Bootstrap {
             'controller' => 'cadastrarController',
             'action' => 'registrar'
         );
+
+        $routes['perfil'] = array(
+            'route' => '/perfil',
+            'controller' => 'perfilController',
+            'action' => 'perfil'
+        );
         //
         $routes['profissional'] = array(
             'route' => '/profissional',
@@ -71,6 +77,12 @@ Class Route extends Bootstrap {
             'route' => '/avaliar_profissional',
             'controller' => 'avaliarController',
             'action' => 'avaliar_profissional'
+        );
+
+        $routes['avaliar_envio'] = array(
+            'route' => '/avaliar_envio',
+            'controller' => 'avaliarController',
+            'action' => 'avaliar_envio'
         );
 
         $this->setRoutes($routes);

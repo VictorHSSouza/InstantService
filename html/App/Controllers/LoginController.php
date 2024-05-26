@@ -10,7 +10,7 @@ class LoginController extends Action {
         if(isset($_GET['fail'])) {
             $this->view->dados = ['erro' => 1];
         }
-        $this->render('login','layout1');
+        $this->render('login','layout2');
     }
 
     public function Logar() {

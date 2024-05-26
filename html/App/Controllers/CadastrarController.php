@@ -7,7 +7,7 @@ use MF\Model\Container;
 
 class CadastrarController extends Action {
     public function Cadastrar() {
-        $this->render('cadastrar','layout1');
+        $this->render('cadastrar','layout2');
     }
 
     public function Registrar() {

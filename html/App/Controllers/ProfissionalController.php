@@ -32,16 +32,19 @@ class ProfissionalController extends Action {
                 $this->render('profissional_habilidades','layout1');
                 break;
             case 3:
+                $obj = Container::getModel('avaliar','instant_service');
+                $conf = $obj->conf_avaliacao($_SESSION['id']);
+                
+                if($conf) {
+                    $avaliacao = $obj->ver_avaliacao($_SESSION['id']);
+                    $this->view->dados = $avaliacao;
+                }
                 $this->render('profissional_avaliando','layout1');
                 break;
             case 4:
-                echo "i é igual a 2";
+                echo "Tela de profissional";
                 break;
         }
-        
-        /*$profissional = $obj->list_profissional();
-        $this->view->dados = $profissional;
-        $this->render('profissional','layout1');*/
     }
 
     public function profissional_cadastro() {
@@ -75,9 +78,10 @@ class ProfissionalController extends Action {
                 echo "erro";
             }
         }
+        $filename = (isset($filename))?$filename:"";
 
         $obj_profissional = Container::getModel('profissional','instant_service');
-        $obj_profissional->status_cadastro_profissional($_SESSION['id']);
+        $obj_profissional->status_cadastro_profissional($_SESSION['id'],$filename);
         
         Header("Location: /?cad_prof=1");
     }
