@@ -11,7 +11,13 @@ class PerfilController extends Action {
         $obj = Container::getModel('login','instant_service');
         $obj->Login();
 
-        echo "PerfilController: dar a opção de auterar informações de usuario: nome, login, senha... <br> e de profissional: região, habilidades...";
+        $obj_profissional = Container::getModel('profissional','instant_service');
+        $cadastro_profissional = $obj_profissional->conferir_profissional($_SESSION["id"]);
+        $obj_perfil = Container::getModel('perfil','instant_service');
+        $perfil = $obj_perfil->list_perfil($_SESSION["id"], $cadastro_profissional);
+
+        $this->view->dados = ['profissional' => $cadastro_profissional, 'dados' => $perfil];
+        $this->render('perfil','layout1');
     }
 
 }

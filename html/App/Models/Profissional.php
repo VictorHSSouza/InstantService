@@ -39,4 +39,12 @@ class Profissional extends Model{
     public function status_cadastro_profissional($id,$filename = "") {    
         $this->update($this->tb,"status_cadastro = 1, nome_curriculo = '$filename' ","id_usuario = $id");
     }
+
+    public function conferir_profissional($id) {
+        if($this->rows("id_usuario",$this->tb,"id_usuario = $id")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
