@@ -116,3 +116,20 @@ function mascara_data(data)
     if(((split_atual[2]-16)>split_data[0]) || ((split_atual[2]-16) === split_data[0] && split_atual[1]>split_data[1]) || ((split_atual[2]-16) === split_data[0] && split_atual[1] === split_data[1] && split_atual[0]>split_data[2]) || ((split_atual[2]-16) === split_data[0] && split_atual[1] === split_data[1] && split_atual[0] === split_data[2])) return true
     else return false;
 }
+
+function edita_dados(comando)
+{
+    if(comando==1)
+    {
+        document.getElementById("alterar_dados").setAttribute("style","display: none;");
+        document.getElementById("cancelar").setAttribute("style","display: true;");
+        document.getElementById("salvar_dados").setAttribute("style","display: true;");
+    }
+    else
+    {
+        document.getElementById("alterar_dados").setAttribute("style","display: true;");
+        document.getElementById("cancelar").setAttribute("style","display: none;");
+        document.getElementById("salvar_dados").setAttribute("style","display: none;");
+    }
+   
+}

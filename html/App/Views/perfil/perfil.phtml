@@ -1,84 +1,89 @@
 <?php 
     $profissional = $this->view->dados["profissional"];
     $dados = $this->view->dados["dados"];
-    var_dump($dados);
+
+    //var_dump($dados);
 ?>
 
 <div>
 
     <div id="div_camposusuario" class="m-0 row d-flex justify-content-center">
-        <div class="h1 mb-5">Informações pessoais:</div>
+        <div class="h3 text-center mb-5 mt-4">Informações pessoais</div>
 
-        <div class="h3 col-5 row mb-4">
-            <label class="pe-2 mb-1" for="name">Nome:</label>
-            <input class="w-50" type="text" name="name" value="<?=$dados["nomecompleto"]?>">
+        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <label class="mb-1"  for="name">Nome:</label> 
+            <input class="w-50" type="text" name="name" value="<?=$dados["nomecompleto"]?>"disabled>
         </div>
 
-        <div class="h3 col-5 row mb-4">
-            <label class="pe-2 mb-1" for="name">Email:</label>
-            <input class="w-50" type="text" name="name">
+        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <label class=" mb-1" for="email">Email:</label>
+            <input class="w-50" type="text" name="email" value="<?=$dados["email"]?>"disabled>
         </div>
 
-        <div class="h3 col-5 row mb-4">
-            <label class="pe-2 mb-1" for="name">Sexo:</label>
-            <input class="w-50" type="text" name="name">
+        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <label class=" mb-1" for="sexo">Sexo:</label>
+            <input class="w-50" type="text" name="sexo" value="<?=$dados["sexo"]?>"disabled>
         </div>
 
-        <div class="h3 col-5 row mb-4">
-            <label class="pe-2 mb-1" for="name">Nascimento:</label>
-            <input class="w-50" type="text" name="name">
+        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <label class=" mb-1" for="data_nascimento">Nascimento:</label>
+            <input class="w-50" type="date" name="data_nascimento" value="<?=$dados["data_nascimento"]?>"disabled>
         </div>
 
-        <div class="h3 col-5 row mb-4">
-            <label class="pe-2 mb-1" for="name">CPF:</label>
-            <input class="w-50" type="text" name="name">
+        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <label class=" mb-1" for="cpf">CPF:</label>
+            <input class="w-50" type="text" name="cpf" value="<?=$dados["cpf"]?>"disabled>
         </div>
-        <div class="h3 col-5 row mb-4"></div>
+        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center"></div>
 
 
         <?php if($profissional) { ?>
-            <div class="h1 mb-5">Informações profissionais:</div>
+            <div class="h3 text-center mb-5 mt-4">Informações profissionais</div>
 
-            <div class="h3 col-5 row mb-4">
-                <label class="pe-2 mb-1" for="name">Nome:</label>
-                <input class="w-50" type="text" name="name">
+            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+                <label class=" mb-1" for="name">Estado:</label>
+                <input class="w-50" type="text" name="name" value="<?=$dados["estado"]?>"disabled>
             </div>
 
-            <div class="h3 col-5 row mb-4">
-                <label class="pe-2 mb-1" for="name">Nome:</label>
-                <input class="w-50" type="text" name="name">
+            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+                <label class=" mb-1" for="cep">Cep:</label>
+                <input class="w-50" type="text" name="cep" value="<?=$dados["cep"]?>"disabled>
             </div>
 
-            <div class="h3 col-5 row mb-4">
-                <label class="pe-2 mb-1" for="name">Nome:</label>
-                <input class="w-50" type="text" name="name">
+            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+                <label class=" mb-1" for="logradouro">Logradouro:</label>
+                <input class="w-50" type="text" name="logradouro" value="<?=$dados["logradouro"]?>"disabled>
             </div>
 
-            <div class="h3 col-5 row mb-4">
-                <label class="pe-2 mb-1" for="name">Nome:</label>
-                <input class="w-50" type="text" name="name">
+            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+                <label class=" mb-1" for="numero">Número</label>
+                <input class="w-50" type="text" name="numero" value="<?=$dados["numero"]?>"disabled>
             </div>
 
-            <div class="h3 col-5 row mb-4">
-                <label class="pe-2 mb-1" for="name">Nome:</label>
-                <input class="w-50" type="text" name="name">
+            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+                <label class=" mb-1" for="complemento">Complemento:</label>
+                <input class="w-50" type="text" name="complemento" value="<?=$dados["complemento"]?>"disabled>
             </div>
 
-            <div class="h3 col-5 row mb-4">
-                <label class="pe-2 mb-1" for="name">Nome:</label>
-                <input class="w-50" type="text" name="name">
+            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+                <label class=" mb-1" for="bairro">Bairro:</label>
+                <input class="w-50" type="text" name="bairro" value="<?=$dados["bairro"]?>"disabled>
             </div>
             
-            <div class="h3 col-5 row mb-4">
-                <label class="pe-2 mb-1" for="name">Nome:</label>
-                <input class="w-50" type="text" name="name">
+            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+                <label class=" mb-1" for="cidade">Cidade:</label>
+                <input class="w-50" type="text" name="cidade" value="<?=$dados["cidade"]?>"disabled>
             </div>
-            <div class="h3 col-5 row mb-4"></div>
+            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center"></div>
         <?php } ?>
-
-
     </div>
 
-    <button>alterar dados pessoais</button>
+    <div class="text-center mt-4" >
+        <div id="alterar_dados" class="btn btn-success" onclick="edita_dados(1)" >Alterar Dados</div>
+
+        <div id="cancelar" class="btn btn-danger" style="display:none;"onclick="edita_dados(2)" >Cancelar</div>
+        <button id="salvar_dados" class="btn btn-success" style="display:none;">Salvar Dados</button>
+    </div>
+   
 
 </div>
