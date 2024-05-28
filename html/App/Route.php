@@ -42,6 +42,12 @@ Class Route extends Bootstrap {
             'controller' => 'perfilController',
             'action' => 'perfil'
         );
+
+        $routes['atualizar_dados'] = array(
+            'route' => '/atualizar_dados',
+            'controller' => 'perfilController',
+            'action' => 'atualizar_dados'
+        );
         //
         $routes['profissional'] = array(
             'route' => '/profissional',

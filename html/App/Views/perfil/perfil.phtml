@@ -1,11 +1,9 @@
 <?php 
     $profissional = $this->view->dados["profissional"];
     $dados = $this->view->dados["dados"];
-
-    //var_dump($dados);
 ?>
 
-<div>
+<form action="/atualizar_dados" method="POST">
 
     <div id="div_camposusuario" class="m-0 row d-flex justify-content-center">
         <div class="h3 text-center mb-5 mt-4">Informações pessoais</div>
@@ -16,8 +14,8 @@
         </div>
 
         <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
-            <label class=" mb-1" for="email">Email:</label>
-            <input class="w-50" type="text" name="email" value="<?=$dados["email"]?>"disabled>
+            <label class="mb-1" for="email">Email:</label>
+            <input class="w-50" id="email" type="text" name="email" value="<?=$dados["email"]?>"disabled>
         </div>
 
         <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
@@ -26,12 +24,12 @@
         </div>
 
         <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
-            <label class=" mb-1" for="data_nascimento">Nascimento:</label>
+            <label class="mb-1" for="data_nascimento">Nascimento:</label>
             <input class="w-50" type="date" name="data_nascimento" value="<?=$dados["data_nascimento"]?>"disabled>
         </div>
 
         <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
-            <label class=" mb-1" for="cpf">CPF:</label>
+            <label class="mb-1" for="cpf">CPF:</label>
             <input class="w-50" type="text" name="cpf" value="<?=$dados["cpf"]?>"disabled>
         </div>
         <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center"></div>
@@ -39,51 +37,60 @@
 
         <?php if($profissional) { ?>
             <div class="h3 text-center mb-5 mt-4">Informações profissionais</div>
+            <input type="hidden" name="profissional" value="1">
 
             <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
-                <label class=" mb-1" for="name">Estado:</label>
-                <input class="w-50" type="text" name="name" value="<?=$dados["estado"]?>"disabled>
+                <label class="mb-1" for="id_estado">Estado:</label>
+                <select disabled class="w-50" name="id_estado" id="id_estado">
+                    <?php
+                    foreach ($dados['estados'] as $value) {
+                        ?> 
+                        <option <?= ($value['id_estado'] == $dados['id_estado'])? "selected" : ""; ?> value="<?=$value['id_estado']?>"><?=$value['nome_estado']?></option>                             
+                        <?php
+                    }
+                    ?>
+                </select>
             </div>
 
             <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
-                <label class=" mb-1" for="cep">Cep:</label>
-                <input class="w-50" type="text" name="cep" value="<?=$dados["cep"]?>"disabled>
+                <label class="mb-1" for="cep">Cep:</label>
+                <input class="w-50" id="cep" type="text" name="cep" value="<?=$dados["cep"]?>"disabled>
             </div>
 
             <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
-                <label class=" mb-1" for="logradouro">Logradouro:</label>
-                <input class="w-50" type="text" name="logradouro" value="<?=$dados["logradouro"]?>"disabled>
+                <label class="mb-1" for="logradouro">Logradouro:</label>
+                <input class="w-50" id="logradouro" type="text" name="logradouro" value="<?=$dados["logradouro"]?>"disabled>
             </div>
 
             <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
-                <label class=" mb-1" for="numero">Número</label>
-                <input class="w-50" type="text" name="numero" value="<?=$dados["numero"]?>"disabled>
+                <label class="mb-1" for="numero">Número</label>
+                <input class="w-50" id="numero" type="text" name="numero" value="<?=$dados["numero"]?>"disabled>
             </div>
 
             <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
-                <label class=" mb-1" for="complemento">Complemento:</label>
-                <input class="w-50" type="text" name="complemento" value="<?=$dados["complemento"]?>"disabled>
+                <label class="mb-1" for="complemento">Complemento:</label>
+                <input class="w-50" id="complemento" type="text" name="complemento" value="<?=$dados["complemento"]?>"disabled>
             </div>
 
             <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
-                <label class=" mb-1" for="bairro">Bairro:</label>
-                <input class="w-50" type="text" name="bairro" value="<?=$dados["bairro"]?>"disabled>
+                <label class="mb-1" for="bairro">Bairro:</label>
+                <input class="w-50" id="bairro" type="text" name="bairro" value="<?=$dados["bairro"]?>"disabled>
             </div>
             
             <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
-                <label class=" mb-1" for="cidade">Cidade:</label>
-                <input class="w-50" type="text" name="cidade" value="<?=$dados["cidade"]?>"disabled>
+                <label class="mb-1" for="cidade">Cidade:</label>
+                <input class="w-50" id="cidade" type="text" name="cidade" value="<?=$dados["cidade"]?>"disabled>
             </div>
             <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center"></div>
         <?php } ?>
     </div>
 
-    <div class="text-center mt-4" >
+    <div class="text-center my-4" >
         <div id="alterar_dados" class="btn btn-success" onclick="edita_dados(1)" >Alterar Dados</div>
 
         <div id="cancelar" class="btn btn-danger" style="display:none;"onclick="edita_dados(2)" >Cancelar</div>
-        <button id="salvar_dados" class="btn btn-success" style="display:none;">Salvar Dados</button>
+        <button id="salvar_dados" class="btn btn-success" style="display:none;" type="submit">Salvar Dados</button>
     </div>
    
 
-</div>
+</form>

@@ -15,11 +15,23 @@ class PerfilController extends Action {
         $cadastro_profissional = $obj_profissional->conferir_profissional($_SESSION["id"]);
         $obj_perfil = Container::getModel('perfil','instant_service');
         $perfil = $obj_perfil->list_perfil($_SESSION["id"], $cadastro_profissional);
+        $obj_estado = Container::getModel('estados','instant_service');
+        $perfil["estados"] = $obj_estado->list_estados();
 
         $this->view->dados = ['profissional' => $cadastro_profissional, 'dados' => $perfil];
         $this->render('perfil','layout1');
     }
 
+    public function atualizar_dados() {
+        $obj = Container::getModel('login','instant_service');
+        $obj->Login();
+
+        $profissional = (isset($_POST["profissional"]))? 1 : 0;
+        $obj_perfil = Container::getModel('perfil','instant_service');
+        $obj_perfil->update_perfil($_SESSION["id"], $profissional, $_POST);
+        header("Location: /");
+    }
 }
+
 
 ?>
