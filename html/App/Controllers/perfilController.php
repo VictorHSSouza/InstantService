@@ -29,7 +29,7 @@ class PerfilController extends Action {
         $profissional = (isset($_POST["profissional"]))? 1 : 0;
         $obj_perfil = Container::getModel('perfil','instant_service');
         $obj_perfil->update_perfil($_SESSION["id"], $profissional, $_POST);
-        header("Location: /");
+        header("Location: /?edit_perfil=1");
     }
 }
 
