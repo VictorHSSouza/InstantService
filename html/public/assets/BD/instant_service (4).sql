@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 26/05/2024 às 22:03
+-- Tempo de geração: 16/06/2024 às 20:46
 -- Versão do servidor: 8.2.0
 -- Versão do PHP: 8.2.13
 
@@ -20,8 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `instant_service`
 --
-	create database instant_service;
-    use instant_service;
+create database instant_service;
+use instant_service;
 -- --------------------------------------------------------
 
 --
@@ -42,7 +42,6 @@ CREATE TABLE IF NOT EXISTS `avaliacao` (
 --
 
 INSERT INTO `avaliacao` (`id_usuario`, `id_funcionario`, `mensagem`, `status_avaliacao`) VALUES
-(2, 2, 'eferw', 1),
 (7, 7, 'gergh', 1),
 (4, 7, 'uyoluiyjk,ui', 0);
 
@@ -73,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `cadastro_profissional` (
 --
 
 INSERT INTO `cadastro_profissional` (`id_usuario`, `id_estado`, `cep`, `logradouro`, `numero`, `complemento`, `bairro`, `cidade`, `nome_curriculo`, `status_ativo`, `status_cadastro`) VALUES
-(2, 13, '11111-111', 'rua a', '4456', 'ghm', 'ghghj', 'ghm', 'Uberização.pdf', 1, 1),
+(2, 13, '11111-111', 'rua a', '56', 'ghm', 'ghghj', 'ghm', 'Uberização.pdf', 0, 1),
 (4, 9, '11111-111', 'rua a', '696', 'ghm', 'ghghj', 'ghm', NULL, 0, 1),
 (5, 14, '11111-111', 'rua a', '6', 'ghm', 'ghghj', 'ghm', NULL, 0, 0),
 (6, 11, '31560-260', 'RUA LEVINDFO IGNACIO RIBEIRO', '35', ' PORTÃO BRANCO ', 'Santa Amelia', 'Belo Horizonte ', NULL, 0, 1),
@@ -213,37 +212,112 @@ INSERT INTO `login` (`id_login`, `id_usuario`, `login`, `senha`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `pedidos`
+--
+
+DROP TABLE IF EXISTS `pedidos`;
+CREATE TABLE IF NOT EXISTS `pedidos` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_usuario` int UNSIGNED NOT NULL,
+  `id_problema` int UNSIGNED NOT NULL,
+  `descricao` varchar(100) NOT NULL,
+  `data_solicitacao` datetime NOT NULL,
+  `data_alteracao` datetime NOT NULL,
+  `id_profissional` int DEFAULT NULL,
+  `data_confirmacao` datetime DEFAULT NULL,
+  `data_finalizacao` datetime DEFAULT NULL,
+  `status` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `problemas`
+--
+
+DROP TABLE IF EXISTS `problemas`;
+CREATE TABLE IF NOT EXISTS `problemas` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nome` varchar(45) NOT NULL,
+  `id_tipo` int UNSIGNED NOT NULL,
+  `descricao` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `problemas`
+--
+
+INSERT INTO `problemas` (`id`, `nome`, `id_tipo`, `descricao`) VALUES
+(1, 'lâmpada queimada', 1, 'lâmpada queimada');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `problema_habilidades`
+--
+
+DROP TABLE IF EXISTS `problema_habilidades`;
+CREATE TABLE IF NOT EXISTS `problema_habilidades` (
+  `id_problema` int UNSIGNED NOT NULL,
+  `id_habilidade` int UNSIGNED NOT NULL,
+  PRIMARY KEY (`id_problema`,`id_habilidade`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `profissional_habilidades`
 --
 
 DROP TABLE IF EXISTS `profissional_habilidades`;
 CREATE TABLE IF NOT EXISTS `profissional_habilidades` (
-  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_profissional` int UNSIGNED NOT NULL,
   `id_habilidade` int UNSIGNED NOT NULL,
   `data` date NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id_profissional`,`id_habilidade`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `profissional_habilidades`
 --
 
-INSERT INTO `profissional_habilidades` (`id`, `id_profissional`, `id_habilidade`, `data`) VALUES
-(23, 4, 5, '2024-05-04'),
-(22, 4, 4, '2024-05-04'),
-(34, 2, 4, '2024-05-24'),
-(32, 2, 1, '2024-05-24'),
-(25, 5, 5, '2024-05-06'),
-(21, 4, 1, '2024-05-04'),
-(40, 6, 2, '2024-05-25'),
-(39, 6, 1, '2024-05-25'),
-(29, 5, 4, '2024-05-06'),
-(30, 5, 6, '2024-05-06'),
-(41, 6, 4, '2024-05-25'),
-(42, 6, 5, '2024-05-25'),
-(43, 7, 3, '2024-05-26'),
-(44, 7, 4, '2024-05-26');
+INSERT INTO `profissional_habilidades` (`id_profissional`, `id_habilidade`, `data`) VALUES
+(4, 5, '2024-05-04'),
+(4, 4, '2024-05-04'),
+(5, 5, '2024-05-06'),
+(4, 1, '2024-05-04'),
+(6, 2, '2024-05-25'),
+(6, 1, '2024-05-25'),
+(5, 4, '2024-05-06'),
+(5, 6, '2024-05-06'),
+(6, 4, '2024-05-25'),
+(6, 5, '2024-05-25'),
+(7, 3, '2024-05-26'),
+(7, 4, '2024-05-26'),
+(2, 5, '2024-06-16');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tipo_problema`
+--
+
+DROP TABLE IF EXISTS `tipo_problema`;
+CREATE TABLE IF NOT EXISTS `tipo_problema` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `nome` varchar(20) NOT NULL,
+  `descricao` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `tipo_problema`
+--
+
+INSERT INTO `tipo_problema` (`id`, `nome`, `descricao`) VALUES
+(1, 'eletrodomestico', 'Problemas com seus eletrodomésticos (Aparelhos/objetos presentes em sua casa)');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

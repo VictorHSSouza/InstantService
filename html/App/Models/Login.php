@@ -6,7 +6,11 @@ class Login extends Model{
     private $tb = "login";
 
     public function login($login = '',$senha = '',$logar = false) {
-        session_start();
+
+        if(!isset($_SESSION['id'])) {
+            session_start();
+        }
+        
         if(!$logar) {
             if(isset($_SESSION['login']) && isset($_SESSION['senha'])) {
                 $login = $_SESSION['login'];

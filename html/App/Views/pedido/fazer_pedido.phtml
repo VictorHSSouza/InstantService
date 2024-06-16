@@ -1,0 +1,33 @@
+<div class="m-0 p-0 text-center my-5 row">
+    <h1 class="mb-5">Cadastro de Usuário</h1>
+
+    <form action="cad_pedido" method="POST" class="row container col col-sm-4 col-11 m-auto py-2 h5 border px-5 border-5 rounded-3 border-dark">
+            
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0">
+            <label for="id_tipo" class="col mb-2 p-0 my-auto text-start">Tipo de problema:</label>
+
+            <select name="id_tipo" id="tipo" class="col-12 p-1" onchange="list_problema()">
+                <option value=""></option>
+
+                <?php foreach($this->view->dados as $value) {  ?>
+                    <option value="<?=$value['id']?>"><?=$value['nome']?></option>
+                <?php } ?>
+            </select>
+
+        </div>
+
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="div_problemas" style="display: none;">
+            <label for="id_problema" class="col mb-2 p-0 my-auto text-start">Problema:</label>
+            <select name="id_problema" id="problema">
+
+            </select>
+        </div>
+            
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="descricao" style="display: none;">
+            <label for="descricao" class="col mb-2 p-0 my-auto text-start">Descreva seu problema:</label>
+            <textarea name="descricao" class="py-1" required></textarea>
+        </div>
+
+        <button class="btn btn-success" id="btnpedido" style="display: none;"> Fazer pedido</button>
+    </form>
+</div>

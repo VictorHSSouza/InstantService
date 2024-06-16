@@ -90,7 +90,42 @@ Class Route extends Bootstrap {
             'controller' => 'avaliarController',
             'action' => 'avaliar_envio'
         );
+        //
+        $routes['fazer_pedido'] = array(
+            'route' => '/fazer_pedido',
+            'controller' => 'pedidoController',
+            'action' => 'fazer_pedido'
+        );
 
+        $routes['list_problemas'] = array(
+            'route' => '/list_problemas',
+            'controller' => 'pedidoController',
+            'action' => 'list_problemas'
+        );
+
+        $routes['cad_pedido'] = array(
+            'route' => '/cad_pedido',
+            'controller' => 'pedidoController',
+            'action' => 'cad_pedido'
+        );
+
+        $routes['ver_pedido'] = array(
+            'route' => '/ver_pedido',
+            'controller' => 'pedidoController',
+            'action' => 'ver_pedido'
+        );
+
+        $routes['edit_pedido'] = array(
+            'route' => '/edit_pedido',
+            'controller' => 'pedidoController',
+            'action' => 'edit_pedido'
+        );
+
+        $routes['excluir_pedido'] = array(
+            'route' => '/excluir_pedido',
+            'controller' => 'pedidoController',
+            'action' => 'excluir_pedido'
+        );
         $this->setRoutes($routes);
     }  
 }
