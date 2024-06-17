@@ -6,7 +6,7 @@ class Problema extends Model{
 
     protected $tb = "problemas";
 
-    protected $idtipo;
+    protected $id_tipo;
 
 
     public function list_tipos() {
@@ -15,7 +15,7 @@ class Problema extends Model{
     }    
 
     public function list_problemas() {
-        $tipo_problema = $this->select("id,nome,descricao",$this->__get("tb"),"id_tipo = ".$this->__get("idtipo"));
+        $tipo_problema = $this->select("id,nome,descricao",$this->__get("tb"),"id_tipo = ".$this->__get("id_tipo"));
         return $tipo_problema;
     }  
 }

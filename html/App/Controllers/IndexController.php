@@ -14,7 +14,7 @@ class IndexController extends Action {
             $obj->Login();
 
             $pedido = Container::getModel('pedido','instant_service');
-            $pedido->__set('idusuario',$_SESSION['id']);
+            $pedido->__set('id_usuario',$_SESSION['id']);
 
             $pedidos = $pedido->list_pedidos();
             $this->view->pedidos = $pedidos;

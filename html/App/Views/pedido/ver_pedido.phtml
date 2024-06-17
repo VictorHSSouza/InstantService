@@ -1,10 +1,3 @@
-<?php if(isset($this->view->edit)) {
-    ?>
-        <div class="alert alert-success text-center">
-            Cadastro realizado com sucesso. Seu curriculo foi enviado.
-        </div>
-    <?php
-} ?>
 <div class="m-0 p-0 text-center my-5 row">
     <h1 class="mb-5">Editar Pedido</h1>
 
@@ -12,12 +5,17 @@
 
         <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="div_problemas" >
             <label for="id_problema" class="col mb-2 p-0 my-auto text-start">Problema:</label>
-            <input type="text" value="<?=$this->view->info['nome']?>" disabled>
+            <input type="text" class="p-1 my-auto text-start" value="<?=$this->view->info['nome']?>" disabled>
         </div>
             
-        <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="descricao" ">
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="descricao">
             <label for="descricao" class="col mb-2 p-0 my-auto text-start">Descreva seu problema:</label>
-            <textarea name="descricao" class="py-1" required><?=$this->view->info['descricao']?></textarea>
+            <textarea name="descricao" class="p-1 my-auto text-start" style="max-height: 150px; min-height: 48px;" required><?=$this->view->info['descricao']?></textarea>
+        </div>
+
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="endereco">
+            <label for="endereco" class="col mb-2 p-0 my-auto text-start" >Endereço:</label>
+            <input name="endereco" type="text" class="p-1 my-auto text-start" value="<?=$this->view->info['endereco']?>" required>
         </div>
 
         <div>
@@ -27,6 +25,6 @@
     </form>
 
     <div>
-        <a href="/" class="mt-5 btn btn-primary"> voltar </a>
+        <a href="/" class="mt-5 btn btn-primary"> Voltar </a>
     </div>
 </div>

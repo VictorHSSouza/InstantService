@@ -26,6 +26,14 @@ if(isset($_GET['pedido'])) {
     <?php
 }
 
+if(isset($_GET['edit'])) {
+    ?>
+        <div class="alert alert-success text-center">
+            Seu Pedido foi alterado com sucesso.
+        </div>
+    <?php
+}
+
 if(isset($this->view->pedidos)) { ?> 
     <div> 
         <div class="mt-2 h3 text-center">Pedidos Abertos:</div>

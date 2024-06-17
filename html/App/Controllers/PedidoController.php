@@ -27,7 +27,7 @@ class PedidoController extends Action {
         }
 
         $problema = Container::getModel('problema','instant_service');
-        $problema->__set("idtipo",$_GET['id']);
+        $problema->__set("id_tipo",$_GET['id']);
 
         $problemas = $problema->list_problemas();
         foreach($problemas as $value) {
@@ -46,9 +46,10 @@ class PedidoController extends Action {
 
         $pedido = Container::getModel('pedido','instant_service');
 
-        $pedido->__set('idusuario',$_SESSION['id']);
-        $pedido->__set('idproblema',$_POST['id_problema']);
+        $pedido->__set('id_usuario',$_SESSION['id']);
+        $pedido->__set('id_problema',$_POST['id_problema']);
         $pedido->__set('descricao',$_POST['descricao']);
+        $pedido->__set('endereco',$_POST['endereco']);
 
         $pedido->cad_pedido();
         header("Location: /?pedido=1");
@@ -65,8 +66,8 @@ class PedidoController extends Action {
 
         $pedido = Container::getModel('pedido','instant_service');
 
-        $pedido->__set('idpedido',$_GET['id']);
-        $pedido->__set('idusuario',$_SESSION['id']);
+        $pedido->__set('id_pedido',$_GET['id']);
+        $pedido->__set('id_usuario',$_SESSION['id']);
         
         $pedidoinfo = $pedido->ver_pedido();
 
@@ -93,8 +94,8 @@ class PedidoController extends Action {
 
         $pedido = Container::getModel('pedido','instant_service');
 
-        $pedido->__set('idpedido',$_GET['id']);
-        $pedido->__set('idusuario',$_SESSION['id']);
+        $pedido->__set('id_pedido',$_GET['id']);
+        $pedido->__set('id_usuario',$_SESSION['id']);
         $pedido->__set('descricao',$_POST['descricao']);
         
         $pedido->edit_pedido();
@@ -106,9 +107,7 @@ class PedidoController extends Action {
         }
         $pedidoinfo['id'] = $_GET['id'];
         $this->view->info = $pedidoinfo;
-        $this->view->edit = true;
-
-        $this->render('ver_pedido','layout1');
+        header("Location: /?edit=1");
     }
 
     public function excluir_pedido() {
@@ -122,8 +121,8 @@ class PedidoController extends Action {
 
         $pedido = Container::getModel('pedido','instant_service');
 
-        $pedido->__set('idpedido',$_GET['id']);
-        $pedido->__set('idusuario',$_SESSION['id']);
+        $pedido->__set('id_pedido',$_GET['id']);
+        $pedido->__set('id_usuario',$_SESSION['id']);
         
         $pedido = $pedido->exc_pedido();
 

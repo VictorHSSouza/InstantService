@@ -46,11 +46,13 @@ function list_problema(){
     xhttp.onreadystatechange = function() {
         if (xhttp.readyState == 4 && xhttp.status == 200)
         {		
-            document.getElementById("div_problemas").setAttribute("style","display: true;");
-            document.getElementById("problema").innerHTML = xhttp.responseText
+            var elements = document.getElementsByClassName("aparece");
 
-            document.getElementById("descricao").setAttribute("style","display: true;");
-            document.getElementById("btnpedido").setAttribute("style","display: true;");
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].style.display = 'block';
+            }
+            
+            document.getElementById("problema").innerHTML = xhttp.responseText
         }
     }	
     var id_tipo = document.getElementById("tipo").value
