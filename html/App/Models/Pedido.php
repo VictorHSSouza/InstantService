@@ -13,6 +13,8 @@ class Pedido extends Model{
     protected $endereco;
 
     public function cad_pedido() {
+        date_default_timezone_set('America/Sao_Paulo');
+        
         $indice = "id_usuario, id_problema, descricao, endereco, data_solicitacao, data_alteracao, status";
         $valor = $this->__get('id_usuario').", ".$this->__get('id_problema').", '".$this->__get('descricao')."', '".$this->__get('endereco')."', '". date('Y-m-d H:i:s')."', '".date('Y-m-d H:i:s')."', 0";
 
@@ -30,7 +32,7 @@ class Pedido extends Model{
     } 
 
     public function edit_pedido() {    
-        $set = "descricao = '".$this->__get("descricao")."'";
+        $set = "descricao = '".$this->__get("descricao")."', endereco = '".$this->__get("endereco")."'";
         $this->update($this->__get("tb"),$set,"id_usuario = ".$this->__get('id_usuario') ." and id = ".$this->__get('id_pedido') );
     }
 

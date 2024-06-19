@@ -97,6 +97,7 @@ class PedidoController extends Action {
         $pedido->__set('id_pedido',$_GET['id']);
         $pedido->__set('id_usuario',$_SESSION['id']);
         $pedido->__set('descricao',$_POST['descricao']);
+        $pedido->__set('endereco',$_POST['endereco']);
         
         $pedido->edit_pedido();
 
