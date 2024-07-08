@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use MF\Controller\Action;
 use MF\Model\Container;
+use App\Models\Correio;
 
 class ProfissionalController extends Action {
     public function Profissional() {
@@ -84,6 +85,25 @@ class ProfissionalController extends Action {
         $obj_profissional->status_cadastro_profissional($_SESSION['id'],$filename);
         
         Header("Location: /?cad_prof=1");
+    }
+
+    public function api_correio() {
+        $obj = Container::getModel('login','instant_service');
+        $obj->Login();
+
+        $cep = $_GET['cep'];
+
+        $caracteres = ['.','-'];
+        $cep = str_replace($caracteres,'',$cep);
+
+        $info = Correio::list_endereco($cep);
+
+        $estado = Container::getModel('estados','instant_service');
+        $estado->__set('identificador',json_decode($info)->uf);
+        $uf = $estado->select_estado();
+
+        $this->view->info = $uf."/".$info;
+        $this->render('info_cep','');
     }
 }
 

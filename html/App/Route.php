@@ -72,6 +72,12 @@ Class Route extends Bootstrap {
             'controller' => 'profissionalController',
             'action' => 'profissional_habilidades'
         );
+
+        $routes['api_correio'] = array(
+            'route' => '/api_correio',
+            'controller' => 'profissionalController',
+            'action' => 'api_correio'
+        );
         //
         $routes['avaliar'] = array(
             'route' => '/avaliar',

@@ -19,7 +19,7 @@ try {
 
     // Configurações do remetente
     $mail->setFrom('instantserviceapp@gmail.com', 'InstantService');
-    $mail->addAddress('henriquenicolletti@gmail.com', 'VICTAO');     // Adiciona um destinatário
+    $mail->addAddress('', 'VICTAO');     // Adiciona um destinatário
     $mail->addReplyTo('logindetudo123@gmail.com', 'Informaçoes');    // Email para resposta
 
     // Definindo a codificação de caracteres

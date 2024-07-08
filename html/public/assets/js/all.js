@@ -45,13 +45,18 @@ function mascara_cpf() {
 function mascara_cep() {
     var cep = document.getElementById("cep").value
     console.log(cep)
-    cep = cep.slice(0, 9)
+    cep = cep.slice(0, 10)
     console.log(cep)
     document.getElementById("cep").value = cep
     var cep_formatado = document.getElementById("cep").value
-    if (cep_formatado[5] != "-") {
-        if (cep_formatado[5] != undefined) {
-            document.getElementById("cep").value = cep_formatado.slice(0, 5) + "-" + cep_formatado[5]
+    if (cep_formatado[2] != ".") {
+        if (cep_formatado[2] != undefined) {
+            document.getElementById("cep").value = cep_formatado.slice(0, 2) + "." + cep_formatado[2]
+        }
+    }
+    if (cep_formatado[6] != "-") {
+        if (cep_formatado[6] != undefined) {
+            document.getElementById("cep").value = cep_formatado.slice(0, 6) + "-" + cep_formatado[6]
         }
     }
 }

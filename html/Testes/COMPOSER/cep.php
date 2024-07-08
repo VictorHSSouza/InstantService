@@ -6,7 +6,7 @@
     $address = json_decode(file_get_contents($url));
     var_dump($address);
 
-    echo $address->logradouro;
+    //echo $address->logradouro;
 
-    echo '<br> CASA DO THIAGO (TEM PISCINA)';
+    //echo '<br> CASA DO THIAGO (NÃO TEM PISCINA)';
 ?>
