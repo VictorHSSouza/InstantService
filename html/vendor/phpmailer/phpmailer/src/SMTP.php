@@ -273,7 +273,6 @@ class SMTP
      * @see SMTP::$Debugoutput
      * @see SMTP::$do_debug
      */
-    
     protected function edebug($str, $level = 0)
     {
         if ($level > $this->do_debug) {

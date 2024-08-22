@@ -19,9 +19,9 @@ abstract class Model {
         $this->$atributo = $valor;
     }
 
-    protected function select($campo,$tb,$where = true) {
-        $sql = "SELECT $campo FROM $tb WHERE $where";
-        //echo $sql;
+    protected function select($campo,$tb,$where = true,$extra = "") {
+        $sql = "SELECT $campo FROM $tb WHERE $where $extra";
+        //echo "<br> $sql <br>";
         $stmt = $this->db->query($sql);
         return $stmt->fetch_all(MYSQLI_ASSOC);
     }
@@ -47,14 +47,14 @@ abstract class Model {
         $stmt->execute();
     }
 
-    public function delete($tb,$where = true) {
+    protected function delete($tb,$where = true) {
         $sql = "DELETE FROM $tb WHERE $where";
         //echo $sql;
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
     }
 
-    public function lastId() {
+    protected function lastId() {
         return $this->db->insert_id;
     }
 }

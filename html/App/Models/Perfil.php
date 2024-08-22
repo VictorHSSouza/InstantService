@@ -9,10 +9,10 @@ class Perfil extends Model{
             $campo = "concat(nome, ' ' , sobrenome) nomecompleto, email, sexo, data_nascimento, cpf, 
             p.id_estado, p.cep, 
             p.logradouro, p.numero, p.complemento, p.bairro, p.cidade";
-            $tb = "cadastro_usuario left join cadastro_profissional p on (id_cliente = p.id_usuario)";
+            $tb = "cadastro_usuario left join cadastro_profissional p on (id_cliente = p.id_usuario) left join login l on(id_cliente = l.id_usuario)";
         } else {
-            $campo = "concat(nome, ' ' , sobrenome) nomecompleto, email, sexo, data_nascimento, cpf";
-            $tb = "cadastro_usuario";
+            $campo = "concat(nome, ' ' , sobrenome) nomecompleto, l.email, sexo, data_nascimento, cpf";
+            $tb = "cadastro_usuario left join login l on(id_cliente = l.id_usuario)";
         }
         $where = "id_cliente = $id";
 

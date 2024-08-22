@@ -18,6 +18,7 @@ class IndexController extends Action {
 
             $pedidos = $pedido->list_pedidos();
             $this->view->pedidos = $pedidos;
+            $this->view->nome = $_SESSION['nome'];
         }
 
         $this->render('home','layout1');

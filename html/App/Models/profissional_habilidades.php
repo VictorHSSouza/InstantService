@@ -33,4 +33,22 @@ class Profissional_habilidades extends Model{
             $this->delete($this->tb,'id_profissional = '.$id.' and id_habilidade = '.$id_habilidade);
         }           
     }
+
+    public function list_prof_email($id_problema) {
+        $campo = "email, nome";
+
+        $tb = "LOGIN L JOIN CADASTRO_USUARIO ON(L.ID_USUARIO = ID_CLIENTE)
+		JOIN CADASTRO_PROFISSIONAL CP ON(CP.ID_USUARIO = ID_CLIENTE)
+		JOIN PROFISSIONAL_HABILIDADES PFH ON(CP.ID_USUARIO = ID_PROFISSIONAL)
+        JOIN HABILIDADES ON (PFH.ID_HABILIDADE = ID)
+        JOIN PROBLEMA_HABILIDADES PBH ON(ID = PBH.ID_HABILIDADE)";
+
+        $where = "PBH.ID_PROBLEMA = $id_problema";
+
+        $extra = "GROUP BY L.ID_USUARIO";
+
+        $email_profissional = $this->select($campo, $tb, $where, $extra);
+
+        return $email_profissional;
+    }
 }

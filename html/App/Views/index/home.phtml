@@ -1,6 +1,16 @@
 
-
 <?php
+
+if(isset($_GET['msg'])) {
+    $msg = $_GET['msg'];
+    if($msg == 'logout') $aviso = "Usuário deslogado com sucesso";
+    //elseif()
+    ?>
+        <div class="alert alert-success text-center">
+            <?=$aviso?>
+        </div>
+    <?php
+}
 
 if(isset($_GET['cad_prof'])) {
     ?>
@@ -36,7 +46,7 @@ if(isset($_GET['edit'])) {
 
 if(isset($this->view->pedidos)) { ?> 
     <div> 
-        <div class="mt-2 h3 text-center">Pedidos Abertos:</div>
+        <div class="mt-2 h3 text-center">Pedidos <?="de: ".$this->view->nome?> Abertos</div>
 
         <div class="mt-4 d-flex justify-content-evenly">
             <?php foreach($this->view->pedidos as $value) { ?>

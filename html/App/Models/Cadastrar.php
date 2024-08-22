@@ -16,6 +16,8 @@ class Cadastrar extends Model{
                 $valor = "'$value'";
             } elseif($key == 'login') {
                 break;
+            } elseif($key == 'email') {
+
             } else {
                 $indice = $indice.", $key";
                 $valor = $valor.", '$value'";
@@ -25,8 +27,8 @@ class Cadastrar extends Model{
         $this->insert('cadastro_usuario',$indice,$valor);
     
         if(md5($Dados['senha']) == md5($Dados['senha2'])) {
-            $indice = "tipo,login,senha,id_usuario";
-            $valor = "'U','".$Dados['login']."','".md5($Dados['senha'])."', ". $this->lastId();
+            $indice = "tipo,login,senha,email,id_usuario";
+            $valor = "'U','".$Dados['login']."','".md5($Dados['senha'])."','".$Dados['email']."', ". $this->lastId();
             $this->insert('login',$indice,$valor);
         }
     }

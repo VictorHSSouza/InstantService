@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use MF\Controller\Action;
 use MF\Model\Container;
+use App\Models\Email;
 
 class PedidoController extends Action {
     public function fazer_pedido() {
@@ -36,6 +37,7 @@ class PedidoController extends Action {
     }
 
     public function cad_pedido() {
+        ob_start();
         $obj = Container::getModel('login','instant_service');
         $obj->Login();
 
@@ -53,13 +55,23 @@ class PedidoController extends Action {
 
         $pedido->cad_pedido();
 
-        $email = Container::getModel('email','instant_service');
+        $email = new Email;
 
-        $email->__set('assunto','Solicitação de Serviço');
-        $email->__set('corpo','<b>Olá! Um novo <b style="color:red">pedido</b> de serviço foi solicitado perto da sua região.</b><br>Confira nosso site para saber mais sobre o pedido!');
+        $email->__set('dados', $_POST);
 
+        //$email->enviar_email();
+        //var_dump($_POST);
+        $obj_prof_hablidades = Container::getModel('profissional_habilidades','instant_service');
+        $profissionais = $obj_prof_hablidades->list_prof_email($_POST['id_problema']);
+        
+        //var_dump($profissionais);
+        foreach($profissionais as $value) {
+            $email->__set('email_destinatario', $value['email']);
+            $email->__set('nome_destinatario', $value['nome']);
+            $email->email_cad_pedido();
+        }
+        
         header("Location: /?pedido=1");
-        $email->enviar_email();
     }
 
     public function ver_pedido() {
@@ -135,13 +147,6 @@ class PedidoController extends Action {
         $pedido = $pedido->exc_pedido();
 
         header("Location: /?exc=1");
-    }
-
-    public function enviar_email(){
-        $obj = Container::getModel('email','instant_service');
-
-        $obj->__set('assunto','QUEM OLHAR É GAY');
-        $obj->__set('corpo','Email enviado automaticamente por <b style="color: yellow;">InstantService</b>');
     }
 }
 

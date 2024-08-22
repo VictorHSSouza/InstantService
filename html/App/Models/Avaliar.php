@@ -15,8 +15,8 @@ class Avaliar extends Model{
     }
 
     public function listar_avaliacao($id_pro) {
-        $campo = "p.id_usuario,concat(u.nome, ' ', u.sobrenome) nome_completo,u.email,u.data_nascimento,(select nome_estado from estados e WHERE e.id_estado = p.id_estado) estado, p.cidade, p.nome_curriculo, a.mensagem";
-        $tb = "cadastro_profissional p INNER JOIN cadastro_usuario u on (p.id_usuario = u.id_cliente) LEFT JOIN avaliacao a on(a.id_usuario = p.id_usuario)";
+        $campo = "p.id_usuario,concat(u.nome, ' ', u.sobrenome) nome_completo,l.email,u.data_nascimento,(select nome_estado from estados e WHERE e.id_estado = p.id_estado) estado, p.cidade, p.nome_curriculo, a.mensagem";
+        $tb = "cadastro_profissional p INNER JOIN cadastro_usuario u on (p.id_usuario = u.id_cliente) LEFT JOIN avaliacao a on(a.id_usuario = p.id_usuario) LEFT JOIN login l on(p.id_usuario = l.id_usuario)";
         $where = "p.id_usuario = $id_pro";
         $consulta = $this->select($campo, $tb, $where)[0];
         return $consulta;

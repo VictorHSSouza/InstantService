@@ -5,43 +5,43 @@
 
 <form action="/atualizar_dados" method="POST">
 
-    <div id="div_camposusuario" class="m-0 row d-flex justify-content-center">
+    <div id="div_camposusuario" class="m-0 row  text-center">
         <div class="h3 text-center mb-5 mt-4">Informações pessoais</div>
 
-        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+        <div class="h3 row mb-4 ">
             <label class="mb-1"  for="name">Nome:</label> 
-            <input class="w-50" type="text" name="name" value="<?=$dados["nomecompleto"]?>"disabled>
+            <input class="m-auto  form-control w-50" type="text" name="name" value="<?=$dados["nomecompleto"]?>"disabled>
         </div>
 
-        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+        <div class="h3 row mb-4 ">
             <label class="mb-1" for="email">Email:</label>
-            <input class="w-50" id="email" type="text" name="email" value="<?=$dados["email"]?>"disabled>
+            <input class="m-auto  form-control w-50" id="email" type="text" name="email" value="<?=$dados["email"]?>"disabled>
         </div>
 
-        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+        <div class="h3 row mb-4 ">
             <label class=" mb-1" for="sexo">Sexo:</label>
-            <input class="w-50" type="text" name="sexo" value="<?=$dados["sexo"]?>"disabled>
+            <input class="m-auto  form-control w-50" type="text" name="sexo" value="<?=$dados["sexo"]?>"disabled>
         </div>
 
-        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+        <div class="h3 row mb-4 ">
             <label class="mb-1" for="data_nascimento">Nascimento:</label>
-            <input class="w-50" type="date" name="data_nascimento" value="<?=$dados["data_nascimento"]?>"disabled>
+            <input class="m-auto  form-control w-50" type="date" name="data_nascimento" value="<?=$dados["data_nascimento"]?>"disabled>
         </div>
 
-        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+        <div class="h3 row mb-4 ">
             <label class="mb-1" for="cpf">CPF:</label>
-            <input class="w-50" type="text" name="cpf" value="<?=$dados["cpf"]?>"disabled>
+            <input class="m-auto  form-control w-50" type="text" name="cpf" value="<?=$dados["cpf"]?>"disabled>
         </div>
-        <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center"></div>
+        <div class="h3 row mb-4 "></div>
 
 
         <?php if($profissional) { ?>
-            <div class="h3 text-center mb-5 mt-4">Informações profissionais</div>
+            <div class="h3 mb-5 mt-4">Informações profissionais</div>
             <input type="hidden" name="profissional" value="1">
 
-            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <div class="h3 row mb-4 ">
                 <label class="mb-1" for="id_estado">Estado:</label>
-                <select disabled class="w-50" name="id_estado" id="id_estado">
+                <select disabled class="m-auto w-50 form-select" name="id_estado" id="id_estado">
                     <?php
                     foreach ($dados['estados'] as $value) {
                         ?> 
@@ -52,36 +52,36 @@
                 </select>
             </div>
 
-            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <div class="h3 row mb-4 ">
                 <label class="mb-1" for="cep">Cep:</label>
-                <input class="w-50" id="cep" type="text" name="cep" value="<?=$dados["cep"]?>"disabled>
+                <input class="m-auto  form-control w-50" id="cep" type="text" name="cep" value="<?=$dados["cep"]?>"disabled>
             </div>
 
-            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <div class="h3 row mb-4 ">
                 <label class="mb-1" for="logradouro">Logradouro:</label>
-                <input class="w-50" id="logradouro" type="text" name="logradouro" value="<?=$dados["logradouro"]?>"disabled>
+                <input class="m-auto  form-control w-50" id="logradouro" type="text" name="logradouro" value="<?=$dados["logradouro"]?>"disabled>
             </div>
 
-            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <div class="h3 row mb-4 ">
                 <label class="mb-1" for="numero">Número</label>
-                <input class="w-50" id="numero" type="text" name="numero" value="<?=$dados["numero"]?>"disabled>
+                <input class="m-auto  form-control w-50" id="numero" type="text" name="numero" value="<?=$dados["numero"]?>"disabled>
             </div>
 
-            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <div class="h3 row mb-4 ">
                 <label class="mb-1" for="complemento">Complemento:</label>
-                <input class="w-50" id="complemento" type="text" name="complemento" value="<?=$dados["complemento"]?>"disabled>
+                <input class="m-auto  form-control w-50" id="complemento" type="text" name="complemento" value="<?=$dados["complemento"]?>"disabled>
             </div>
 
-            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <div class="h3 row mb-4 ">
                 <label class="mb-1" for="bairro">Bairro:</label>
-                <input class="w-50" id="bairro" type="text" name="bairro" value="<?=$dados["bairro"]?>"disabled>
+                <input class="m-auto  form-control w-50" id="bairro" type="text" name="bairro" value="<?=$dados["bairro"]?>"disabled>
             </div>
             
-            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center">
+            <div class="h3 row mb-4 ">
                 <label class="mb-1" for="cidade">Cidade:</label>
-                <input class="w-50" id="cidade" type="text" name="cidade" value="<?=$dados["cidade"]?>"disabled>
+                <input class="m-auto  form-control w-50" id="cidade" type="text" name="cidade" value="<?=$dados["cidade"]?>"disabled>
             </div>
-            <div class="h3 col-5 row mb-4 d-flex justify-content-center text-center"></div>
+            <div class="h3 row mb-4 "></div>
         <?php } ?>
     </div>
 

@@ -25,6 +25,12 @@ Class Route extends Bootstrap {
             'action' => 'logar'
         );
 
+        $routes['logout'] = array(
+            'route' => '/logout',
+            'controller' => 'loginController',
+            'action' => 'logout'
+        );
+
         $routes['cadastrar'] = array(
             'route' => '/cadastrar',
             'controller' => 'cadastrarController',
