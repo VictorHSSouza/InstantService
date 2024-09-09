@@ -9,10 +9,10 @@ class Perfil extends Model{
             $campo = "concat(nome, ' ' , sobrenome) nomecompleto, email, sexo, data_nascimento, cpf, 
             p.id_estado, p.cep, 
             p.logradouro, p.numero, p.complemento, p.bairro, p.cidade";
-            $tb = "cadastro_usuario left join cadastro_profissional p on (id_cliente = p.id_usuario) left join login l on(id_cliente = l.id_usuario)";
+            $tb = "cliente left join profissional p on (id_cliente = p.id_profissional)";
         } else {
-            $campo = "concat(nome, ' ' , sobrenome) nomecompleto, l.email, sexo, data_nascimento, cpf";
-            $tb = "cadastro_usuario left join login l on(id_cliente = l.id_usuario)";
+            $campo = "concat(nome, ' ' , sobrenome) nomecompleto, email, sexo, data_nascimento, cpf";
+            $tb = "cliente";
         }
         $where = "id_cliente = $id";
 
@@ -21,10 +21,18 @@ class Perfil extends Model{
     }
 
     public function update_perfil($id, $profissional, $valores) {
-        $this->update("cadastro_usuario", "email = '" . $valores["email"]. "'", "id_cliente = $id");
+        $this->update("cliente", "email = '" . $valores["email"]. "'", "id_cliente = $id");
 
         if($profissional) {
-            $this->update("cadastro_profissional", "id_estado = " . $valores["id_estado"] . ",cep='" . $valores["cep"] ."',logradouro='" . $valores["logradouro"] . "',numero='" . $valores["numero"] . "',complemento='" . $valores["complemento"] . "',bairro='" . $valores["bairro"] . "',cidade='" . $valores["cidade"] . "'", "id_usuario = $id");
+            $this->update("profissional", 
+                "id_estado = " . $valores["id_estado"] . 
+                ",cep='" . $valores["cep"] .
+                "',logradouro='" . $valores["logradouro"] . 
+                "',numero='" . $valores["numero"] . 
+                "',complemento='" . $valores["complemento"] . 
+                "',bairro='" . $valores["bairro"] . 
+                "',cidade='" . $valores["cidade"] . "'"
+                , "id_profissional = $id");
         }
 
     }

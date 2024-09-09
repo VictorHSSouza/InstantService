@@ -7,14 +7,14 @@ use MF\Model\Container;
 use App\Models\Email;
 
 class CadastrarController extends Action {
-    public function Cadastrar() {
+    public function cadastrar() {
         $this->render('cadastrar','layout2');
     }
 
-    public function Registrar() {
+    public function registrar() {
         ob_start();
         //$this->render('cadastrar','layout1');
-        $obj = Container::getModel('cadastrar','instant_service');
+        $obj = Container::getModel('cliente','instant_service');
         $obj->cadastrar($_POST);
 
         $email = new Email;

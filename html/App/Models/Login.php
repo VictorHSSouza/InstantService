@@ -3,7 +3,7 @@ namespace App\Models;
 use MF\Model\Model;
 
 class Login extends Model{
-    private $tb = "login";
+    private $tb = "cliente";
 
     public function login($login = '',$senha = '',$email = '',$logar = false) {
 
@@ -26,8 +26,8 @@ class Login extends Model{
 
         if($conta) {
             if($logar) {
-                $info = $this->select('login, senha, id_usuario, nome, email, tipo',$this->tb." INNER JOIN cadastro_usuario ON(id_cliente = id_usuario)","login = '$login' and senha = '$senha' or email = '$email'")[0];
-                $_SESSION['id'] = $info['id_usuario'];
+                $info = $this->select('login, senha, id_cliente, nome, email, tipo',$this->tb,"login = '$login' and senha = '$senha' or email = '$email'")[0];
+                $_SESSION['id'] = $info['id_cliente'];
                 $_SESSION['nome'] = $info['nome'];
                 $_SESSION['login'] = $info['login'];
                 $_SESSION['senha'] = $info['senha'];

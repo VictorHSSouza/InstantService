@@ -1,5 +1,5 @@
 <?php 
-
+/*
 namespace App\Models;
 use MF\Model\Model;
 
@@ -24,12 +24,12 @@ class Cadastrar extends Model{
             }
         }
 
-        $this->insert('cadastro_usuario',$indice,$valor);
+        $this->insert('cliente',$indice,$valor);
     
         if(md5($Dados['senha']) == md5($Dados['senha2'])) {
-            $indice = "tipo,login,senha,email,id_usuario";
-            $valor = "'U','".$Dados['login']."','".md5($Dados['senha'])."','".$Dados['email']."', ". $this->lastId();
+            $indice = "login,senha,email,id_cliente";
+            $valor = $Dados['login']."','".md5($Dados['senha'])."','".$Dados['email']."', ". $this->lastId();
             $this->insert('login',$indice,$valor);
         }
     }
-}
+} */

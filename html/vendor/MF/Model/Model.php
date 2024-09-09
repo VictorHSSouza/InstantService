@@ -35,14 +35,14 @@ abstract class Model {
 
     protected function insert($tb,$indice,$valor) {
         $sql = "INSERT INTO $tb ($indice) VALUES($valor)";
-        //echo $sql;
+        //echo "<br> $sql <br>";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
     }
 
     protected function update($tb,$valor,$where) {
         $sql = "UPDATE $tb SET $valor WHERE $where";
-        //echo $sql;
+        //cho "<br> $sql <br>";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
     }

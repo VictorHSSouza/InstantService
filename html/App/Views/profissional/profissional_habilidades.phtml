@@ -14,9 +14,9 @@
             <div class="text-start row">
                 <?php
                     foreach($habilidades['habilidades'] as $values) {
-                        $stts = (isset($habilidades['habilidades_prof'][$values['id']]))?'none':'true';
+                        $stts = (isset($habilidades['habilidades_prof'][$values['id_habilidade']]))?'none':'true';
                         ?>
-                            <div class="m-1 btn btn-success col" id="habilidade<?=$values['id']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id']?>,<?=$values['id']?>,'0')"><?=$values['habilidade']?></div>
+                            <div class="m-1 btn btn-success col" id="habilidade<?=$values['id_habilidade']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id']?>,<?=$values['id_habilidade']?>,'0')"><?=$values['habilidade']?></div>
                         <?php
                     }
                 ?>
@@ -26,9 +26,9 @@
             <div class="border mt-1 text-start" style="min-height: 200px ;">
                 <?php
                     foreach($habilidades['habilidades'] as $values) {
-                        $stts = (!isset($habilidades['habilidades_prof'][$values['id']]))?'none':'true';
+                        $stts = (!isset($habilidades['habilidades_prof'][$values['id_habilidade']]))?'none':'true';
                         ?>
-                            <div class="m-1 btn btn-success col" id="habilidade_cad<?=$values['id']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id']?>,<?=$values['id']?>,'1')"><?=$values['habilidade']?></div>
+                            <div class="m-1 btn btn-success col" id="habilidade_cad<?=$values['id_habilidade']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id']?>,<?=$values['id_habilidade']?>,'1')"><?=$values['habilidade']?></div>
                         <?php
                     }
                 ?>

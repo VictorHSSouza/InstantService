@@ -18,7 +18,7 @@ class PedidoController extends Action {
         $this->render('fazer_pedido','layout1');
     }
 
-    public function list_problemas() {
+    public function list_problemas() {  //ajax não mexer
         $obj = Container::getModel('login','instant_service');
         $obj->Login();
 
@@ -32,7 +32,7 @@ class PedidoController extends Action {
 
         $problemas = $problema->list_problemas();
         foreach($problemas as $value) {
-            echo "<option value='".$value['id']."'>".$value['nome']."</option>";
+            echo "<option value='".$value['id_problema']."'>".$value['nome']."</option>";
         }
     }
 
@@ -42,13 +42,15 @@ class PedidoController extends Action {
         $obj->Login();
 
         if(!isset($_POST['id_problema']) or !$_POST['id_problema']) {
+            var_dump($_POST);
+            echo "oi";
             header("Location: /");
             exit;
         }
 
         $pedido = Container::getModel('pedido','instant_service');
 
-        $pedido->__set('id_usuario',$_SESSION['id']);
+        $pedido->__set('id_cliente',$_SESSION['id']);
         $pedido->__set('id_problema',$_POST['id_problema']);
         $pedido->__set('descricao',$_POST['descricao']);
         $pedido->__set('endereco',$_POST['endereco']);
@@ -56,11 +58,8 @@ class PedidoController extends Action {
         $pedido->cad_pedido();
 
         $email = new Email;
-
         $email->__set('dados', $_POST);
 
-        //$email->enviar_email();
-        //var_dump($_POST);
         $obj_prof_hablidades = Container::getModel('profissional_habilidades','instant_service');
         $profissionais = $obj_prof_hablidades->list_prof_email($_POST['id_problema']);
         
@@ -86,7 +85,7 @@ class PedidoController extends Action {
         $pedido = Container::getModel('pedido','instant_service');
 
         $pedido->__set('id_pedido',$_GET['id']);
-        $pedido->__set('id_usuario',$_SESSION['id']);
+        $pedido->__set('id_cliente',$_SESSION['id']);
         
         $pedidoinfo = $pedido->ver_pedido();
 
@@ -102,6 +101,34 @@ class PedidoController extends Action {
         $this->render('ver_pedido','layout1');
     }
 
+    public function ver_pedido_profissional() {
+        $obj = Container::getModel('login','instant_service');
+        $obj->Login();
+
+        if(!isset($_GET['id']) or !$_GET['id']) {
+            header("Location: /");
+            exit;
+        }
+
+        $pedido = Container::getModel('pedido','instant_service');
+
+        $pedido->__set('id_pedido',$_GET['id']);
+        $pedido->__set('id_cliente',$_SESSION['id']);
+        
+        $pedidoinfo = $pedido->ver_pedido();
+
+        if(!isset($pedidoinfo) or !$pedidoinfo) {
+            header("Location: /");
+            exit;
+        }
+
+        $pedidoinfo['id'] = $_GET['id'];
+
+        $this->view->info = $pedidoinfo;
+
+        $this->render('ver_pedido_profissional','layout1');
+    }
+
     public function edit_pedido() {
         $obj = Container::getModel('login','instant_service');
         $obj->Login();
@@ -114,7 +141,7 @@ class PedidoController extends Action {
         $pedido = Container::getModel('pedido','instant_service');
 
         $pedido->__set('id_pedido',$_GET['id']);
-        $pedido->__set('id_usuario',$_SESSION['id']);
+        $pedido->__set('id_cliente',$_SESSION['id']);
         $pedido->__set('descricao',$_POST['descricao']);
         $pedido->__set('endereco',$_POST['endereco']);
         
@@ -142,11 +169,26 @@ class PedidoController extends Action {
         $pedido = Container::getModel('pedido','instant_service');
 
         $pedido->__set('id_pedido',$_GET['id']);
-        $pedido->__set('id_usuario',$_SESSION['id']);
+        $pedido->__set('id_cliente',$_SESSION['id']);
         
         $pedido = $pedido->exc_pedido();
 
         header("Location: /?exc=1");
+    }
+
+    public function vincular_pedido() {
+        $obj = Container::getModel('login','instant_service');
+        $obj->Login();
+
+        $pedido = Container::getModel('pedido','instant_service');
+
+        $pedido->__set('id_pedido',$_GET['id']);
+        $pedido->__set('id_profissional',$_SESSION['id']);
+        $pedido->__set('data_confirmacao',date("Y-m-d H:i:s"));
+        
+        $pedido->vincular_pedido();
+
+        header("Location: /profissional");
     }
 }
 

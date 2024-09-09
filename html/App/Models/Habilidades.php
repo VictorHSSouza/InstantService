@@ -8,7 +8,7 @@ class Habilidades extends Model{
     protected $tb = "habilidades";
 
     public function list_habilidades() {  
-        $habilidades = $this->select("id,habilidade",$this->tb);
+        $habilidades = $this->select("id_habilidade,habilidade",$this->tb);
         return $habilidades;
     }
 }

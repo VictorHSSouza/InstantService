@@ -1,0 +1,38 @@
+<div class="my-5 display-2 text-center">Lista de Pedidos</div>
+
+<div class="m-3">
+    <div class="mb-4 text-start">
+        <a href="/profissional_pedidos_vinculados" class="btn btn-success p-3 border border-dark border-2 "> Ver Pedidos Ativos </a>
+    </div>
+
+    <!--<div class="d-flex justify-content-center py-3 my-3">
+        <div class="w-75 border border-1 rounded-2">
+            sss
+        </div>
+    </div> -->
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Solicitante</th>
+                <th scope="col">Problema</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Endereço</th>
+                <th scope="col">Data da Solicitação</th>
+                <th scope="col">Sistema</th>
+            </tr>
+        </thead>
+        <tbody> 
+            <?php foreach($this->view->pedidos as $value) { ?>
+                <tr>
+                    <td><?=$value['nome_completo']?></td>
+                    <td><?=$value['problema']?></td>
+                    <td><?=$value['descricao']?></td>
+                    <td><?=$value['endereco']?></td>
+                    <td><?=$value['data_solicitacao']?></td>
+                    <td><a href="/ver_pedido_profissional?id=<?=$value['id_pedido']?>" class="btn shadow text-start ">Mais Informações</a> <a href="" class="btn shadow text-start ">Recusar Pedido</a></td>
+                </tr>
+            <?php } ?>
+        </tbody>
+    </table>
+</div>

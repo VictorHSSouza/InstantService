@@ -6,7 +6,7 @@
 
     <div class="row d-flex justify-content-center">
         <?php foreach($avaliacao as $value) { ?>
-            <a href="/avaliar_profissional?id=<?=$value['id_usuario']?>" class="col-2 m-2 btn bg-dark-subtle"><span class="h5">Avaliar: <?=$value['nome_completo']?></span></a>    
+            <a href="/avaliar_profissional?id=<?=$value['id_cliente']?>" class="col-2 m-2 btn bg-dark-subtle"><span class="h5">Avaliar: <?=$value['nome_completo']?></span></a>    
         <?php } ?>
     </div>
 </div>

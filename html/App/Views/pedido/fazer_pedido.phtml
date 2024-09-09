@@ -10,14 +10,14 @@
                 <option value=""></option>
 
                 <?php foreach($this->view->dados as $value) {  ?>
-                    <option value="<?=$value['id']?>"><?=$value['nome']?></option>
+                    <option value="<?=$value['id_tipo']?>"><?=$value['nome']?></option>
                 <?php } ?>
             </select>
 
         </div>
 
         <div class="mt-2 mb-3 col-12 mx-auto row p-0 aparece" id="div_problemas" style="display: none;">
-            <label for="id_problema" class="col mb-2 p-0 my-auto text-start">Problema:</label>
+            <label for="problema" class="col mb-2 p-0 my-auto text-start">Problema:</label>
             <select name="id_problema" id="problema" class="p-1 my-auto text-start">
 
             </select>

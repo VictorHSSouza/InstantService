@@ -10,12 +10,12 @@ class Problema extends Model{
 
 
     public function list_tipos() {
-        $tipo_problema = $this->select("id,nome,descricao","tipo_problema");
+        $tipo_problema = $this->select("id_tipo,nome,descricao","tipo_problema");
         return $tipo_problema;
     }    
 
     public function list_problemas() {
-        $tipo_problema = $this->select("id,nome,descricao",$this->__get("tb"),"id_tipo = ".$this->__get("id_tipo"));
+        $tipo_problema = $this->select("id_problema,nome,descricao",$this->tb,"id_tipo = ".$this->id_tipo);
         return $tipo_problema;
     }  
 }

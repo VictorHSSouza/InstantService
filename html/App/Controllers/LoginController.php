@@ -10,7 +10,7 @@ class LoginController extends Action {
 
     public $authUrl;
 
-    public function Login() {
+    public function login() {
         /*
         $googleClient = new GoogleClient;
         $googleClient->init();

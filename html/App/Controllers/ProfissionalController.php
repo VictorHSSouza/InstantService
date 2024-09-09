@@ -7,7 +7,7 @@ use MF\Model\Container;
 use App\Models\Correio;
 
 class ProfissionalController extends Action {
-    public function Profissional() {
+    public function profissional() {
         $obj = Container::getModel('login','instant_service');
         $obj->Login();
 
@@ -43,7 +43,16 @@ class ProfissionalController extends Action {
                 $this->render('profissional_avaliando','layout1');
                 break;
             case 4:
-                echo "Tela de profissional";
+                if(isset($_SESSION['id'])) {        
+                    $pedido = Container::getModel('pedido','instant_service');
+                    $pedido->__set('id_cliente',$_SESSION['id']);
+        
+                    $pedidos = $pedido->list_servicos();
+                    $this->view->pedidos = $pedidos;
+                    $this->view->nome = $_SESSION['nome'];
+                }
+
+                $this->render('area_profissional','layout1');
                 break;
         }
     }
@@ -64,6 +73,19 @@ class ProfissionalController extends Action {
 
         $obj_prof_habilidade = Container::getModel('profissional_habilidades','instant_service');
         $obj_prof_habilidade->cad_prof_habilidades($_GET['id_habilidade'],$_GET['status_habilidade'],$_SESSION['id']);
+    }
+
+    public function profissional_pedidos_vinculados() {
+        $obj = Container::getModel('login','instant_service');
+        $obj->Login();
+
+        $obj_pedido = Container::getModel('pedido','instant_service');
+        $obj_pedido->__set('id_profissional',$_SESSION['id']);
+
+        $pedidos = $obj_pedido->list_servicos_vinculados();
+        $this->view->pedidos = $pedidos;
+
+        $this->render('profissional_pedidos_vinculados', 'layout1');
     }
 
     public function profissional_habilidades() {
@@ -106,5 +128,4 @@ class ProfissionalController extends Action {
         $this->render('info_cep','');
     }
 }
-
 ?>

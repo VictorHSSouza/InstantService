@@ -46,11 +46,11 @@ if(isset($_GET['edit'])) {
 
 if(isset($this->view->pedidos)) { ?> 
     <div> 
-        <div class="mt-2 h3 text-center">Pedidos <?="de: ".$this->view->nome?> Abertos</div>
+        <div class="mt-5 display-2 text-center">Pedidos <?="de: ".$this->view->nome?></div>
 
         <div class="mt-4 d-flex justify-content-evenly">
             <?php foreach($this->view->pedidos as $value) { ?>
-                <a href="/ver_pedido?id=<?=$value['id']?>" class="btn btn-info">Pedido: <br><?=$value['data_solicitacao']?></a>
+                <a href="/ver_pedido?id=<?=$value['id_pedido']?>" class="btn btn-info">Pedido: <br><?=$value['data_solicitacao']?></a>
             <?php } ?>
     
         </div>

@@ -67,6 +67,12 @@ Class Route extends Bootstrap {
             'action' => 'profissional_cadastro'
         );
 
+        $routes['profissional_pedidos_vinculados'] = array(
+            'route' => '/profissional_pedidos_vinculados',
+            'controller' => 'profissionalController',
+            'action' => 'profissional_pedidos_vinculados'
+        );
+
         $routes['profissional_habilidades_cadastro'] = array(
             'route' => '/profissional_habilidades_cadastro',
             'controller' => 'profissionalController',
@@ -127,6 +133,12 @@ Class Route extends Bootstrap {
             'action' => 'ver_pedido'
         );
 
+        $routes['ver_pedido_profissional'] = array(
+            'route' => '/ver_pedido_profissional',
+            'controller' => 'pedidoController',
+            'action' => 'ver_pedido_profissional'
+        );
+
         $routes['edit_pedido'] = array(
             'route' => '/edit_pedido',
             'controller' => 'pedidoController',
@@ -137,6 +149,12 @@ Class Route extends Bootstrap {
             'route' => '/excluir_pedido',
             'controller' => 'pedidoController',
             'action' => 'excluir_pedido'
+        );
+
+        $routes['vincular_pedido'] = array(
+            'route' => '/vincular_pedido',
+            'controller' => 'pedidoController',
+            'action' => 'vincular_pedido'
         );
         $this->setRoutes($routes);
     }  

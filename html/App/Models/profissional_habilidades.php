@@ -37,15 +37,15 @@ class Profissional_habilidades extends Model{
     public function list_prof_email($id_problema) {
         $campo = "email, nome";
 
-        $tb = "LOGIN L JOIN CADASTRO_USUARIO ON(L.ID_USUARIO = ID_CLIENTE)
-		JOIN CADASTRO_PROFISSIONAL CP ON(CP.ID_USUARIO = ID_CLIENTE)
-		JOIN PROFISSIONAL_HABILIDADES PFH ON(CP.ID_USUARIO = ID_PROFISSIONAL)
-        JOIN HABILIDADES ON (PFH.ID_HABILIDADE = ID)
-        JOIN PROBLEMA_HABILIDADES PBH ON(ID = PBH.ID_HABILIDADE)";
+        $tb = "CLIENTE C
+		JOIN PROFISSIONAL CP ON(CP.ID_PROFISSIONAL = C.ID_CLIENTE)
+		JOIN PROFISSIONAL_HABILIDADES PFH ON(CP.ID_PROFISSIONAL = PFH.ID_PROFISSIONAL)
+        JOIN HABILIDADES H ON (PFH.ID_HABILIDADE = H.ID_HABILIDADE)
+        JOIN PROBLEMA_HABILIDADES PBH ON(H.ID_HABILIDADE = PBH.ID_HABILIDADE)";
 
         $where = "PBH.ID_PROBLEMA = $id_problema";
 
-        $extra = "GROUP BY L.ID_USUARIO";
+        $extra = "GROUP BY C.ID_CLIENTE";
 
         $email_profissional = $this->select($campo, $tb, $where, $extra);
 

@@ -9,7 +9,7 @@ class PerfilController extends Action {
 
     public function perfil() {
         $obj = Container::getModel('login','instant_service');
-        $obj->Login();
+        $obj->login();
 
         $obj_profissional = Container::getModel('profissional','instant_service');
         $cadastro_profissional = $obj_profissional->conferir_profissional($_SESSION["id"]);
@@ -24,7 +24,7 @@ class PerfilController extends Action {
 
     public function atualizar_dados() {
         $obj = Container::getModel('login','instant_service');
-        $obj->Login();
+        $obj->login();
 
         $profissional = (isset($_POST["profissional"]))? 1 : 0;
         $obj_perfil = Container::getModel('perfil','instant_service');
