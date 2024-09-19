@@ -35,7 +35,12 @@ function list_problema(){
             var elements = document.getElementsByClassName("aparece")
 
             for (let i = 0; i < elements.length; i++) {
-                elements[i].style.display = 'block'
+                elements[i].classList.remove('d-none'); // Remove a classe que esconde o elemento
+                elements[i].classList.add('d-block');   // Adiciona a classe do Bootstrap para mostrar o elemento
+                elements[i].offsetHeight;
+                $(elements[i]).find('.select2').select2({
+                    theme: 'bootstrap-5'
+                });
             }
             
             document.getElementById("problema").innerHTML = xhttp.responseText

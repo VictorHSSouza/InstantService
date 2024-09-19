@@ -51,5 +51,6 @@ class Avaliar extends Model{
     public function completa_avaliacao($id_pro) {     
         $this->update($this->tb,"status_avaliacao = 1","id_profissional = $id_pro");
         $this->update("profissional","status_ativo = 1","id_profissional = $id_pro");
+        $this->update("cliente","tipo = 'P'","id_cliente = $id_pro");
     }
 }

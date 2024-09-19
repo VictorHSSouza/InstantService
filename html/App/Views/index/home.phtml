@@ -1,63 +1,83 @@
-
 <?php
+    if(isset($_GET['msg'])) {
+        $msg = $_GET['msg'];
+        if($msg == 'logout') $aviso = "Usuário deslogado com sucesso";
+        elseif($msg == 'cad_prof') $aviso = "Cadastro realizado com sucesso. Seu curriculo foi enviado.";
+        elseif($msg == 'edit_perfil') $aviso = "Seu perfil foi alterado com sucesso.";
+        elseif($msg == 'pedido') $aviso = "Seu Pedido foi realizado.";
+        elseif($msg == 'edit') $aviso = "Seu Pedido foi alterado com sucesso.";
+        ?>
+            <div class="alert alert-success text-center">
+                <?=$aviso?>
+            </div>
+        <?php
+    }
+?>
 
-if(isset($_GET['msg'])) {
-    $msg = $_GET['msg'];
-    if($msg == 'logout') $aviso = "Usuário deslogado com sucesso";
-    //elseif()
-    ?>
-        <div class="alert alert-success text-center">
-            <?=$aviso?>
-        </div>
-    <?php
-}
+<div class="row p-0 m-0 my-5">
+    <div class="text-start m-auto display-4 col col-sm-8 col-11 p-0 mb-4 text-decoration-underline fw-bold"> Localização </div>
 
-if(isset($_GET['cad_prof'])) {
-    ?>
-        <div class="alert alert-success text-center">
-            Cadastro realizado com sucesso. Seu curriculo foi enviado.
-        </div>
-    <?php
-}
-
-if(isset($_GET['edit_perfil'])) {
-    ?>
-        <div class="alert alert-success text-center">
-            Seu perfil foi alterado com sucesso.
-        </div>
-    <?php
-}
-
-if(isset($_GET['pedido'])) {
-    ?>
-        <div class="alert alert-success text-center">
-            Seu Pedido foi realizado.
-        </div>
-    <?php
-}
-
-if(isset($_GET['edit'])) {
-    ?>
-        <div class="alert alert-success text-center">
-            Seu Pedido foi alterado com sucesso.
-        </div>
-    <?php
-}
-
-if(isset($this->view->pedidos)) { ?> 
-    <div> 
-        <div class="mt-5 display-2 text-center">Pedidos <?="de: ".$this->view->nome?></div>
-
-        <div class="mt-4 d-flex justify-content-evenly">
-            <?php foreach($this->view->pedidos as $value) { ?>
-                <a href="/ver_pedido?id=<?=$value['id_pedido']?>" class="btn btn-info">Pedido: <br><?=$value['data_solicitacao']?></a>
-            <?php } ?>
-    
+    <div class="mb-5 d-flex p-0 justify-content-center">    
+        <div class="col col-sm-8 col-11 d-flex align-items-center bg-secondary-subtle justify-content-center rounded-2 shadow" style="height: 400px;">
+            <span class="h2">MAPA EM BREVE</span>
         </div>
     </div>
-<?php } ?>
 
-<div class="position-absolute top-50 start-50 translate-middle">
-    <a href="fazer_pedido" class="btn btn-success">Fazer Pedido</a>
+    <?php
+
+    if(isset($this->view->pedidos) and $this->view->pedidos) { ?> 
+    
+        <div class="text-start m-auto display-4 col col-sm-8 col-11 p-0 mb-4 text-decoration-underline fw-bold"> Pedidos em Andamento </div>
+
+        <div class="mb-5 d-flex p-0 justify-content-center"> 
+
+            <div class="col col-sm-8 col-11 align-items-center justify-content-center">
+                <?php foreach($this->view->pedidos as $value) { 
+                    if(false) {
+                        $ico = "<i class='fas fa-check-circle me-3 text-success'></i>";
+                        $cor = "btn-success-light";
+                        $msg = "Profissional aceitou o pedido";
+                    } elseif(false) {
+                        $ico = "<i class='fas fa-comments me-3 text-dark'></i>";
+                        $cor = "btn-success-lemon";
+                        $msg = "Profissional entrou em contato";
+                    } else {
+                        $ico = "<i class='fas fa-clock me-3 text-dark'></i>";
+                        $cor = "btn-tertiary-2";
+                        $msg = "Buscando profissionais";
+                    }
+                    ?>
+                    <a href="/ver_pedido?id=<?=$value['id_pedido']?>" class="btn <?=$cor?> justify-content-between rounded-4 mb-3 w-100 shadow pt-3 pb-2 px-4 d-flex align-items-center">
+                        <div class="d-flex align-items-center">
+                            <!-- Ícone de verificação -->
+                            <?=$ico?>
+                            <div class="text-start">
+                                <div class="flex-grow-1 h5"><?=$value['descricao']?></div>
+                                <div class="mt-2 h6"><?=$msg?></div>
+                            </div>
+                        </div>
+                    </a>
+                <?php } ?>
+            </div>
+            
+        </div>
+    <?php } ?>
+
+    <?php if(isset($_SESSION['id'])) { ?>
+        <div class="text-start m-auto display-4 col col-sm-8 col-11 p-0 mb-3 text-decoration-underline fw-bold">
+            <span>Olá, <?=$this->view->nome?>!</span>
+        </div>
+    <?php } ?>
+
+    <div class="text-start m-auto h5 col col-sm-8 col-11 p-0 mb-4 roboto-300">
+        <span>Encontre profissionais e contrate serviços para tudo o que precisar!</span>
+    </div>
+
+    <div class="text-start m-auto col col-sm-8 col-11 p-0 mb-3">
+        <a href="fazer_pedido" class="btn btn-success-light rounded-4 px-4 py-3 fw-bold shadow">
+            <i class="fas fa-cart-plus me-2 text-dark"></i>
+            <span class="h6">Fazer Pedido</span>
+        </a>
+    </div>
 </div>
 

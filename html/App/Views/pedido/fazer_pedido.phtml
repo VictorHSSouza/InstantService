@@ -2,39 +2,47 @@
     <h1 class="mb-5">Cadastro de Usuário</h1>
 
     <form action="cad_pedido" method="POST" class="row container col col-sm-4 col-11 m-auto py-3 h5 border px-5 border-5 rounded-3 border-dark">
-            
-        <div class="mt-2 mb-3 col-12 mx-auto row p-0">
-            <label for="id_tipo" class="col mb-2 p-0 my-auto text-start">Tipo de problema:</label>
 
-            <select name="id_tipo" id="tipo" class="col-12 p-1" onchange="list_problema()">
+        <div class="mt-2 mb-3 col-12 text-start mx-auto p-0">
+            <div class="">
+                <label class=" mb-2 p-0 my-auto " for="id_estado">
+                    Tipo do problema:
+                </label>
+            </div>
+        
+            <select class="form-select p-0 select2" name="id_tipo" id="tipo" onchange="list_problema()">
                 <option value=""></option>
-
-                <?php foreach($this->view->dados as $value) {  ?>
-                    <option value="<?=$value['id_tipo']?>"><?=$value['nome']?></option>
-                <?php } ?>
+                <?php
+                foreach($this->view->dados as $value) {
+                    ?> 
+                    <option class="text-start" value="<?=$value['id_tipo']?>"><?=$value['nome']?></option>                             
+                    <?php
+                }
+                ?>
             </select>
-
         </div>
 
-        <div class="mt-2 mb-3 col-12 mx-auto row p-0 aparece" id="div_problemas" style="display: none;">
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0 aparece d-none" id="div_problemas">
             <label for="problema" class="col mb-2 p-0 my-auto text-start">Problema:</label>
-            <select name="id_problema" id="problema" class="p-1 my-auto text-start">
+            <div class="col-12 p-0 text-start">
+                <select name="id_problema" id="problema" class="form-select p-0 select2">
 
-            </select>
+                </select>
+            </div>
         </div>
             
-        <div class="mt-2 mb-3 col-12 mx-auto row p-0 aparece" id="descricao" style="display: none;">
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0 aparece d-none" id="descricao">
             <label for="descricao" class="col mb-2 p-0 my-auto text-start">Descreva seu problema:</label>
             <textarea name="descricao" class="p-1 my-auto text-start" style="max-height: 150px; min-height: 48px;" required></textarea>
         </div>
 
-        <div class="mt-2 mb-3 col-12 mx-auto row p-0 aparece" id="endereco" style="display: none;">
+        <div class="mt-2 mb-3 col-12 mx-auto row p-0 aparece d-none" id="endereco" >
             <label for="endereco" class="col mb-2 p-0 my-auto text-start" >Endereço:</label>
             <input name="endereco" type="text" class="p-1 my-auto text-start" required>
         </div>
 
         <input name="nome" type="hidden" value="<?= $_SESSION['nome'] ?>">
 
-        <button class="btn btn-success aparece" id="btnpedido" style="display: none;"> Fazer pedido</button>    
+        <button class="btn btn-success aparece d-none" id="btnpedido" > Fazer pedido</button>    
     </form>
 </div>

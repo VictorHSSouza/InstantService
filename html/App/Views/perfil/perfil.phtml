@@ -3,94 +3,90 @@
     $dados = $this->view->dados["dados"];
 ?>
 
-<form action="/atualizar_dados" method="POST">
-
-    <div id="div_camposusuario" class="m-0 row  text-center">
-        <div class="h3 text-center mb-5 mt-4">Informações pessoais</div>
-
-        <div class="h3 row mb-4 ">
-            <label class="mb-1"  for="name">Nome:</label> 
-            <input class="m-auto  form-control w-50" type="text" name="name" value="<?=$dados["nomecompleto"]?>"disabled>
+<div class="row m-auto mt-5 col-10 shadow p-2 pe-4 rounded-4">
+    <div class="col col-sm-3 col-12 text-center">
+        <?php
+            $img = isset($_SESSION['img'])?"/public/assets/img/img_perfil/".$_SESSION['img']:"https://placehold.co/100?text=Sua+Imagem";
+        ?>
+        <img src="<?=$img?>" alt="Profile Image" class="rounded-circle mt-4 mb-5 col-10 border border-2 p-0 shadow">
+        
+        <div class="mb-3">
+            <div id="alterar_dados" class="btn btn-success" onclick="edita_dados(1)" >Alterar Dados</div>
+            <div id="cancelar" class="btn btn-danger" style="display:none;"onclick="edita_dados(2)" >Cancelar</div>
+            <button id="salvar_dados" class="btn btn-success" style="display:none;" type="submit">Salvar Dados</button>
         </div>
+    </div>
+    <div class="col col-sm-9 col-12 my-3 ps-3">
+        <span class="h3 text-decoration-underline fw-bold"><?=$dados["nomecompleto"]?></span>
+        <form class="col row mt-3" action="/atualizar_dados" method="POST" id="div_camposusuario">
+            <div class="mb-3 col col-sm-6 col-12">
+                <label for="name" class="form-label">Nome</label> 
+                <input type="text" class="form-control" id="name" placeholder="Nome" name="name" value="<?=$dados["nomecompleto"]?>" disabled>
+            </div>
+            <div class="mb-3 col col-sm-6 col-12">
+                <label for="sexo" class="form-label">Sexo</label>
+                <input type="text" class="form-control" id="sexo" placeholder="Sexo" value="<?=$dados["sexo"]?>"disabled>
+            </div>
+            <div class="mb-3 col col-sm-6 col-12">
+                <label for="data_nascimento" class="form-label">Data de Nascimento</label>
+                <input type="date" class="form-control" id="data_nascimento" placeholder="Data de Nascimento" value="<?=$dados["data_nascimento"]?>"disabled>
+            </div>
+            <div class="mb-3 col col-sm-6 col-12">
+                <label for="cpf" class="form-label">CPF</label>
+                <input type="text" class="form-control" id="cpf" placeholder="CPF" value="<?=$dados["cpf"]?>"disabled oninput="mascara_cpf()">
+            </div>
+            <div class="mb-3 col col-12">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Email" value="<?=$dados["email"]?>"disabled oninput="mascara_email()">
+            </div>
 
-        <div class="h3 row mb-4 ">
-            <label class="mb-1" for="email">Email:</label>
-            <input class="m-auto  form-control w-50" id="email" type="text" name="email" value="<?=$dados["email"]?>"disabled>
-        </div>
+            <?php if($profissional) { ?>
+                <span class="h3 text-decoration-underline fw-bold mt-5 mb-3">Informações profissionais</span>
+                <input type="hidden" name="profissional" value="1">
 
-        <div class="h3 row mb-4 ">
-            <label class=" mb-1" for="sexo">Sexo:</label>
-            <input class="m-auto  form-control w-50" type="text" name="sexo" value="<?=$dados["sexo"]?>"disabled>
-        </div>
-
-        <div class="h3 row mb-4 ">
-            <label class="mb-1" for="data_nascimento">Nascimento:</label>
-            <input class="m-auto  form-control w-50" type="date" name="data_nascimento" value="<?=$dados["data_nascimento"]?>"disabled>
-        </div>
-
-        <div class="h3 row mb-4 ">
-            <label class="mb-1" for="cpf">CPF:</label>
-            <input class="m-auto  form-control w-50" type="text" name="cpf" value="<?=$dados["cpf"]?>"disabled>
-        </div>
-        <div class="h3 row mb-4 "></div>
-
-
-        <?php if($profissional) { ?>
-            <div class="h3 mb-5 mt-4">Informações profissionais</div>
-            <input type="hidden" name="profissional" value="1">
-
-            <div class="h3 row mb-4 ">
-                <label class="mb-1" for="id_estado">Estado:</label>
-                <select disabled class="m-auto w-50 form-select" name="id_estado" id="id_estado">
-                    <?php
-                    foreach ($dados['estados'] as $value) {
-                        ?> 
-                        <option <?= ($value['id_estado'] == $dados['id_estado'])? "selected" : ""; ?> value="<?=$value['id_estado']?>"><?=$value['nome_estado']?></option>                             
+                <div class="mb-3 col col-sm-6 col-12">
+                    <label for="estado" class="form-label">Estado</label>
+                    <select class="form-select p-0 select2" name="id_estado" placeholder="Estado" id="id_estado"disabled>
                         <?php
-                    }
-                    ?>
-                </select>
-            </div>
+                            foreach ($dados['estados'] as $value) {
+                                ?> 
+                                <option <?= ($value['id_estado'] == $dados['id_estado'])? "selected" : ""; ?> value="<?=$value['id_estado']?>"><?=$value['nome_estado']?></option>                             
+                                <?php
+                            }
+                        ?>
+                    </select>
+                </div>
 
-            <div class="h3 row mb-4 ">
-                <label class="mb-1" for="cep">Cep:</label>
-                <input class="m-auto  form-control w-50" id="cep" type="text" name="cep" value="<?=$dados["cep"]?>"disabled>
-            </div>
+                <div class="mb-3 col col-sm-6 col-12">
+                    <label for="cep" class="form-label">CEP</label>
+                    <input type="text" class="form-control" id="cep" placeholder="CEP" value="<?=$dados["cep"]?>"disabled oninput="mascara_cep();list_endereco()">
+                </div>
 
-            <div class="h3 row mb-4 ">
-                <label class="mb-1" for="logradouro">Logradouro:</label>
-                <input class="m-auto  form-control w-50" id="logradouro" type="text" name="logradouro" value="<?=$dados["logradouro"]?>"disabled>
-            </div>
+                <div class="mb-3 col col-sm-6 col-12">
+                    <label for="logradouro" class="form-label">Logradouro</label>
+                    <input type="text" class="form-control" id="logradouro" placeholder="Logradouro" value="<?=$dados["logradouro"]?>"disabled>
+                </div>
 
-            <div class="h3 row mb-4 ">
-                <label class="mb-1" for="numero">Número</label>
-                <input class="m-auto  form-control w-50" id="numero" type="text" name="numero" value="<?=$dados["numero"]?>"disabled>
-            </div>
+                <div class="mb-3 col col-sm-6 col-12">
+                    <label for="numero" class="form-label">Número</label>
+                    <input type="text" class="form-control" id="numero" placeholder="Número" value="<?=$dados["numero"]?>"disabled>
+                </div>
 
-            <div class="h3 row mb-4 ">
-                <label class="mb-1" for="complemento">Complemento:</label>
-                <input class="m-auto  form-control w-50" id="complemento" type="text" name="complemento" value="<?=$dados["complemento"]?>"disabled>
-            </div>
+                <div class="mb-3 col col-sm-6 col-12">
+                    <label for="complemento" class="form-label">Complemento</label>
+                    <input type="text" class="form-control" id="complemento" placeholder="Complemento" value="<?=$dados["complemento"]?>"disabled>
+                </div>
 
-            <div class="h3 row mb-4 ">
-                <label class="mb-1" for="bairro">Bairro:</label>
-                <input class="m-auto  form-control w-50" id="bairro" type="text" name="bairro" value="<?=$dados["bairro"]?>"disabled>
-            </div>
-            
-            <div class="h3 row mb-4 ">
-                <label class="mb-1" for="cidade">Cidade:</label>
-                <input class="m-auto  form-control w-50" id="cidade" type="text" name="cidade" value="<?=$dados["cidade"]?>"disabled>
-            </div>
-            <div class="h3 row mb-4 "></div>
-        <?php } ?>
+                <div class="mb-3 col col-sm-6 col-12">
+                    <label for="bairro" class="form-label">Bairro</label>
+                    <input type="text" class="form-control" id="bairro" placeholder="Bairro" value="<?=$dados["bairro"]?>"disabled>
+                </div>
+                
+                <div class="mb-3 col col-12">
+                    <label for="cidade" class="form-label">Cidade</label>
+                    <input type="text" class="form-control" id="cidade" placeholder="Cidade" value="<?=$dados["cidade"]?>"disabled>
+                </div>
+            <?php } ?>
+        </form>
     </div>
-
-    <div class="text-center my-4" >
-        <div id="alterar_dados" class="btn btn-success" onclick="edita_dados(1)" >Alterar Dados</div>
-
-        <div id="cancelar" class="btn btn-danger" style="display:none;"onclick="edita_dados(2)" >Cancelar</div>
-        <button id="salvar_dados" class="btn btn-success" style="display:none;" type="submit">Salvar Dados</button>
-    </div>
-   
-
-</form>
+</div>

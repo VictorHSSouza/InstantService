@@ -1,3 +1,9 @@
+$(document).ready(function() {
+    $('.select2').select2({
+        theme: 'bootstrap-5'
+    });
+});
+
 function troca_cad() {
     if (document.getElementById("nome").value && document.getElementById("sobrenome").value && document.getElementById("email").value
         && document.getElementById("cpf").value && document.getElementById("data_nascimento").value && document.getElementById("cpf").value.length == 14 && mascara_email(document.getElementById("email").value) && mascara_data(document.getElementById("data_nascimento").value)) {

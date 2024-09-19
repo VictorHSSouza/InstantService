@@ -26,13 +26,14 @@ class Login extends Model{
 
         if($conta) {
             if($logar) {
-                $info = $this->select('login, senha, id_cliente, nome, email, tipo',$this->tb,"login = '$login' and senha = '$senha' or email = '$email'")[0];
+                $info = $this->select('login, senha, id_cliente, nome, email, tipo, img_perfil',$this->tb,"login = '$login' and senha = '$senha' or email = '$email'")[0];
                 $_SESSION['id'] = $info['id_cliente'];
                 $_SESSION['nome'] = $info['nome'];
                 $_SESSION['login'] = $info['login'];
                 $_SESSION['senha'] = $info['senha'];
                 $_SESSION['email'] = $info['email'];
                 $_SESSION['tipo'] = $info['tipo'];
+                $_SESSION['img'] = $info['img_perfil'];
 
                 header("Location: /");
             } 

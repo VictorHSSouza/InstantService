@@ -4,60 +4,110 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?=$this->view->page?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Links -->
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <!-- select2 CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+        <!-- select2 tema bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+        <!-- google_fonts CSS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <!--Internal CSS-->
+        <link rel="stylesheet" href="/public/assets/css/style.css">
+        <!--Font Awesome-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 </head>
 <body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">InstantService</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-light bg-light border-bottom">
+        <div class="container-fluid p-0">
+
+            <button class="navbar-toggler ms-4" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="logout">Logout</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profissional">Cadastro profissional</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="profissional">Area de profissional</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="avaliar">Avaliar</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfil">Perfil</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
+
+            <a href="/" class="h2 m-0 text-decoration-none">
+                Instant Service 
+            </a>
+
+            <div class="nav-brand dropdown m-0 p-0">
+                <a class="nav-link dropdown-toggle text-light d-flex justify-content-end m-0 p-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <div class="d-flex justify-content-end">
+                        <?php if (isset($_SESSION['img']) && $_SESSION['img']) { ?>
+                            <div class="d-flex align-items-center" style="width: 50px; height: 50px;">
+                                <img class="rounded-circle img-fluid w-100 h-100 object-fit-cover shadow" src="/public/assets/img/img_perfil/<?=$_SESSION['img']?>" alt="">
+                            </div>
+                        <?php } else { ?>
+                            <div class="d-flex align-items-center" style="width: 50px; height: 50px;">
+                                <img class="rounded-circle img-fluid w-100 h-100 object-fit-cover" src="/public/assets/img/img_perfil/perfil0.png" alt="">
+                            </div>
+                        <?php } ?>
+                    </div>
+                </a>
+
+                <ul class="dropdown-menu dropdown-menu dropdown-menu-end me-1">
+                    <?php if(!isset($_SESSION['id'])) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link ps-2" href="login">Login</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ps-2" href="cadastrar">Cadastrar</a>
+                        </li>
+                    <?php } else { ?>
+                        <li class="nav-item">
+                            <a class="nav-link ps-2" href="perfil">Perfil</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link ps-2" href="logout">Logout</a>
+                        </li>
+                    <?php } ?>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+            </div>
+
+            <div class="offcanvas offcanvas-start shadow-lg" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Instant Service</h5>
+                    <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item ">
+                            <a class="nav-link active letra" aria-current="page" href="/">Home</a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link" href="profissional"><?=(isset($_SESSION['tipo']) and $_SESSION['tipo']=="P")?"Area profissional":"Cadastrar como profissional"?></a>
+                        </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link" href="avaliar">Avaliar</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex mt-3" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-success" type="submit">Search</button>
+                    </form>
+                </div>
             </div>
         </div>
     </nav>
     <?= $this->content() ?>
-    <script src="/public/assets/js/ajax.js"></script>
-    <script src="/public/assets/js/all.js"> </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <!--jquery JS-->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.js"></script>
+        <!-- select2 JS -->
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <!-- Internal JS -->
+        <script src="/public/assets/js/ajax.js"></script>
+        <script src="/public/assets/js/all.js"> </script>
 </body>
 </html>

@@ -1,0 +1,81 @@
+*{
+    font-family: "Roboto Condensed", sans-serif;
+    font-style: normal; 
+    color: black;
+}
+
+/* FONTE ROBOTO */
+    .roboto-300{
+        font-weight: 300 !important;
+    }
+    .roboto-400{
+        font-weight: 400 !important;
+    }
+    .roboto-500{
+        font-weight: 500 !important;
+    }
+    .roboto-600{
+        font-weight: 600 !important;
+    }
+    .roboto-700{
+        font-weight: 700 !important;
+    }
+    .roboto-800{
+        font-weight: 800 !important;
+    }
+
+    .roboto-900{
+        font-weight: 900 !important;
+    }
+
+/* CORES */
+    /* pedido aceito */
+        .btn-success-light {
+            background-color: #C2F0C2; /* Cor personalizada */
+            border-color: #C2F0C2; /* Cor da borda personalizada */
+            color: 333; /* Cor do texto (verde escuro do botão sucesso padrão) */
+        }
+
+        .btn-success-light:hover {
+            background-color: #a4e0a4; /* Cor mais escura ao passar o mouse (ajuste conforme necessário) */
+            border-color: #a4e0a4; /* Cor da borda ao passar o mouse */
+            color: #333; /* Cor do texto ao passar o mouse */
+        }
+
+        .btn-success-light:focus, .btn-success-light.focus {
+            box-shadow: 0 0 0 0.2rem rgba(84, 198, 84, 0.5); /* Sombra ao focar no botão */
+        }
+
+    /* pedido em processo */
+        .btn-success-lemon {
+            background-color: #E7FF9D; /* Cor personalizada */
+            border-color: #E7FF9D; /* Cor da borda personalizada */
+            color: #333; /* Cor do texto (verde escuro do botão sucesso padrão) */
+        }
+        
+        .btn-success-lemon:hover {
+            background-color: #d4f17d; /* Cor mais escura ao passar o mouse (ajuste conforme necessário) */
+            border-color: #d4f17d; /* Cor da borda ao passar o mouse */
+            color: #333; /* Cor do texto ao passar o mouse */
+        }
+        
+        .btn-success-lemon:focus, .btn-success-light.focus {
+            box-shadow: 0 0 0 0.2rem rgba(84, 198, 84, 0.5); /* Sombra ao focar no botão */
+        }
+    
+    /* pedido criado */
+        .btn-tertiary-2 {
+            background-color: #D6D6D6; /* Cor personalizada */
+            border-color: #D6D6D6; /* Cor da borda personalizada */
+            color: #333; /* Cor do texto (verde escuro do botão sucesso padrão) */
+        }
+        
+        .btn-tertiary-2:hover {
+            background-color: #c6c6c6; /* Cor mais escura ao passar o mouse (ajuste conforme necessário) */
+            border-color: #c6c6c6; /* Cor da borda ao passar o mouse */
+            color: #333; /* Cor do texto ao passar o mouse */
+        }
+        
+        .btn-tertiary-2:focus, .btn-success-light.focus {
+            box-shadow: 0 0 0 0.2rem rgba(84, 198, 84, 0.5); /* Sombra ao focar no botão */
+        }
