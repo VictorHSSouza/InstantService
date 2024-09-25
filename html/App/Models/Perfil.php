@@ -22,6 +22,7 @@ class Perfil extends Model{
 
     public function update_perfil($id, $profissional, $valores) {
         $this->update("cliente", "email = '" . $valores["email"]. "'", "id_cliente = $id");
+        $_SESSION['email'] = $valores['email'];
 
         if($profissional) {
             $this->update("profissional", 

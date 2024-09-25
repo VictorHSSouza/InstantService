@@ -12,7 +12,7 @@ class Login extends Model{
         if(!$logar) {
             if(isset($_SESSION['login']) && isset($_SESSION['senha'])) {
                 $email = $_SESSION['email'];
-            } else {
+            } else { 
                 header("Location: /login");
                 exit;
             }

@@ -8,7 +8,7 @@ class Avaliar extends Model{
 
     public function listar_avaliacoes_pendentes() {
         $campo = "id_cliente,concat(nome, ' ', sobrenome) nome_completo";
-        $tb = "profissional INNER JOIN cliente on (id_cliente = id_cliente)";
+        $tb = "profissional INNER JOIN cliente on (id_profissional = id_cliente)";
         $where = "status_ativo = 0 and status_cadastro = 1";
         $consulta = $this->select($campo,$tb , $where );
         return $consulta;
@@ -51,6 +51,6 @@ class Avaliar extends Model{
     public function completa_avaliacao($id_pro) {     
         $this->update($this->tb,"status_avaliacao = 1","id_profissional = $id_pro");
         $this->update("profissional","status_ativo = 1","id_profissional = $id_pro");
-        $this->update("cliente","tipo = 'P'","id_cliente = $id_pro");
+        $this->update("cliente","tipo = '2'","id_cliente = $id_pro");
     }
-}
+}   

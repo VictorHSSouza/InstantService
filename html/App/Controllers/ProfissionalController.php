@@ -60,6 +60,7 @@ class ProfissionalController extends Action {
     public function profissional_cadastro() {
         $obj = Container::getModel('login','instant_service');
         $obj->Login();
+        //var_dump($_POST);
 
         $obj_profissional = Container::getModel('profissional','instant_service');
         $obj_profissional->cadastrar_profissional($_POST);

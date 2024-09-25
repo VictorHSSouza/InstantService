@@ -84,12 +84,20 @@
                         </li>
 
                         <li class="nav-item ">
-                            <a class="nav-link" href="profissional"><?=(isset($_SESSION['tipo']) and $_SESSION['tipo']=="P")?"Area profissional":"Cadastrar como profissional"?></a>
+                            <a class="nav-link" href="profissional"><?=(isset($_SESSION['tipo']) and $_SESSION['tipo']==2)?"Area profissional":"Cadastrar como profissional"?></a>
                         </li>
 
-                        <li class="nav-item ">
-                            <a class="nav-link" href="avaliar">Avaliar</a>
-                        </li>
+                        <?php if(isset($_SESSION['tipo']) and $_SESSION['tipo']>=3){ ?>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="avaliar">Avaliar</a>
+                            </li>
+                        <?php } ?>
+
+                        <?php if(isset($_SESSION['tipo']) and $_SESSION['tipo']>=4){ ?>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="funcionario">Funcionario</a>
+                            </li> 
+                        <?php } ?>
                     </ul>
                     <form class="d-flex mt-3" role="search">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

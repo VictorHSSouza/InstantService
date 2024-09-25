@@ -65,11 +65,11 @@ function list_endereco() {
 
             campos.forEach(function(nome, i) {
                 if(dados[indices[i]]) {
-                    document.getElementById(nome).setAttribute("disabled", "");
+                    document.getElementById(nome).setAttribute("readonly", "");
                     document.getElementById(nome).value = dados[indices[i]]
                 }
             })
-            document.getElementById('id_estado').setAttribute("disabled", "");
+            document.getElementById('id_estado').setAttribute("readonly", "");
             document.getElementById('id_estado').value = resposta[0]
         }
     }	
@@ -85,10 +85,10 @@ function list_endereco() {
     }
     else {
         campos.forEach(function(nome, i) {
-            document.getElementById(nome).removeAttribute("disabled")
+            document.getElementById(nome).removeAttribute("readonly")
             document.getElementById(nome).value = ""
         })
-        document.getElementById('id_estado').removeAttribute("disabled")
+        document.getElementById('id_estado').removeAttribute("readonly")
         document.getElementById('id_estado').value = 1
     }
 }

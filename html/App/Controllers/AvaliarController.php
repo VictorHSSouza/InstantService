@@ -10,6 +10,8 @@ class AvaliarController extends Action {
     public function avaliar() {
         $obj = Container::getModel('login','instant_service');
         $obj->Login();
+        $obj_permissao = Container::getModel('permissao','instant_service');
+        $obj_permissao->verificar_permissao(3);
 
         $obj = Container::getModel('avaliar','instant_service');
         $avaliacao = $obj->listar_avaliacoes_pendentes();
@@ -20,6 +22,8 @@ class AvaliarController extends Action {
     public function avaliar_profissional() {
         $obj = Container::getModel('login','instant_service');
         $obj->Login();
+        $obj_permissao = Container::getModel('permissao','instant_service');
+        $obj_permissao->verificar_permissao(3);
 
         $obj = Container::getModel('avaliar','instant_service');
         $avaliacao = $obj->listar_avaliacao($_GET['id']);
@@ -30,6 +34,8 @@ class AvaliarController extends Action {
     public function avaliar_envio() {
         $obj = Container::getModel('login','instant_service');
         $obj->Login();
+        $obj_permissao = Container::getModel('permissao','instant_service');
+        $obj_permissao->verificar_permissao(3);
         var_dump($_POST);
 
         $obj = Container::getModel('avaliar','instant_service');

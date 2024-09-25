@@ -156,6 +156,31 @@ Class Route extends Bootstrap {
             'controller' => 'pedidoController',
             'action' => 'vincular_pedido'
         );
+
+        $routes['funcionario'] = array(
+            'route' => '/funcionario',
+            'controller' => 'funcionarioController',
+            'action' => 'funcionario'
+        );
+
+        $routes['funcionario_cadastro'] = array(
+            'route' => '/funcionario_cadastro',
+            'controller' => 'funcionarioController',
+            'action' => 'funcionario_cadastro'
+        );
+
+        $routes['cadastrar_funcionario'] = array(
+            'route' => '/cadastrar_funcionario',
+            'controller' => 'funcionarioController',
+            'action' => 'cadastrar_funcionario'
+        );
+
+        $routes['excluir_funcionario'] = array(
+            'route' => '/excluir_funcionario',
+            'controller' => 'funcionarioController',
+            'action' => 'excluir_funcionario'
+        );
+        
         $this->setRoutes($routes);
     }  
 }

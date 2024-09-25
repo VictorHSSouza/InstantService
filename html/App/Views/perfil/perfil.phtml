@@ -3,7 +3,7 @@
     $dados = $this->view->dados["dados"];
 ?>
 
-<div class="row m-auto mt-5 col-10 shadow p-2 pe-4 rounded-4">
+<form class="row m-auto mt-5 col-10 shadow p-2 pe-4 rounded-4" action="/atualizar_dados" method="POST" id="div_camposusuario">
     <div class="col col-sm-3 col-12 text-center">
         <?php
             $img = isset($_SESSION['img'])?"/public/assets/img/img_perfil/".$_SESSION['img']:"https://placehold.co/100?text=Sua+Imagem";
@@ -18,26 +18,26 @@
     </div>
     <div class="col col-sm-9 col-12 my-3 ps-3">
         <span class="h3 text-decoration-underline fw-bold"><?=$dados["nomecompleto"]?></span>
-        <form class="col row mt-3" action="/atualizar_dados" method="POST" id="div_camposusuario">
+        <div class="col row mt-3">
             <div class="mb-3 col col-sm-6 col-12">
-                <label for="name" class="form-label">Nome</label> 
-                <input type="text" class="form-control" id="name" placeholder="Nome" name="name" value="<?=$dados["nomecompleto"]?>" disabled>
+                <label for="nome" class="form-label">Nome</label> 
+                <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" name="nome" value="<?=$dados["nomecompleto"]?>" disabled required>
             </div>
             <div class="mb-3 col col-sm-6 col-12">
                 <label for="sexo" class="form-label">Sexo</label>
-                <input type="text" class="form-control" id="sexo" placeholder="Sexo" value="<?=$dados["sexo"]?>"disabled>
+                <input type="text" class="form-control" id="sexo" name="sexo" placeholder="Sexo" value="<?=$dados["sexo"]?>"disabled required>
             </div>
             <div class="mb-3 col col-sm-6 col-12">
                 <label for="data_nascimento" class="form-label">Data de Nascimento</label>
-                <input type="date" class="form-control" id="data_nascimento" placeholder="Data de Nascimento" value="<?=$dados["data_nascimento"]?>"disabled>
+                <input type="date" class="form-control" id="data_nascimento" name="data_nascimento" placeholder="Data de Nascimento" value="<?=$dados["data_nascimento"]?>"disabled required>
             </div>
             <div class="mb-3 col col-sm-6 col-12">
                 <label for="cpf" class="form-label">CPF</label>
-                <input type="text" class="form-control" id="cpf" placeholder="CPF" value="<?=$dados["cpf"]?>"disabled oninput="mascara_cpf()">
+                <input type="text" class="form-control" id="cpf" name="cpf" placeholder="CPF" value="<?=$dados["cpf"]?>"disabled required oninput="mascara_cpf()">
             </div>
             <div class="mb-3 col col-12">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" placeholder="Email" value="<?=$dados["email"]?>"disabled oninput="mascara_email()">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?=$dados["email"]?>"disabled required oninput="mascara_email()">
             </div>
 
             <?php if($profissional) { ?>
@@ -46,7 +46,7 @@
 
                 <div class="mb-3 col col-sm-6 col-12">
                     <label for="estado" class="form-label">Estado</label>
-                    <select class="form-select p-0 select2" name="id_estado" placeholder="Estado" id="id_estado"disabled>
+                    <select class="form-select p-0 select2" name="id_estado" placeholder="Estado" id="id_estado"disabled required>
                         <?php
                             foreach ($dados['estados'] as $value) {
                                 ?> 
@@ -59,34 +59,34 @@
 
                 <div class="mb-3 col col-sm-6 col-12">
                     <label for="cep" class="form-label">CEP</label>
-                    <input type="text" class="form-control" id="cep" placeholder="CEP" value="<?=$dados["cep"]?>"disabled oninput="mascara_cep();list_endereco()">
+                    <input type="text" class="form-control" id="cep" name="cep" placeholder="CEP" value="<?=$dados["cep"]?>"disabled required oninput="mascara_cep();list_endereco()">
                 </div>
 
                 <div class="mb-3 col col-sm-6 col-12">
                     <label for="logradouro" class="form-label">Logradouro</label>
-                    <input type="text" class="form-control" id="logradouro" placeholder="Logradouro" value="<?=$dados["logradouro"]?>"disabled>
+                    <input type="text" class="form-control" id="logradouro" name="logradouro" placeholder="Logradouro" value="<?=$dados["logradouro"]?>"disabled required>
                 </div>
 
                 <div class="mb-3 col col-sm-6 col-12">
                     <label for="numero" class="form-label">Número</label>
-                    <input type="text" class="form-control" id="numero" placeholder="Número" value="<?=$dados["numero"]?>"disabled>
+                    <input type="text" class="form-control" id="numero" name="numero" placeholder="Número" value="<?=$dados["numero"]?>"disabled required>
                 </div>
 
                 <div class="mb-3 col col-sm-6 col-12">
                     <label for="complemento" class="form-label">Complemento</label>
-                    <input type="text" class="form-control" id="complemento" placeholder="Complemento" value="<?=$dados["complemento"]?>"disabled>
+                    <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento" value="<?=$dados["complemento"]?>"disabled required>
                 </div>
 
                 <div class="mb-3 col col-sm-6 col-12">
                     <label for="bairro" class="form-label">Bairro</label>
-                    <input type="text" class="form-control" id="bairro" placeholder="Bairro" value="<?=$dados["bairro"]?>"disabled>
+                    <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Bairro" value="<?=$dados["bairro"]?>"disabled required>
                 </div>
                 
                 <div class="mb-3 col col-12">
                     <label for="cidade" class="form-label">Cidade</label>
-                    <input type="text" class="form-control" id="cidade" placeholder="Cidade" value="<?=$dados["cidade"]?>"disabled>
+                    <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Cidade" value="<?=$dados["cidade"]?>"disabled required>
                 </div>
             <?php } ?>
-        </form>
+        </div>
     </div>
-</div>
+</form>

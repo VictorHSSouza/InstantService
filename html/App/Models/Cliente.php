@@ -20,7 +20,7 @@ class Cliente extends Model{
             foreach($dados as $key => $value) {
                 if($key == 'senha') {
                     $indice .= $key.", tipo";
-                    $valor .= "'".md5($value)."', 'U'";
+                    $valor .= "'".md5($value)."', '1'";
                     break;
                 } else {
                     $indice .="$key, ";

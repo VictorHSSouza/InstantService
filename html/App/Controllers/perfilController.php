@@ -22,14 +22,15 @@ class PerfilController extends Action {
         $this->render('perfil','layout1');
     }
 
-    public function atualizar_dados() {
+    public function atualizar_dados() { 
         $obj = Container::getModel('login','instant_service');
         $obj->login();
+        var_dump($_POST);
 
         $profissional = (isset($_POST["profissional"]))? 1 : 0;
         $obj_perfil = Container::getModel('perfil','instant_service');
         $obj_perfil->update_perfil($_SESSION["id"], $profissional, $_POST);
-        header("Location: /?edit_perfil=1");
+        header("Location: /?msg=edit_perfil");
     }
 }
 

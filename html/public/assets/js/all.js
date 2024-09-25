@@ -151,3 +151,7 @@ function edita_dados(comando) {
 
 
 }
+
+function confirmar_exclusao() {
+    return confirm("Você tem certeza que deseja excluir este usuário?");
+}
