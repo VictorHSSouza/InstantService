@@ -7,7 +7,6 @@ class Permissao extends Model{
     protected $tb = "permissao";
 
     public function verificar_permissao($nivel) {
-
         if(!isset($_SESSION['tipo']) or $_SESSION['tipo']<$nivel){
             Header("Location: /");
         }

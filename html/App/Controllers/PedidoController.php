@@ -115,7 +115,7 @@ class PedidoController extends Action {
         $pedido->__set('id_pedido',$_GET['id']);
         $pedido->__set('id_cliente',$_SESSION['id']);
         
-        $pedidoinfo = $pedido->ver_pedido();
+        $pedidoinfo = $pedido->ver_pedido_profissional();
 
         if(!isset($pedidoinfo) or !$pedidoinfo) {
             header("Location: /");
@@ -190,6 +190,84 @@ class PedidoController extends Action {
 
         header("Location: /profissional");
     }
+
+    public function recusar_pedido() {
+        $obj = Container::getModel('login','instant_service');
+        $obj->Login();
+
+        $pedido = Container::getModel('pedido','instant_service');
+
+        $pedido->__set('id_pedido',$_GET['id']);
+        $pedido->__set('id_profissional',$_SESSION['id']);
+        
+        $pedido->recusar_pedido();
+
+        header("Location: /profissional");
+    }
+
+    public function finalizar_pedido() {
+        $obj = Container::getModel('login','instant_service');
+        $obj->Login();
+
+        $pedido = Container::getModel('pedido','instant_service');
+
+        $pedido->__set('id_pedido',$_GET['id']);
+        
+        $pedido->finalizar_pedido();
+
+        header("Location: /profissional");
+    }
+
+
+
+
+
+
+
+
+
+
+    public function detalhes_pedido() {
+        $obj = Container::getModel('login','instant_service');
+        $obj->Login();
+
+        if(!isset($_GET['id']) or !$_GET['id']) {
+            header("Location: /");
+            exit;
+        }
+
+        $pedido = Container::getModel('pedido','instant_service');
+
+        $pedido->__set('id_pedido',$_GET['id']);
+        $pedido->__set('id_cliente',$_SESSION['id']);
+        
+        $pedidoinfo = $pedido->ver_pedido_profissional();
+
+        if(!isset($pedidoinfo) or !$pedidoinfo) {
+            header("Location: /");
+            exit;
+        }
+
+        $pedidoinfo['id'] = $_GET['id'];
+
+        $this->view->info = $pedidoinfo;
+
+        
+        $obj_msg = Container::getModel('Mensagem','instant_service');
+        $obj_msg->__set("id_pedido",$_GET['id']);
+        $chat = $obj_msg->view_chat();
+
+        $this->view->chat = $chat;
+        $this->render('detalhes_pedido','layout1');
+    }
+
+    public function cad_mensagem() {
+        $obj = Container::getModel('login','instant_service');
+        $obj->Login();
+
+        var_dump($_GET);
+    }
 }
+
 
 ?>

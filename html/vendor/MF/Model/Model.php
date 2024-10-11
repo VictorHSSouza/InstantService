@@ -42,7 +42,7 @@ abstract class Model {
 
     protected function update($tb,$valor,$where) {
         $sql = "UPDATE $tb SET $valor WHERE $where";
-        //cho "<br> $sql <br>";
+        echo "<br> $sql <br>";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
     }

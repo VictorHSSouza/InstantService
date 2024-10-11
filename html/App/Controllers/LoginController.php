@@ -11,12 +11,11 @@ class LoginController extends Action {
     public $authUrl;
 
     public function login() {
-        /*
+        
         $googleClient = new GoogleClient;
         $googleClient->init();
         $googleClient->authorized();
         $this->authUrl = $googleClient->generateAuthLink();
-        */
 
         if(isset($_GET['fail'])) $this->view->dados = ['erro' => 1];
         $this->render('login','layout2');
@@ -28,18 +27,18 @@ class LoginController extends Action {
         header("Location: /");*/
 
         $obj = Container::getModel('login','instant_service');
-        /*
+        
         $googleClient = new GoogleClient;
         $googleClient->init();
-        $googleClient->authorized(); */
+        $googleClient->authorized();
 
 
         if($_POST) {
             $obj->login($_POST['login'],md5($_POST['senha']),"",true);
-        } /* elseif($googleClient->getData()) {
+        } elseif($googleClient->getData()) {
             $email = $googleClient->getEmail();
             $obj->login("","",$email,$logar = true);
-        } */else {
+        } else {
             header("Location: /login");
         }
     } 

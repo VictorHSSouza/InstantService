@@ -12,7 +12,8 @@ Class Route extends Bootstrap {
             'controller' => 'indexController',
             'action' => 'index'
         );
-        //
+        
+        //login 
         $routes['login'] = array(
             'route' => '/login',
             'controller' => 'loginController',
@@ -43,6 +44,7 @@ Class Route extends Bootstrap {
             'action' => 'registrar'
         );
 
+        // perfil
         $routes['perfil'] = array(
             'route' => '/perfil',
             'controller' => 'perfilController',
@@ -54,7 +56,8 @@ Class Route extends Bootstrap {
             'controller' => 'perfilController',
             'action' => 'atualizar_dados'
         );
-        //
+
+        // profissional
         $routes['profissional'] = array(
             'route' => '/profissional',
             'controller' => 'profissionalController',
@@ -90,7 +93,8 @@ Class Route extends Bootstrap {
             'controller' => 'profissionalController',
             'action' => 'api_correio'
         );
-        //
+
+        // avaliar
         $routes['avaliar'] = array(
             'route' => '/avaliar',
             'controller' => 'avaliarController',
@@ -108,7 +112,8 @@ Class Route extends Bootstrap {
             'controller' => 'avaliarController',
             'action' => 'avaliar_envio'
         );
-        //
+
+        // pedido
         $routes['fazer_pedido'] = array(
             'route' => '/fazer_pedido',
             'controller' => 'pedidoController',
@@ -139,6 +144,12 @@ Class Route extends Bootstrap {
             'action' => 'ver_pedido_profissional'
         );
 
+        $routes['detalhes_pedido'] = array(
+            'route' => '/detalhes_pedido',
+            'controller' => 'pedidoController',
+            'action' => 'detalhes_pedido'
+        );
+
         $routes['edit_pedido'] = array(
             'route' => '/edit_pedido',
             'controller' => 'pedidoController',
@@ -157,6 +168,19 @@ Class Route extends Bootstrap {
             'action' => 'vincular_pedido'
         );
 
+        $routes['recusar_pedido'] = array(
+            'route' => '/recusar_pedido',
+            'controller' => 'pedidoController',
+            'action' => 'recusar_pedido'
+        );
+
+        $routes['finalizar_pedido'] = array(
+            'route' => '/finalizar_pedido',
+            'controller' => 'pedidoController',
+            'action' => 'finalizar_pedido'
+        );
+
+        // funcionario 
         $routes['funcionario'] = array(
             'route' => '/funcionario',
             'controller' => 'funcionarioController',
@@ -179,6 +203,12 @@ Class Route extends Bootstrap {
             'route' => '/excluir_funcionario',
             'controller' => 'funcionarioController',
             'action' => 'excluir_funcionario'
+        );
+        // mensagem 
+        $routes['cad_mensagem'] = array(
+            'route' => '/cad_mensagem',
+            'controller' => 'PedidoController',
+            'action' => 'cad_mensagem'
         );
         
         $this->setRoutes($routes);

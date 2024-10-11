@@ -1,3 +1,4 @@
+<?php date_default_timezone_set('America/Sao_Paulo') ?>
 <div class="m-0 p-0 text-center my-5 row">
     <h1 class="mb-5">Cadastro de Usuário</h1>
 
@@ -43,6 +44,6 @@
 
         <input name="nome" type="hidden" value="<?= $_SESSION['nome'] ?>">
 
-        <button class="btn btn-success aparece d-none" id="btnpedido" > Fazer pedido</button>    
+        <button class="btn btn-success aparece d-none " id="btnpedido" onclick="desable_button(btnpedido)"> Fazer pedido</button>    
     </form>
 </div>

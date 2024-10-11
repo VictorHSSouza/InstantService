@@ -1,6 +1,16 @@
+<?php
+
+$timestamp = time();
+
+//- strtotime('2024-10-10 14:00:00')
+?>
 <div class="my-5 display-2 text-center">Lista em Atendimento </div>
 
 <div class="m-3">
+    <div class="mb-4 text-start">
+        <a href="/profissional" class="btn btn-success p-3 border border-dark border-2 "> Área de Profissional </a>
+    </div>
+
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -9,18 +19,24 @@
                 <th scope="col">Descrição</th>
                 <th scope="col">Endereço</th>
                 <th scope="col">Data da Solicitação</th>
+                <th scope="col">Tempo decorrido</th>
                 <th scope="col">Sistema</th>
             </tr>
         </thead>
         <tbody> 
             <?php foreach($this->view->pedidos as $value) { ?>
+                <?php
+                    $atual = strtotime((new DateTime('now', new DateTimeZone('America/Sao_Paulo')))->format('Y-m-d H:i:s'));
+                    $bd = strtotime($value['data_solicitacao']);
+                ?>
                 <tr>
                     <td><?=$value['nome_completo']?></td>
                     <td><?=$value['problema']?></td>
                     <td><?=$value['descricao']?></td>
                     <td><?=$value['endereco']?></td>
-                    <td><?=$value['data_solicitacao']?></td>
-                    <td><a href="" class="btn shadow text-start ">Mais Informações</a> <a href="" class="btn shadow text-start ">Recusar Pedido</a></td>
+                    <td><?=date("H:i d/m/Y", strtotime($value['data_solicitacao'])) ?></td>
+                    <td><span class="d-inline"><i class="fa-regular fa-clock ms-1 me-2"></i><?= date("H:i",$atual - $bd) ?></span></td>
+                    <td><a href="/detalhes_pedido?id=<?=$value['id_pedido']?>" class="btn shadow text-start me-2">Mais Informações</a><a href="/recusar_pedido?id=<?=$value['id_pedido']?>" class="btn shadow text-start ">Recusar Pedido</a></td>
                 </tr>
             <?php } ?>
         </tbody>
