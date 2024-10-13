@@ -35,7 +35,7 @@ abstract class Model {
 
     protected function insert($tb,$indice,$valor) {
         $sql = "INSERT INTO $tb ($indice) VALUES($valor)";
-        //echo "<br> $sql <br>";
+        echo "<br> $sql <br>";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
     }

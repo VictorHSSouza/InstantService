@@ -73,4 +73,17 @@ class Pedido extends Model{
         $pedidos = $this->update($this->tb, "data_finalizacao='". date('Y-m-d H:i:s')."', finalizado=1","id_pedido =". $this->id_pedido);
         return $pedidos;
     }
+
+    public function ver_status($id) {    
+        if(true) {
+            $status = 3;
+        } elseif(1 > 2) {
+            $status = 3;
+        } else {
+            $status = 3;
+        };
+
+        $status = 1;
+        return $status;
+    }
 }

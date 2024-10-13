@@ -2,43 +2,56 @@
 
 <div class="m-3">
     <div class="mb-4 text-start">
-        <a href="/profissional_pedidos_vinculados" class="btn btn-success p-3 border border-dark border-2 "> Ver Pedidos Ativos </a>
+        <a href="/profissional_pedidos_vinculados" class=""> Pedidos Disponiveis </a>
     </div>
 
-    <!--<div class="d-flex justify-content-center py-3 my-3">
-        <div class="w-75 border border-1 rounded-2">
-            sss
-        </div>
-    </div> -->
-
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Solicitante</th>
-                <th scope="col">Problema</th>
-                <th scope="col">Descrição</th>
-                <th scope="col">Endereço</th>
-                <th scope="col">Data da Solicitação</th>
-                <th scope="col">Tempo decorrido</th>
-                <th scope="col">Sistema</th>
-            </tr>
-        </thead>
-        <tbody> 
-            <?php foreach($this->view->pedidos as $value) { ?>
-                <?php
-                    $atual = strtotime((new DateTime('now', new DateTimeZone('America/Sao_Paulo')))->format('Y-m-d H:i:s'));
-                    $bd = strtotime($value['data_solicitacao']);
-                ?>
-                <tr>
-                <td><?=$value['nome_completo']?></td>
-                    <td><?=$value['problema']?></td>
-                    <td><?=$value['descricao']?></td>
-                    <td><?=$value['endereco']?></td>
-                    <td><?=date("H:i d/m/Y", strtotime($value['data_solicitacao'])) ?></td>
-                    <td><span class="d-inline"><i class="fa-regular fa-clock ms-1 me-2"></i><?= date("H:i",$atual - $bd) ?></span></td>
-                    <td><a href="/ver_pedido_profissional?id=<?=$value['id_pedido']?>" class="btn shadow text-start ">Mais Informações</a></td>
-                </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+    <div class="row justify-content-evenly">
+        <?php foreach($this->view->pedidos as $value) { ?>
+            <?php
+                $atual = strtotime((new DateTime('now', new DateTimeZone('America/Sao_Paulo')))->format('Y-m-d H:i:s'));
+                $bd = strtotime($value['data_solicitacao']);
+            ?>
+            <div class="card col-3" style="width: 18rem;">
+                
+                <div class="card-body">
+                    <h5 class="card-title"><?=$value['problema']?></h5>
+                    <p class="card-text">
+                        <div class="text-center h6"><?=$value['nome_completo']?></div>
+                        <hr class="border-dark opacity-100 w-75 mx-auto my-0">
+                        <div class="text-center mb-4"><?=$value['descricao']?></div>
+                        <div class="text-center">Tempo decorrido: <span class="d-inline"><i class="fa-regular fa-clock ms-1 me-2"></i><?= date("H:i",$atual - $bd) ?></span></div>
+                        <div class="text-center">Endereço: <?=$value['endereco']?></div>
+                    </p>
+                    <div class="text-center">
+                        <a href="/ver_pedido_profissional?id=<?=$value['id_pedido']?>" class="btn btn-primary">Mais Informações</a>
+                    </div>
+                    
+                </div>
+            </div>
+        <?php } ?>
+    </div>
 </div>
+
+
+
+<!--<div>
+    <div class="text-center">
+        <div class="row bg-info d-flex justify-content-evenly p-0 m-0">
+            <div class="col-3 d-flex justify-content-evenly bg-danger p-0"><div class="w-75 bg-secondary-subtle">
+                <h2>PROBLEMA</h2>
+                <h3>Descrição</h3>
+                <hr class="border-dark opacity-100 w-75 mx-auto">
+                <div class="container">
+                    <div class="p-3 border text-wrap w-300">
+                        Este é um exemplo de texto que irá quebrar a linha automaticamente quando atingir o final da div.
+                    </div>
+                </div>
+
+                <td><a href="/ver_pedido_profissional?id=" class="btn shadow text-start bg-dark text-white">Mais Informações</a></td>
+            </div></div>
+            <div class="col-3 d-flex justify-content-evenly bg-danger p-0"><div class="w-75 bg-primary"></div></div>
+            <div class="col-3 d-flex justify-content-evenly bg-danger p-0"><div class="w-75 bg-primary"></div></div>
+            <div class="col-3 d-flex justify-content-evenly bg-danger p-0"><div class="w-75 bg-primary"></div></div>
+        </div>
+  </div>
+</div>-->

@@ -72,7 +72,7 @@ class PedidoController extends Action {
         
         header("Location: /?pedido=1");
     }
-
+///////////////
     public function ver_pedido() {
         $obj = Container::getModel('login','instant_service');
         $obj->Login();
@@ -93,6 +93,13 @@ class PedidoController extends Action {
             header("Location: /");
             exit;
         }
+
+        $obj_msg = Container::getModel('Mensagem','instant_service');
+        $obj_msg->__set("id_pedido",$_GET['id']);
+        $chat = $obj_msg->view_chat();
+
+        $this->view->chat = $chat;
+        $this->view->remetente = "U";
 
         $pedidoinfo['id'] = $_GET['id'];
 
@@ -218,15 +225,6 @@ class PedidoController extends Action {
         header("Location: /profissional");
     }
 
-
-
-
-
-
-
-
-
-
     public function detalhes_pedido() {
         $obj = Container::getModel('login','instant_service');
         $obj->Login();
@@ -251,13 +249,13 @@ class PedidoController extends Action {
         $pedidoinfo['id'] = $_GET['id'];
 
         $this->view->info = $pedidoinfo;
-
         
         $obj_msg = Container::getModel('Mensagem','instant_service');
         $obj_msg->__set("id_pedido",$_GET['id']);
         $chat = $obj_msg->view_chat();
 
         $this->view->chat = $chat;
+        $this->view->remetente = "P";
         $this->render('detalhes_pedido','layout1');
     }
 
@@ -266,6 +264,16 @@ class PedidoController extends Action {
         $obj->Login();
 
         var_dump($_GET);
+        var_dump($_POST);
+
+        $obj_msg = Container::getModel('Mensagem','instant_service');
+        $obj_msg->__set("id_pedido",$_GET['id_pedido']);
+        $obj_msg->__set("id_profissional",$_SESSION['id']);
+        $obj_msg->__set("remetente",$_GET['remetente']);
+        $obj_msg->__set("mensagem",$_POST['msg']);
+        $obj_msg->cad_chat();
+
+        header("Location: /".$_GET['link']."?id=".$_GET['id_pedido']);
     }
 }
 
