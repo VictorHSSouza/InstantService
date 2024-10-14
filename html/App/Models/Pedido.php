@@ -17,24 +17,24 @@ class Pedido extends Model{
     public function cad_pedido() {
         date_default_timezone_set('America/Sao_Paulo');
         
-        $indice = "id_cliente, id_problema, descricao, endereco, data_solicitacao, finalizado";
-        $valor = $this->id_cliente.", ".$this->id_problema.", '".$this->descricao."', '".$this->endereco."', '". date('Y-m-d H:i:s')."', 0";
+        $indice = "id_cliente, id_problema, descricao, endereco, data_solicitacao, id_status";
+        $valor = $this->id_cliente.", ".$this->id_problema.", '".$this->descricao."', '".$this->endereco."', '". date('Y-m-d H:i:s')."', 1";
 
         $this->insert($this->tb,$indice,$valor);
     } 
 
     public function list_pedidos() {    
-        $pedidos = $this->select("id_pedido,data_solicitacao,descricao",$this->tb,"id_cliente = ".$this->id_cliente ." and finalizado != 1", "order by id_pedido desc" );
+        $pedidos = $this->select("id_pedido,data_solicitacao,$this->tb.descricao, $this->tb.id_status,status_pedido.descricao as descricao_status", "$this->tb inner join status_pedido on (status_pedido.id_status = $this->tb.id_status)","id_cliente = ".$this->id_cliente ." and $this->tb.id_status != 0", "order by id_status desc" );
         return $pedidos;
     } 
 
     public function ver_pedido() {    
-        $pedido = $this->select("pr.nome,p.descricao, p.endereco",$this->tb." p INNER JOIN problemas pr ON(p.id_problema = pr.id_problema)","p.id_cliente = ".$this->id_cliente ." and p.id_pedido = ".$this->id_pedido ." and finalizado != 1");
+        $pedido = $this->select("pr.nome,p.descricao, p.endereco",$this->tb." p INNER JOIN problemas pr ON(p.id_problema = pr.id_problema)","p.id_cliente = ".$this->id_cliente ." and p.id_pedido = ".$this->id_pedido ." and id_status != 0");
         return $pedido[0];
     } 
 
     public function ver_pedido_profissional() {    
-        $pedido = $this->select("pr.nome,p.descricao, p.endereco",$this->tb." p INNER JOIN problemas pr ON(p.id_problema = pr.id_problema)","p.id_cliente != ".$this->id_cliente ." and p.id_pedido = ".$this->id_pedido ." and finalizado != 1");
+        $pedido = $this->select("pr.nome,p.descricao, p.endereco",$this->tb." p INNER JOIN problemas pr ON(p.id_problema = pr.id_problema)","p.id_cliente != ".$this->id_cliente ." and p.id_pedido = ".$this->id_pedido ." and id_status != 0");
         return $pedido[0];
     } 
 
@@ -45,7 +45,7 @@ class Pedido extends Model{
 
     public function exc_pedido() {    
         date_default_timezone_set('America/Sao_Paulo');
-        $this->update($this->tb, "data_finalizacao='". date('Y-m-d H:i:s')."', finalizado=1","id_cliente = ".$this->id_cliente." and id_pedido = ".$this->id_pedido);
+        $this->update($this->tb, "data_finalizacao='". date('Y-m-d H:i:s')."', id_status=1","id_cliente = ".$this->id_cliente." and id_pedido = ".$this->id_pedido);
     }
 
     public function list_servicos() {    
@@ -59,31 +59,28 @@ class Pedido extends Model{
     }
 
     public function vincular_pedido() {    
-        $pedidos = $this->update($this->tb, "id_profissional =". $this->id_profissional.",data_confirmacao ='". $this->data_confirmacao. "'", "id_pedido =". $this->id_pedido);
+        $pedidos = $this->update($this->tb, "id_profissional =". $this->id_profissional.",data_confirmacao ='". $this->data_confirmacao. "',id_status=2", "id_pedido =". $this->id_pedido);
         return $pedidos;
     }
 
     public function recusar_pedido() {    
-        $pedidos = $this->update($this->tb, "id_profissional = NULL".",data_confirmacao =NULL", "id_pedido =". $this->id_pedido);
+        $pedidos = $this->update($this->tb, "id_profissional = NULL".",data_confirmacao =NULL,id_status=1", "id_pedido =". $this->id_pedido);
         return $pedidos;
     }
 
     public function finalizar_pedido() {    
         date_default_timezone_set('America/Sao_Paulo');
-        $pedidos = $this->update($this->tb, "data_finalizacao='". date('Y-m-d H:i:s')."', finalizado=1","id_pedido =". $this->id_pedido);
+        $pedidos = $this->update($this->tb, "data_finalizacao='". date('Y-m-d H:i:s')."', id_status=0","id_pedido =". $this->id_pedido);
         return $pedidos;
     }
 
-    public function ver_status($id) {    
-        if(true) {
-            $status = 3;
-        } elseif(1 > 2) {
-            $status = 3;
-        } else {
-            $status = 3;
-        };
+    public function status_mensagem($remetente) {    
+        $this->id_profissional = ($remetente == "P")?$this->id_profissional:null;
 
-        $status = 1;
-        return $status;
+        if($this->id_profissional == null) {
+            $this->update($this->tb, "id_status=3","id_pedido=$this->id_pedido");
+        } else {
+            $this->update($this->tb, "id_status=4","id_pedido=$this->id_pedido");
+        }
     }
 }

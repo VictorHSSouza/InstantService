@@ -47,14 +47,33 @@ class ProfissionalController extends Action {
                     $pedido = Container::getModel('pedido','instant_service');
                     $pedido->__set('id_cliente',$_SESSION['id']);
         
-                    $pedidos = $pedido->list_servicos();
-                    $this->view->pedidos = $pedidos;
+                    $pedidos_disponiveis = $pedido->list_servicos();
+                    $this->view->pedidos_disponiveis = $pedidos_disponiveis;
                     $this->view->nome = $_SESSION['nome'];
+
+                    $obj_pedido = Container::getModel('pedido','instant_service');
+                    $obj_pedido->__set('id_profissional',$_SESSION['id']);
+            
+                    $pedidos_vinculados = $obj_pedido->list_servicos_vinculados();
+                    $this->view->pedidos_vinculados = $pedidos_vinculados;
                 }
 
                 $this->render('area_profissional','layout1');
                 break;
         }
+    }
+
+    public function profissional_pedidos_vinculados() {
+        $obj = Container::getModel('login','instant_service');
+        $obj->Login();
+
+        $obj_pedido = Container::getModel('pedido','instant_service');
+        $obj_pedido->__set('id_profissional',$_SESSION['id']);
+
+        $pedidos_vinculados = $obj_pedido->list_servicos_vinculados();
+        $this->view->pedidos_vinculados = $pedidos_vinculados;
+
+        $this->render('profissional_pedidos_vinculados', 'layout1');
     }
 
     public function profissional_cadastro() {
@@ -74,19 +93,6 @@ class ProfissionalController extends Action {
 
         $obj_prof_habilidade = Container::getModel('profissional_habilidades','instant_service');
         $obj_prof_habilidade->cad_prof_habilidades($_GET['id_habilidade'],$_GET['status_habilidade'],$_SESSION['id']);
-    }
-
-    public function profissional_pedidos_vinculados() {
-        $obj = Container::getModel('login','instant_service');
-        $obj->Login();
-
-        $obj_pedido = Container::getModel('pedido','instant_service');
-        $obj_pedido->__set('id_profissional',$_SESSION['id']);
-
-        $pedidos = $obj_pedido->list_servicos_vinculados();
-        $this->view->pedidos = $pedidos;
-
-        $this->render('profissional_pedidos_vinculados', 'layout1');
     }
 
     public function profissional_habilidades() {

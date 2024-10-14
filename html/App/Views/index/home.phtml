@@ -33,19 +33,23 @@
 
             <div class="col col-sm-8 col-11 align-items-center justify-content-center">
                 <?php foreach($this->view->pedidos as $value) { 
-                    var_dump($this->view->pedidos);
-                    if(false) {
-                        $ico = "<i class='fas fa-check-circle me-3 text-success'></i>";
-                        $cor = "btn-success-light";
-                        $msg = "Profissional aceitou o pedido";
-                    } elseif(false) {
-                        $ico = "<i class='fas fa-comments me-3 text-dark'></i>";
-                        $cor = "btn-success-lemon";
-                        $msg = "Profissional entrou em contato";
-                    } else {
-                        $ico = "<i class='fas fa-clock me-3 text-dark'></i>";
-                        $cor = "btn-tertiary-2";
-                        $msg = "Buscando profissionais";
+                    switch ($value['id_status']) {
+                        case 1:
+                            $ico = "<i class='fas fa-clock me-3 text-dark'></i>";
+                            $cor = "btn-tertiary-2";
+                            break;
+                        case 2:
+                            $ico = "<i class='fas fa-check-circle me-3 text-success'></i>";
+                            $cor = "btn-success-light";
+                            break;
+                        case 3:
+                            $ico = "<i class='fas fa-envelope me-3 text-dark'></i>";
+                            $cor = "btn-success-lemon";
+                            break;
+                        case 4:
+                            $ico = "<i class='fas fa-comments me-3 text-dark'></i>";
+                            $cor = "btn-success-warning";
+                            break;
                     }
                     ?>
                     <a href="/ver_pedido?id=<?=$value['id_pedido']?>" class="btn <?=$cor?> justify-content-between rounded-4 mb-3 w-100 shadow pt-3 pb-2 px-4 d-flex align-items-center">
@@ -54,7 +58,7 @@
                             <?=$ico?>
                             <div class="text-start">
                                 <div class="flex-grow-1 h5"><?=$value['descricao']?></div>
-                                <div class="mt-2 h6"><?=$msg?></div>
+                                <div class="mt-2 h6"><?=$value['descricao_status']?></div>
                             </div>
                         </div>
                     </a>

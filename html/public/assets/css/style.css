@@ -46,7 +46,7 @@
             box-shadow: 0 0 0 0.2rem rgba(84, 198, 84, 0.5); /* Sombra ao focar no botão */
         }
 
-    /* pedido em processo */
+    /* pedido aguardando resposta profissional */
         .btn-success-lemon {
             background-color: #E7FF9D; /* Cor personalizada */
             border-color: #E7FF9D; /* Cor da borda personalizada */
@@ -62,8 +62,25 @@
         .btn-success-lemon:focus, .btn-success-light.focus {
             box-shadow: 0 0 0 0.2rem rgba(84, 198, 84, 0.5); /* Sombra ao focar no botão */
         }
+
+    /* pedido profissional entrou em contato */
+        .btn-success-warning {
+            background-color: #A7E0EA; /* Cor personalizada */
+            border-color: #A7E0EA; /* Cor da borda personalizada */
+            color: #333; /* Cor do texto (verde escuro do botão sucesso padrão) */
+        }
+        
+        .btn-success-warning:hover {
+            background-color: #87D0EA; /* Cor mais escura ao passar o mouse (ajuste conforme necessário) */
+            border-color: #87E0EA; /* Cor da borda ao passar o mouse */
+            color: #333; /* Cor do texto ao passar o mouse */
+        }
+        
+        .btn-success-warning:focus, .btn-success-light.focus {
+            box-shadow: 0 0 0 0.2rem rgba(84, 198, 84, 0.5); /* Sombra ao focar no botão */
+        }
     
-    /* pedido criado */
+    /* pedido aguardando profissionais */
         .btn-tertiary-2 {
             background-color: #D6D6D6; /* Cor personalizada */
             border-color: #D6D6D6; /* Cor da borda personalizada */
@@ -78,4 +95,9 @@
         
         .btn-tertiary-2:focus, .btn-success-light.focus {
             box-shadow: 0 0 0 0.2rem rgba(84, 198, 84, 0.5); /* Sombra ao focar no botão */
+        }
+
+    /* tabela avaliar curriculo */
+        .table-body-secondary td, .table-body-secondary th{
+            background-color: #E9ECEF;
         }

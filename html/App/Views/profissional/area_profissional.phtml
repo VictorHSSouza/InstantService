@@ -1,36 +1,79 @@
-<div class="my-5 display-2 text-center">Lista de Pedidos</div>
 
-<div class="m-3">
-    <div class="mb-4 text-start">
-        <a href="/profissional_pedidos_vinculados" class=""> Pedidos Disponiveis </a>
+<div class="m-3 mt-4">
+    <?php if($this->view->pedidos_vinculados) { ?>
+        <div class="mb-4 text-start">
+        <div class="h2"> Pedidos Vinculados </div>
     </div>
 
-    <div class="row justify-content-evenly">
-        <?php foreach($this->view->pedidos as $value) { ?>
+    <div class="row mb-5">
+        <?php foreach($this->view->pedidos_vinculados as $value) { ?>
             <?php
                 $atual = strtotime((new DateTime('now', new DateTimeZone('America/Sao_Paulo')))->format('Y-m-d H:i:s'));
                 $bd = strtotime($value['data_solicitacao']);
             ?>
-            <div class="card col-3" style="width: 18rem;">
-                
-                <div class="card-body">
-                    <h5 class="card-title"><?=$value['problema']?></h5>
-                    <p class="card-text">
-                        <div class="text-center h6"><?=$value['nome_completo']?></div>
-                        <hr class="border-dark opacity-100 w-75 mx-auto my-0">
-                        <div class="text-center mb-4"><?=$value['descricao']?></div>
-                        <div class="text-center">Tempo decorrido: <span class="d-inline"><i class="fa-regular fa-clock ms-1 me-2"></i><?= date("H:i",$atual - $bd) ?></span></div>
-                        <div class="text-center">Endereço: <?=$value['endereco']?></div>
-                    </p>
-                    <div class="text-center">
-                        <a href="/ver_pedido_profissional?id=<?=$value['id_pedido']?>" class="btn btn-primary">Mais Informações</a>
+            <div class="col-3 text-center d-flex justify-content-evenly mb-5"> 
+                <div class="card container h-100 d-flex flex-column" style="width: 20rem;">
+                    <div class="row p-4 flex-grow-1">
+                        <div class="mb-3">
+                            <h5 class="card-title text-center"><?=$value['problema']?></h5>
+                            <div class="text-center h6"><?=$value['nome_completo']?></div>
+                            <hr class="border-dark opacity-100 w-75 mx-auto my-0 mb-2">
+                            <div class="text-center"><?=$value['descricao']?></div>
+                        </div>
+                        
+                        <div class="col align-self-end mt-auto">
+                            <div class="text-center">Tempo decorrido: <span class="d-inline"><i class="fa-regular fa-clock ms-1 me-2"></i><?= date("H:i",$atual - $bd) ?></span></div>
+                            <div class="text-center">Endereço: <?=$value['endereco']?></div>
+                        
+                            <div class="text-center mt-2">
+                                <a href="/detalhes_pedido?id=<?=$value['id_pedido']?>" class="btn btn-dark w-75">Mais Informações</a><br>
+                                <a href="/recusar_pedido?id=<?=$value['id_pedido']?>" class="btn shadow text-center mt-2 w-75">Recusar Pedido</a>
+                            </div>
+                        </div>
+                        
                     </div>
-                    
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+    <?php } ?>
+    <div class="mb-4 text-start">
+        <div class="h2"> Pedidos Disponiveis </div>
+    </div>
+
+    <div class="row">
+        <?php foreach($this->view->pedidos_disponiveis as $value) { ?>
+            <?php
+                $atual = strtotime((new DateTime('now', new DateTimeZone('America/Sao_Paulo')))->format('Y-m-d H:i:s'));
+                $bd = strtotime($value['data_solicitacao']);
+            ?>
+            <div class="col-3 text-center d-flex justify-content-evenly mb-5"> 
+                <div class="card container h-100 d-flex flex-column" style="width: 20rem;">
+                    <div class="row p-4 flex-grow-1">
+                        <div class="mb-3">
+                            <h5 class="card-title text-center"><?=$value['problema']?></h5>
+                        
+                            <div class="text-center h6"><?=$value['nome_completo']?></div>
+                            <hr class="border-dark opacity-100 w-75 mx-auto my-0 mb-2">
+                            <div class="text-center"><?=$value['descricao']?></div>
+                        </div>
+
+                        <div class="col align-self-end mt-auto">
+                            <div class="text-center">Tempo decorrido: <span class="d-inline"><i class="fa-regular fa-clock ms-1 me-2"></i><?= date("H:i",$atual - $bd) ?></span></div>
+                            <div class="text-center">Endereço: <?=$value['endereco']?></div>
+
+                            <div class="text-center mt-2">
+                                <a href="/ver_pedido_profissional?id=<?=$value['id_pedido']?>" class="btn btn-dark w-75">Mais Informações</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         <?php } ?>
     </div>
 </div>
+
+
 
 
 

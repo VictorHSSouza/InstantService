@@ -273,6 +273,11 @@ class PedidoController extends Action {
         $obj_msg->__set("mensagem",$_POST['msg']);
         $obj_msg->cad_chat();
 
+        $pedido = Container::getModel('pedido','instant_service');
+        $pedido->__set("id_pedido",$_GET['id_pedido']);
+        $pedido->__set("id_profissional",$_SESSION['id']);
+        $pedido->status_mensagem($_GET['remetente']);
+
         header("Location: /".$_GET['link']."?id=".$_GET['id_pedido']);
     }
 }

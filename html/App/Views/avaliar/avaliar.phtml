@@ -1,12 +1,60 @@
 <?php
     $avaliacao = $this->view->dados;
 ?>
-<div class="m-0 p-0 text-center my-5 row">
-    <h1 class="mb-5">Avaliar Curriculos de Profissionais</h1>
 
-    <div class="row d-flex justify-content-center">
-        <?php foreach($avaliacao as $value) { ?>
-            <a href="/avaliar_profissional?id=<?=$value['id_cliente']?>" class="col-2 m-2 btn bg-dark-subtle"><span class="h5">Avaliar: <?=$value['nome_completo']?></span></a>    
-        <?php } ?>
+<!-- Título -->
+<div class="container mt-5">
+    <div class="ms-3 h2">Avaliar Currículo</div>
+
+    <!-- Tabela -->
+    <div class="mt-4 bg-body-secondary rounded-4 pb-1 px-2 pt-3 mb-5">
+        <table class="table table-body-secondary" >
+            <thead class="">
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Cidade</th>
+                    <th scope="col">Data do Envio</th>
+                    <th scope="col">Currículo</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $contalinha = 0 ?>
+                <?php foreach($avaliacao as $value) { $contalinha +=1;?>
+                    <tr>
+                        <td><?= $value['nome_completo']; ?></td>
+                        <td><?= $value['email']; ?></td>
+                        <td><?= $value['nome_estado']; ?></td>
+                        <td><?= $value['cidade']; ?></td>
+                        <td><?= date("d/m/Y", strtotime($value['data_cadastro'])); ?></td>
+                        <td><a href="/avaliar_profissional?id=<?= $value['id_cliente'] ?>" class="bg-success-subtle btn btn-outline-success btn-sm w-100">Ver</a></td>
+                        <td><a class="btn btn-sm w-100 <?= ($value['status_ativo'] == 0) ? 'btn-outline-danger bg-danger-subtle' : 'bg-success-subtle btn-outline-success'; ?>">Pendente</a></td>
+                    </tr>
+                <?php } for($i=0; $i<(13-$contalinha);$i++) { ?>
+                    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+                <?php } ?>
+
+                
+            </tbody>
+        </table>
+
+        <footer aria-label="Page navigation example">
+            <ul class="pagination justify-content-end mt-4">
+                <li class="page-item bg-body-secondary text-black disabled">
+                    <a class="page-link py-1 mx-1" href="" tabindex="-1" aria-disabled="true">&laquo;</a>
+                </li>
+                <li class="page-item active mx-1"><a class="page-link btn py-1 bg-dark text-white" href="">1</a></li>
+                <li class="page-item mx-1"><a class="page-link btn py-1 bg-body-secondary text-black" href="">2</a></li>
+                <li class="page-item mx-1"><a class="page-link btn py-1 bg-body-secondary text-black" href="">3</a></li>
+                <li class="page-item mx-1"><a class="page-link btn py-1 bg-body-secondary text-black" href="">...</a></li>
+                <li class="page-item mx-1"><a class="page-link btn py-1 bg-body-secondary text-black" href="">40</a></li>
+                <li class="page-item">
+                    <a class="page-link py-1 mx-1 bg-body-secondary text-black" href="">&raquo;</a>
+                </li>
+            </ul>
+        </footer>
+        
     </div>
 </div>

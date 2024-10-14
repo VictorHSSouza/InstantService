@@ -30,8 +30,4 @@ class Mensagem extends Model{
         $valor = substr($valor,0,-1);
         $this->insert($this->tb,$indice,$valor);
     }
-
-    public function verificar_mensagem($id) {
-        
-    }
 }
