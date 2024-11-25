@@ -101,3 +101,180 @@
         .table-body-secondary td, .table-body-secondary th{
             background-color: #E9ECEF;
         }
+
+
+
+/* fazueli */
+
+
+#menu {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    height: 30px;
+    width: 50px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+}
+
+select:focus {
+    outline: none;
+    border-color: #0056b3;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}
+
+select option {
+    font-size: 16px;
+}
+
+@media(max-width: 730px) {
+
+    .nav-item {
+        display: none;
+    }
+
+    #menu {
+        display: inline-block;
+        text-decoration: none;
+    }
+}
+
+
+.content-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+.title {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    font-size: 6vh;
+    font-weight: 600;
+}
+
+.title span {
+    color: #009dff;
+}
+
+.text {
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+@media(max-width: 594px) {
+    .title {
+        font-size: 2.2rem;
+    }
+}
+
+@media(max-width: 504px) {
+    .title {
+        font-size: 2rem;
+    }
+}
+
+@media(max-width: 440px) {
+    .title {
+        font-size: 1.5rem;
+    }
+}
+
+#botao {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #009dff;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+}
+
+#botao:hover {
+    background-color: #fff;
+    color: #000;
+    border: #000 solid 2px;
+}
+
+.site-container {
+    width: 80%;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 30px;
+    padding: 30px;
+    height: 150%;
+}
+
+
+.about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 17vh;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+}
+
+#about-title {
+    height: 50vh;
+}
+
+.boxes {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+.box:hover {
+    color: #009dff;
+}
+
+.box {
+    width: 450px;
+    height: 500px;
+    background-color: #fff;
+    border-radius: 10px;
+    margin: 45px;
+}
+
+.blue-box {
+    background-color: #009dff;
+}
+
+
+.boxes2 {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+
+.box2 {
+    width: 450px;
+    height: 500px;
+    background-color: #000;
+    border: 2px solid #009dff;
+    border-radius: 10px;
+    margin: 45px;
+}
+
+.blue-box2 {
+    background-color: #000;
+    border: 2px solid #009dff;
+}

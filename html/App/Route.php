@@ -12,6 +12,12 @@ Class Route extends Bootstrap {
             'controller' => 'indexController',
             'action' => 'index'
         );
+
+        $routes['sobre_nos'] = array(
+            'route' => '/sobre_nos',
+            'controller' => 'indexController',
+            'action' => 'sobre_nos'
+        );
         
         //login 
         $routes['login'] = array(
