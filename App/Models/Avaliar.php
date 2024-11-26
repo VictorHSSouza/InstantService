@@ -45,7 +45,7 @@ class Avaliar extends Model{
     }
 
     public function atualizar_avaliacao($id_pro,$msg) {     
-        $this->update($this->tb,"mensagem = '$msg'","id_cliente = $id_pro");
+        $this->update($this->tb,"mensagem = '$msg'","id_profissional = $id_pro");
     }
 
     public function completa_avaliacao($id_pro) {     

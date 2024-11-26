@@ -1,0 +1,77 @@
+<?php
+    $avaliacao = $this->view->dados;
+    $caminho = '/public/assets/pdf/' . $avaliacao['nome_curriculo'];
+    /*
+?>
+<!--
+<div class="m-0 p-0 text-center row my-5">
+    <h1 class="mb-5">Avaliar Curriculo de <?=$avaliacao['nome_completo']?></h1>
+
+    <div class="col-4"></div>
+    <div class="text-start col m-0 mb-3">
+        <div class="h3">Email:  <?=$avaliacao['email']?></div>
+        <div class="h3">Data de nascimento:  <?=$avaliacao['data_nascimento']?></div>
+        <div class="h3">Estado:  <?=$avaliacao['estado']?></div>
+        <div class="h3">Cidade:  <?=$avaliacao['cidade']?></div>
+    </div>
+    <div>
+        <a class="btn btn-secondary" href="<?=$caminho?>" download>Download do currículo</a>
+    </div>
+</div>
+
+<div class="m-0 p-0 text-center my-5">
+    <h1 class="mb-5">Enviar mensagem</h1>
+
+    <div> 
+        <form action="avaliar_envio?id=<?=$avaliacao['id_profissional']?>" method="POST">
+            <textarea name="msg" style="max-height: 100px; min-height: 100px" class="container form-control"><?=$avaliacao['mensagem']?></textarea>
+
+            <div class="mt-3">
+                <input class="form-check-input" type="checkbox" name="status" id="defaultCheck1">
+                <label class="form-check-label" for="defaultCheck1">
+                    Tornar Profissional
+                </label>
+            </div>
+
+            <button type="submit" class="mt-3 btn btn-success"> Enviar Avaliação </button>
+        </form>
+        
+    </div> 
+</div>
+!--> */?>
+<div class="container py-4">
+
+    <!-- Título -->
+    <h2 class="text-start mb-5">Currículo de <span class="text-capitalize"><?=$avaliacao['nome_completo']?></span></h2>
+
+    <!-- Informações Básicas e Enviar Mensagem -->
+    <form action="avaliar_envio?id=<?=$avaliacao['id_profissional']?>" method="POST" class="row g-4">
+        <!-- Informações Básicas -->
+        <div class="col-md-6" style="min-height: 250px;">
+            <div class="card p-3 h-100 mb-3">
+                <h5>Informações Básicas</h5>
+                <p><strong>Email:</strong> <?=$avaliacao['email']?></p>
+                <p><strong>Data de Nascimento:</strong> <?=$avaliacao['data_nascimento']?></p>
+                <p><strong>Estado:</strong> <?=$avaliacao['estado']?></p>
+                <p><strong>Cidade:</strong> <?=$avaliacao['cidade']?></p>
+            </div>
+
+            <a href="<?=$caminho?>" class="btn btn-dark rounded-4 px-3 py-2 me-4" download>Download do Currículo</a>
+            <label class="btn btn-danger rounded-4 px-4 py-2" for="btn-check"><input type="checkbox" name="status" id="btn-check" autocomplete="off"> Tornar Profissional </label>
+        </div>
+
+        <!-- Enviar Mensagem -->
+        <div class="col-md-6" style="min-height: 250px;">
+            <div class="card p-3 h-100 mb-3">
+                <h5 class="mb-3">Enviar Mensagem</h5>
+                <textarea name="msg" class="form-control mb-3 h-100" placeholder="Digite sua mensagem aqui..." required><?=$avaliacao['mensagem']?></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-success rounded-4 px-4 py-2">Enviar Avaliação</button>
+        </div>
+    </form>
+
+    <!-- Botões -->
+    <div class="d-flex justify-content-center gap-3 mt-4">
+    </div>
+</div>
