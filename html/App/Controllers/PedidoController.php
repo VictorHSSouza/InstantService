@@ -108,6 +108,20 @@ class PedidoController extends Action {
         $this->render('ver_pedido','layout1');
     }
 
+    public function ver_pedido_finalizado() {
+        $obj = Container::getModel('login','instant_service');
+        $obj->Login();
+
+        $pedido = Container::getModel('pedido','instant_service');
+        $pedido->__set('id_cliente',$_SESSION['id']);
+
+        $pedidos = $pedido->list_pedido_finalizado();
+        $this->view->pedidos = $pedidos;
+        $this->view->nome = $_SESSION['nome'];
+
+        $this->render('ver_pedido_finalizado','layout1');
+    }
+
     public function ver_pedido_profissional() {
         $obj = Container::getModel('login','instant_service');
         $obj->Login();

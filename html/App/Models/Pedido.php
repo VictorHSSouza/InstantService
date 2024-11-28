@@ -33,6 +33,11 @@ class Pedido extends Model{
         return $pedido[0];
     } 
 
+    public function list_pedido_finalizado() {    
+        $pedidos = $this->select("id_pedido,data_solicitacao,$this->tb.descricao, $this->tb.id_status,status_pedido.descricao as descricao_status", "$this->tb inner join status_pedido on (status_pedido.id_status = $this->tb.id_status)","id_cliente = ".$this->id_cliente ." and $this->tb.id_status = 0", "order by id_status desc" );
+        return $pedidos;
+    } 
+
     public function ver_pedido_profissional() {    
         $pedido = $this->select("pr.nome,p.descricao, p.endereco",$this->tb." p INNER JOIN problemas pr ON(p.id_problema = pr.id_problema)","p.id_cliente != ".$this->id_cliente ." and p.id_pedido = ".$this->id_pedido ." and id_status != 0");
         return $pedido[0];

@@ -1,72 +1,90 @@
+<?php
+    $dados = $this->view->dados??"";
+    $nome = $dados['nome']??"";
+    $sobrenome = $dados['sobrenome']??"";
+    $email = $dados['email']??"";
+    $sexo = $dados['sexo']??"";   
+    $cpf = $dados['cpf']??"";
+    $data_nascimento = $dados['data_nascimento']??"";
+    $login = $dados['login']??"";
+
+    $cad1 = $dados?"style='display: none;'":"";
+    $cad2 = $dados?"":"style='display: none;'";
+?>
+
+<?php if(isset($this->view->alert)) { ?>
+    <div class="alert alert-danger text-center"><?=$this->view->alert?></div>
+<?php } ?>
+
 <div class="m-0 p-0 text-center my-5 row">
     <h1 class="mb-5">Cadastro de Usuário</h1>
 
-    <form action="registrar" method="POST" class="row container col col-sm-4 col-11 m-auto py-2 h5 border px-5 border-5 rounded-3 border-dark">
+    <form action="registrar" method="POST" class="row container col col-sm-4 col-11 m-auto py-2 h5 border px-5 rounded-4 form">
         
-        <div id="cad1" class="p-0">
+        <div id="cad1" class="p-0" <?=$cad1?>>
             <div class="mt-3 mb-3 col-12 mx-auto row p-0">
                 <label for="nome" class="col mb-2 p-0 my-auto text-start">Nome:</label>
-                <input type="text" id="nome" name="nome" class="col-12 p-1" required>
+                <input type="text" id="nome" name="nome" class="col-12 p-1 form-control rounded-4" value="<?= $nome ?>" required>
             </div>
 
             <div class="mt-2 mb-3 col-12 mx-auto row p-0">
                 <label for="sobrenome" class="col mb-2 p-0 my-auto text-start">Sobrenome:</label>
-                <input type="text" id="sobrenome" name="sobrenome" class="col-12 p-1" required>
+                <input type="text" id="sobrenome" name="sobrenome" class="col-12 p-1 form-control rounded-4"  value="<?= $sobrenome ?>" required>
             </div>
 
             <div class="mt-2 mb-3 col-12 mx-auto row p-0">
                 <label for="email" class="col mb-2 p-0 my-auto text-start">Email:</label>
-                <input type="email" id="email" name="email" class="col-12 p-1" required> 
+                <input type="email" id="email" name="email" class="col-12 p-1 form-control rounded-4"  value="<?= $email ?>" required> 
             </div>
 
             <div class="mt-2 mb-3 col-12 mx-auto row p-0">
                 <label for="sexo" class="col mb-2 p-0 my-auto text-start">Sexo:</label>
-                <select name="sexo" id="sexo" class="col-12 p-1">
-                    <option value="F">Feminino</option>
-                    <option value="M">Masculino</option>
-                    <option value="O">Outro</option>
+                <select name="sexo" id="sexo" class="col-12 p-1 form-control rounded-4">
+                    <option <?= $sexo=="F"?"selected":""?> value="F">Feminino</option>
+                    <option <?= $sexo=="M"?"selected":""?> value="M">Masculino</option>
+                    <option <?= $sexo=="O"?"selected":""?> value="O">Outro</option>
                 </select>
             </div>
 
             <div class="mt-2 mb-3 col-12 mx-auto row p-0">
                 <label for="cpf" class="col mb-2 p-0 my-auto text-start">CPF:</label>
-                <input type="text" id="cpf" name="cpf" class="col-12 p-1" oninput="mascara_cpf()" onkeypress="return somente_numeros(event)" required> 
+                <input type="text" id="cpf" name="cpf" value="<?= $cpf ?>" class="col-12 p-1 form-control rounded-4" oninput="mascara_cpf()" onkeypress="return somente_numeros(event)" required> 
             </div>
 
             <div class="mt-2 mb-3 col-12 mx-auto row p-0">
                 <label for="data_nascimento" class="col mb-2 p-0 my-auto text-start">Data de Nascimento:</label>
-                <input type="date" id="data_nascimento" name="data_nascimento" class="col-12 p-1" required> 
+                <input type="date" id="data_nascimento" name="data_nascimento" value="<?= $data_nascimento ?>" class="col-12 p-1 form-control rounded-4" required> 
             </div>
         </div>
 
-        <div id="cad2" style="display: none;">
+        <div id="cad2" <?=$cad2?>>
             <div class="mt-2 mb-3 col-12 mx-auto row p-0">
                 <label for="login" class="col mb-2 p-0 my-auto text-start">Login:</label>
-                <input type="text" id="login" name="login" class="col-12 p-1" required> 
+                <input type="text" id="login" name="login" value="<?= $login ?>" class="col-12 p-1 form-control rounded-4" required> 
             </div>
 
             <div class="mt-2 mb-3 col-12 mx-auto row p-0">
                 <label for="senha" class="col mb-2 p-0 my-auto text-start">Senha:</label>
-                <input type="password" id="senha" name="senha" class="col-12 p-1" required> 
+                <input type="password" id="senha" name="senha" class="col-12 p-1 form-control rounded-4" required> 
             </div>
 
             <div class="mt-2 mb-3 col-12 mx-auto row p-0">
                 <label for="senha2" class="col mb-2 p-0 my-auto text-start">Senha Novamente:</label>
-                <input type="password" id="senha2" name="senha2" class="col-12 p-1" required> 
+                <input type="password" id="senha2" name="senha2" class="col-12 p-1 form-control rounded-4" required> 
             </div>
         </div>
 
-        <div class="my-3 mx-auto p-0 text-center" id="troca_cad">
-            <div onclick="troca_cad()" class="w-75 btn btn-success">Próximo</div>
+        <div class="my-3 mx-auto p-0 text-center" id="troca_cad" <?=$cad1?>>
+            <div onclick="troca_cad()" class="w-75 btn btn-dark rounded-5 font-weight-bold text-white">Próximo</div>
         </div>
 
-        <div class="my-3 mx-auto p-0 text-center" id="submit" style="display: none;">
-            <div class="btn btn-success" onclick="voltar_cad()"><</div>
-            <button type="submit" class="w-75 btn btn-success">Cadastrar</button>
+        <div class="my-3 mx-auto p-0 text-center" id="submit" <?=$cad2?>>
+            <div class="btn btn-dark" onclick="voltar_cad()"><</div>
+            <button type="submit" class="w-75 btn btn-dark">Cadastrar</button>
         </div>   
 
         <div class="mb-4">
-            <a href="login" class="text-decoration-none">Já possui uma conta? Entrar.</a>
+            <a href="login" class=" h5 text-decoration-none text-secondary">Já possui uma conta? Entrar.</a>
         </div>
 
     </form>

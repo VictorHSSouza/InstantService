@@ -1,50 +1,54 @@
 <div class="m-0 p-0 text-center my-5 row">
-    <h1 class="mb-5">Editar Pedido</h1>
+    <h1 class="mb-3">Editar Pedido</h1>
 
-    <div class="container col col-sm-4 col-11 py-2 h5 border px-5 border-5 rounded-3 border-dark mt-3">
-        <form action="edit_pedido?id=<?=$this->view->info['id']?>" method="POST" class="row container m-auto py-2 h5">
+    <div class="container col col-sm-5 col-11 pt-3 pb-4 h5 rounded-3">
+        <form action="edit_pedido?id=<?=$this->view->info['id']?>" method="POST" class="row container col col-12 m-auto pt-3 pb-4 h5 border px-5 mt-3 mb-4 rounded-4">
 
             <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="div_problemas" >
                 <label for="id_problema" class="col mb-2 p-0 my-auto text-start">Problema:</label>
-                <input type="text" class="p-1 my-auto text-start" value="<?=$this->view->info['nome']?>" disabled>
+                <input type="text" class="p-1 my-auto text-start form-control rounded-3" value="<?=$this->view->info['nome']?>" disabled>
             </div>
                 
             <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="descricao">
                 <label for="descricao" class="col mb-2 p-0 my-auto text-start">Descreva seu problema:</label>
-                <textarea name="descricao" class="p-1 my-auto text-start" style="max-height: 150px; min-height: 48px;" required><?=$this->view->info['descricao']?></textarea>
+                <textarea name="descricao" class="p-1 my-auto text-start form-control rounded-3" style="max-height: 150px; min-height: 48px;" required><?=$this->view->info['descricao']?></textarea>
             </div>
 
             <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="endereco">
                 <label for="endereco" class="col mb-2 p-0 my-auto text-start" >Endereço:</label>
-                <input name="endereco" type="text" class="p-1 my-auto text-start" value="<?=$this->view->info['endereco']?>" required>
+                <input name="endereco" type="text" class="p-1 my-auto text-start form-control rounded-3" value="<?=$this->view->info['endereco']?>" required>
             </div>
 
-            <div>
-                <button type="submit" class="btn btn-success w-25" id="btnpedido"> Editar</button>
-                <a href="excluir_pedido?id=<?=$this->view->info['id']?>" class="btn btn-danger w-25" id="btnpedido"> Excluir</a>
+            <div class="p-0 m-0 ">
+                <button type="submit" class="btn btn-success w-50 m-0 rounded-4" id="btnpedido">Editar</button>
+                <a href="excluir_pedido?id=<?=$this->view->info['id']?>" class="btn btn-danger w-50 m-0 rounded-4 mt-2" id="btnpedido"> Excluir</a>
             </div>
         </form>
-        <div class="card">
-            <div class="card-header">
+        <div class="card rounded-4">
+            <div class="card-header ">
                 Chat
             </div>
             <div class="card-body chat-body" style="max-height: 200px; min-height: 200px; overflow-y: auto;">
                 <?php $ult_msg = "";
                 foreach($this->view->chat as $msg) { ?>
                     <?php if($msg['remetente'] == "U") {
-                        $ps = "text-start ps-2";
+                        $ps = "text-end justify-content-end me-2";
                         $nome = $msg['nome_cliente'];
                     } else {
-                        $ps = "text-end me-2";
+                        $ps = "text-start ps-2";
                         $nome = $msg['nome_profissional'];
                     } ?>
 
-                    <div class="<?=$ps?>">
+                    <div class="<?=$ps?> row">
                         <?php if($ult_msg != $nome) { $ult_msg = $nome; ?>
                             <div class="me-2"><?=$nome?></div>
                         <?php } ?>
 
-                        <div class="py-2"><samp class="bg-secondary-subtle p-2 rounded-2"><?=$msg['mensagem']?></samp></div>
+                        <div class="my-1" style="max-width: 75%; width: fit-content;">
+                            <div class="bg-secondary-subtle rounded-2 p-2" >
+                                <samp class="" ><?=$msg['mensagem']?></samp>
+                            </div>
+                        </div>
 
                     </div>
                 <?php } ?>
@@ -54,11 +58,11 @@
                     <form action="cad_mensagem?id_pedido=<?=$_GET['id']?>&remetente=<?=$this->view->remetente?>&link=ver_pedido" method="POST" class="w-100">
                         <div class="row">
                             <div class="col-10">
-                                <input type="text" class="form-control" name="msg" maxlength="255" placeholder="Digite sua mensagem aqui...">
+                                <input type="text" class="form-control rounded-5" name="msg" maxlength="255" placeholder="Digite sua mensagem aqui...">
                             </div>
                             
                             <div class="input-group-append col-2">
-                                <button class="btn btn-success" type="submit">Enviar</button>
+                                <button class="btn btn-dark rounded-4" type="submit">Enviar</button>
                             </div>
                         </div>
                     </form>
@@ -68,6 +72,6 @@
     </div>
 
     <div>
-        <a href="/" class="mt-5 btn btn-primary"> Voltar </a>
+        <a href="/" class="mt-5 btn btn-dark rounded-4"> Voltar </a>
     </div>
 </div>

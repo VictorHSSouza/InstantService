@@ -5,13 +5,13 @@
         <div class="h2"> Pedidos Vinculados </div>
     </div>
 
-    <div class="row mb-5">
+    <div class="row mb-5 d-flex justify-content-center justify-content-sm-start m-0">
         <?php foreach($this->view->pedidos_vinculados as $value) { ?>
             <?php
                 $atual = strtotime((new DateTime('now', new DateTimeZone('America/Sao_Paulo')))->format('Y-m-d H:i:s'));
                 $bd = strtotime($value['data_solicitacao']);
             ?>
-            <div class="col-3 text-center d-flex justify-content-evenly mb-5"> 
+            <div class="col col-11 col-sm-3 text-center d-flex justify-content-evenly mb-5"> 
                 <div class="card container h-100 d-flex flex-column" style="width: 20rem;">
                     <div class="row p-4 flex-grow-1">
                         <div class="mb-3">
@@ -30,7 +30,6 @@
                                 <a href="/recusar_pedido?id=<?=$value['id_pedido']?>" class="btn shadow text-center mt-2 w-75">Recusar Pedido</a>
                             </div>
                         </div>
-                        
                     </div>
                 </div>
             </div>
@@ -41,13 +40,13 @@
         <div class="h2"> Pedidos Disponiveis </div>
     </div>
 
-    <div class="row">
+    <div class="row d-flex justify-content-center justify-content-sm-start">
         <?php foreach($this->view->pedidos_disponiveis as $value) { ?>
             <?php
                 $atual = strtotime((new DateTime('now', new DateTimeZone('America/Sao_Paulo')))->format('Y-m-d H:i:s'));
                 $bd = strtotime($value['data_solicitacao']);
             ?>
-            <div class="col-3 text-center d-flex justify-content-evenly mb-5"> 
+            <div class="col col-11 col-sm-3 text-center d-flex justify-content-evenly mb-5"> 
                 <div class="card container h-100 d-flex flex-column" style="width: 20rem;">
                     <div class="row p-4 flex-grow-1">
                         <div class="mb-3">

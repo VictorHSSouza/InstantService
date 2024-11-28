@@ -102,7 +102,7 @@ class ProfissionalController extends Action {
         if($_FILES['pdfadd']['name']) {
             $rootDir = $_SERVER['DOCUMENT_ROOT'];
             $uploaddir = $rootDir . '/public/assets/pdf/';
-            $filename = basename($_FILES['pdfadd']['name']);
+            $filename = "curriculo_user-".$_SESSION['id'].".pdf";
             $arquivo = $uploaddir . $filename;
             if (!move_uploaded_file($_FILES['pdfadd']['tmp_name'], $arquivo)) {
                 echo "erro";

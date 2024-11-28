@@ -2,7 +2,7 @@
 <div class="m-0 p-0 text-center my-5 row">
     <h1 class="mb-5">Cadastro de Usuário</h1>
 
-    <form action="cad_pedido" method="POST" class="row container col col-sm-4 col-11 m-auto py-3 h5 border px-5 border-5 rounded-3 border-dark">
+    <form action="cad_pedido" method="POST" class="row container col col-sm-5 col-11 m-auto pt-3 pb-4 h5 border px-5 rounded-4">
 
         <div class="mt-2 mb-3 col-12 text-start mx-auto p-0">
             <div class="">
@@ -33,17 +33,17 @@
         </div>
             
         <div class="mt-2 mb-3 col-12 mx-auto row p-0 aparece d-none" id="descricao">
-            <label for="descricao" class="col mb-2 p-0 my-auto text-start">Descreva seu problema:</label>
-            <textarea name="descricao" class="p-1 my-auto text-start" style="max-height: 150px; min-height: 48px;" required></textarea>
+            <label for="descricao" class="col mb-2 p-0 my-auto text-start ">Descreva seu problema:</label>
+            <textarea name="descricao" class="p-1 my-auto text-start rounded-3 border" style="max-height: 150px; min-height: 48px;" required></textarea>
         </div>
 
         <div class="mt-2 mb-3 col-12 mx-auto row p-0 aparece d-none" id="endereco" >
             <label for="endereco" class="col mb-2 p-0 my-auto text-start" >Endereço:</label>
-            <input name="endereco" type="text" class="p-1 my-auto text-start" required>
+            <input name="endereco" type="text" class="p-1 my-auto text-start form-control" required>
         </div>
 
         <input name="nome" type="hidden" value="<?= $_SESSION['nome'] ?>">
 
-        <button class="btn btn-success aparece d-none " id="btnpedido" onclick="desable_button(btnpedido)"> Fazer pedido</button>    
+        <button class="btn btn-dark aparece d-none " id="btnpedido" onclick="desable_button(btnpedido)"> Fazer pedido</button>    
     </form>
 </div>

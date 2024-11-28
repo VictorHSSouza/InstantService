@@ -3,7 +3,7 @@
     $dados = $this->view->dados["dados"];
 ?>
 
-<form class="row m-auto mt-5 col-10 shadow p-2 pe-4 rounded-4" action="/atualizar_dados" method="POST" id="div_camposusuario">
+<form class="row m-auto mt-5 col-10 shadow p-2 pe-4 rounded-4 mb-3" action="/atualizar_dados" method="POST" id="div_camposusuario">
     <div class="col col-sm-3 col-12 text-center">
         <?php
             $img = isset($_SESSION['img'])?"/public/assets/img/img_perfil/".$_SESSION['img']:"https://placehold.co/100?text=Sua+Imagem";
@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="col col-sm-9 col-12 my-3 ps-3">
-        <span class="h3 text-decoration-underline fw-bold"><?=$dados["nomecompleto"]?></span>
+        <span class="h3 fw-bold"><?=$dados["nomecompleto"]?></span>
         <div class="col row mt-3">
             <div class="mb-3 col col-sm-6 col-12">
                 <label for="nome" class="form-label">Nome</label> 
@@ -41,7 +41,7 @@
             </div>
 
             <?php if($profissional) { ?>
-                <span class="h3 text-decoration-underline fw-bold mt-5 mb-3">Informações profissionais</span>
+                <span class="h3 fw-bold mt-5 mb-3">Informações profissionais</span>
                 <input type="hidden" name="profissional" value="1">
 
                 <div class="mb-3 col col-sm-6 col-12">

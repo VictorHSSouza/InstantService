@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 25/09/2024 às 00:10
+-- Tempo de geração: 28/11/2024 às 03:17
 -- Versão do servidor: 8.2.0
 -- Versão do PHP: 8.2.13
 
@@ -20,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `instant_service`
 --
-
+create database instant_service;
+use instant_service;
 -- --------------------------------------------------------
 
 --
@@ -41,12 +42,22 @@ CREATE TABLE IF NOT EXISTS `avaliacao_profissional` (
 --
 
 INSERT INTO `avaliacao_profissional` (`id_profissional`, `id_funcionario`, `mensagem`, `status_avaliacao`) VALUES
-(31, 31, '', 1),
-(32, 32, '', 1),
-(33, 33, '', 1),
-(35, 35, '', 1),
-(43, 42, '', 1),
-(44, 42, '', 1);
+(4, 3, 'ok', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura stand-in para view `chat`
+-- (Veja abaixo para a visão atual)
+--
+DROP VIEW IF EXISTS `chat`;
+CREATE TABLE IF NOT EXISTS `chat` (
+`id_pedido` int unsigned
+,`nome_cliente` varchar(41)
+,`nome_profissional` varchar(41)
+,`remetente` char(1)
+,`mensagem` varchar(255)
+);
 
 -- --------------------------------------------------------
 
@@ -68,17 +79,18 @@ CREATE TABLE IF NOT EXISTS `cliente` (
   `tipo` int NOT NULL,
   `img_perfil` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `cliente`
 --
 
 INSERT INTO `cliente` (`id_cliente`, `nome`, `sobrenome`, `login`, `senha`, `email`, `data_nascimento`, `cpf`, `sexo`, `tipo`, `img_perfil`) VALUES
-(31, 'Administrador', 'Geral', 'admin', '470805af85e62beab989de045f38822d', 'ADM@GMAIL.COM', '1111-11-11', '111.111.111-11', 'M', 5, 'perfil31.png'),
-(42, 'func', 'func', 'func', '7df4935f4a5a2865191ef74f64df8754', 'ADM@GMAIL.COM', '1111-01-01', '111.111.111-11', 'O', 4, NULL),
-(44, 'B', 'B', 'B', '9d5ed678fe57bcca610140957afab571', 'asda@adsa.conasdasdas', '0001-11-11', '111.111.111-11', 'F', 2, NULL),
-(45, 'A', 'a', 'a', '0cc175b9c0f1b6a831c399e269772661', 'victorhenriquesantanasouza@gmail.com', '0001-11-11', '666.666.666-66', 'M', 1, NULL);
+(1, 'Administrador', 'Geral', 'admin', '4988676fdc34d84d026eca2751a2eb27', 'victorhenriquesantanasouza@gmail.com', '2000-02-20', '123.456.789-01', 'M', 5, 'perfil1.png'),
+(2, 'gerente', 'IS', 'gerente', '2d86d3f096e9d2c6350f54f3b9528f91', 'thiagohermontsiqueira@gmail.com', '0000-00-00', '111.111.111-11', 'M', 4, 'perfil2.jpg'),
+(3, 'funcionario', 'IS', 'funcionario', 'fa7cc236cfb2a732b5fe745755b0e1c3', '22201157@aluno.cotemig.com.br', '0000-00-00', '123.456.789-01', 'F', 3, 'perfil3.jpg'),
+(4, 'Profissional', 'IS', 'profissional', 'c2def48cab698acfe53c0c3a9a7a9ded', '22201785@aluno.cotemig.com.br', '2000-02-22', '163.786.536-82', 'O', 2, 'perfil4.jpg'),
+(5, 'Cliente', 'IS', 'cliente', '36d22972227f252d6fb05af149c6ad64', 'logindetudo123@gmail.com', '2000-02-22', '234.543.245-34', 'M', 1, 'perfil5.jpg');
 
 -- --------------------------------------------------------
 
@@ -162,6 +174,7 @@ CREATE TABLE IF NOT EXISTS `list_servicos` (
 `id_profissional` int unsigned
 ,`id_profissional_vinculado` int
 ,`id_pedido` int unsigned
+,`id_cliente` int unsigned
 ,`nome_completo` varchar(41)
 ,`problema` varchar(45)
 ,`descricao` varchar(100)
@@ -179,11 +192,19 @@ DROP TABLE IF EXISTS `mensagem`;
 CREATE TABLE IF NOT EXISTS `mensagem` (
   `id_mensagem` int NOT NULL AUTO_INCREMENT,
   `id_pedido` int NOT NULL,
-  `id_profissional` int NOT NULL,
-  `remetente` int NOT NULL,
+  `id_profissional` int DEFAULT NULL,
+  `remetente` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `mensagem` varchar(255) NOT NULL,
   PRIMARY KEY (`id_mensagem`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `mensagem`
+--
+
+INSERT INTO `mensagem` (`id_mensagem`, `id_pedido`, `id_profissional`, `remetente`, `mensagem`) VALUES
+(1, 2, 4, 'P', 'Oiiiii'),
+(2, 3, 0, 'U', 'Preciso de ajuda');
 
 -- --------------------------------------------------------
 
@@ -202,18 +223,21 @@ CREATE TABLE IF NOT EXISTS `pedidos` (
   `data_solicitacao` datetime NOT NULL,
   `data_confirmacao` datetime DEFAULT NULL,
   `data_finalizacao` datetime DEFAULT NULL,
-  `status` tinyint(1) NOT NULL,
+  `id_status` int NOT NULL,
   PRIMARY KEY (`id_pedido`)
-) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `pedidos`
 --
 
-INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `id_profissional`, `id_problema`, `descricao`, `endereco`, `data_solicitacao`, `data_confirmacao`, `data_finalizacao`, `status`) VALUES
-(53, 33, 33, 1, 'Lâmpada Queimou! AHHHHHHHHHHHH', 'Rua Conde Santa Marinha', '2024-09-03 21:14:15', '2024-09-04 00:16:09', NULL, 0),
-(55, 31, NULL, 1, 'gggggg', 'gggggg', '2024-09-10 20:50:16', NULL, NULL, 0),
-(56, 31, NULL, 1, 'SSSSSSSS', 's', '2024-09-16 21:19:16', NULL, NULL, 0);
+INSERT INTO `pedidos` (`id_pedido`, `id_cliente`, `id_profissional`, `id_problema`, `descricao`, `endereco`, `data_solicitacao`, `data_confirmacao`, `data_finalizacao`, `id_status`) VALUES
+(1, 5, 4, 1, 'ajuda', 'Rua Professor Ricardo Pinto', '2024-11-27 23:52:40', '2024-11-28 03:01:04', '2024-11-28 00:06:24', 0),
+(2, 5, 4, 1, 'deu BO', 'Rua das Palmeiras, 959 - Vila Nova, Curitiba', '2024-11-27 23:58:02', '2024-11-28 03:01:07', NULL, 4),
+(3, 5, 4, 1, 'SOS', 'Rua dos Três Irmãos, 877 - Bairro do Sol, Curitiba', '2024-11-27 23:58:30', '2024-11-28 03:01:10', NULL, 3),
+(4, 5, 4, 1, 'Lâmpada foi de f', 'Avenida Brasil, 166 - Centro, Belo Horizonte', '2024-11-27 23:59:12', '2024-11-28 03:06:11', NULL, 2),
+(5, 5, NULL, 1, 'Queimou', 'Avenida Brasil, 628 - Centro, Belo Horizonte', '2024-11-28 00:01:28', NULL, NULL, 1),
+(6, 5, 4, 1, 'Lâmpada queimada', 'Avenida Paulista, 221 - Bairro do Sol', '2024-11-28 00:03:36', '2024-11-28 03:06:14', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -280,8 +304,7 @@ CREATE TABLE IF NOT EXISTS `problema_habilidades` (
 --
 
 INSERT INTO `problema_habilidades` (`id_problema`, `id_habilidade`) VALUES
-(1, 5),
-(2, 3);
+(1, 5);
 
 -- --------------------------------------------------------
 
@@ -302,21 +325,16 @@ CREATE TABLE IF NOT EXISTS `profissional` (
   `nome_curriculo` varchar(30) DEFAULT NULL,
   `status_ativo` tinyint(1) NOT NULL,
   `status_cadastro` tinyint(1) NOT NULL,
+  `data_cadastro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_profissional`)
-) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Despejando dados para a tabela `profissional`
 --
 
-INSERT INTO `profissional` (`id_profissional`, `id_estado`, `cep`, `logradouro`, `numero`, `complemento`, `bairro`, `cidade`, `nome_curriculo`, `status_ativo`, `status_cadastro`) VALUES
-(31, 7, '31.130-080', 'Rua Conde Santa Marinha', '355', 'Casa', 'Cachoeirinha', 'dasda', 'page_7662_638585451271254716.p', 1, 1),
-(32, 0, '31.130-080', '', '11', '11', '', '', 'Projeto elétrico + Listas de m', 1, 1),
-(33, 0, '31.130-080', '', '10', 'Casa', '', '', 'Projeto elétrico + Listas de m', 1, 1),
-(35, 0, '31.130-080', '', '355', 'Casa', '', '', 'Projeto elétrico + Listas de m', 1, 1),
-(43, 0, '31.130-080', '', '355', 'Casa', '', '', 'Projeto elétrico + Listas de m', 1, 1),
-(44, 11, '31.130-080', 'Rua Conde Santa Marinha', '12', 'Casa', 'Cachoeirinha', 'Belo Horizonte', 'Projeto elétrico + Listas de m', 1, 1),
-(45, 11, '31.130-080', 'Rua Conde Santa Marinha', '355', 'Casa', 'Cachoeirinha', 'Belo Horizonte', 'page_7662_638585452099378960_2', 0, 1);
+INSERT INTO `profissional` (`id_profissional`, `id_estado`, `cep`, `logradouro`, `numero`, `complemento`, `bairro`, `cidade`, `nome_curriculo`, `status_ativo`, `status_cadastro`, `data_cadastro`) VALUES
+(4, 11, '31.710-550', 'Rua Professor Ricardo Pinto', '629', '.', 'Itapoã', 'Belo Horizonte', 'curriculo_user-4.pdf', 1, 1, '2024-11-27 23:41:36');
 
 -- --------------------------------------------------------
 
@@ -337,21 +355,33 @@ CREATE TABLE IF NOT EXISTS `profissional_habilidades` (
 --
 
 INSERT INTO `profissional_habilidades` (`id_profissional`, `id_habilidade`, `data`) VALUES
-(32, 6, '2024-09-02'),
-(35, 4, '2024-09-17'),
-(33, 5, '2024-09-03'),
-(31, 5, '2024-09-02'),
-(31, 2, '2024-09-02'),
-(32, 3, '2024-09-02'),
-(35, 5, '2024-09-17'),
-(43, 1, '2024-09-21'),
-(43, 3, '2024-09-21'),
-(44, 1, '2024-09-21'),
-(44, 3, '2024-09-21'),
-(44, 4, '2024-09-21'),
-(45, 1, '2024-09-21'),
-(45, 3, '2024-09-21'),
-(45, 5, '2024-09-21');
+(4, 2, '2024-11-27'),
+(4, 5, '2024-11-27'),
+(4, 6, '2024-11-27');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `status_pedido`
+--
+
+DROP TABLE IF EXISTS `status_pedido`;
+CREATE TABLE IF NOT EXISTS `status_pedido` (
+  `id_status` int NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_status`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Despejando dados para a tabela `status_pedido`
+--
+
+INSERT INTO `status_pedido` (`id_status`, `descricao`) VALUES
+(0, 'Finalizado'),
+(1, 'Procurando Profissionais'),
+(2, 'Profissional aceitou o Pedido'),
+(3, 'Aguardando resposta do profissional'),
+(4, 'Profissional entrou em contato');
 
 -- --------------------------------------------------------
 
@@ -377,12 +407,22 @@ INSERT INTO `tipo_problema` (`id_tipo`, `nome`, `descricao`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura para view `chat`
+--
+DROP TABLE IF EXISTS `chat`;
+
+DROP VIEW IF EXISTS `chat`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `chat`  AS SELECT `p`.`id_pedido` AS `id_pedido`, concat(`c`.`nome`,' ',`c`.`sobrenome`) AS `nome_cliente`, ifnull((select concat(`c2`.`nome`,' ',`c2`.`sobrenome`) from `cliente` `c2` where (`c2`.`id_cliente` = `m`.`id_profissional`)),0) AS `nome_profissional`, `m`.`remetente` AS `remetente`, `m`.`mensagem` AS `mensagem` FROM ((`mensagem` `m` join `pedidos` `p` on((`m`.`id_pedido` = `p`.`id_pedido`))) join `cliente` `c` on((`c`.`id_cliente` = `p`.`id_cliente`))) ;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para view `list_servicos`
 --
 DROP TABLE IF EXISTS `list_servicos`;
 
 DROP VIEW IF EXISTS `list_servicos`;
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `list_servicos`  AS SELECT `pr`.`id_profissional` AS `id_profissional`, `pe`.`id_profissional` AS `id_profissional_vinculado`, `pe`.`id_pedido` AS `id_pedido`, concat(`c`.`nome`,' ',`c`.`sobrenome`) AS `nome_completo`, `p`.`nome` AS `problema`, `pe`.`descricao` AS `descricao`, `pe`.`endereco` AS `endereco`, `pe`.`data_solicitacao` AS `data_solicitacao` FROM (((((`profissional` `pr` join `profissional_habilidades` `ph` on((`pr`.`id_profissional` = `ph`.`id_profissional`))) join `problema_habilidades` `prh` on((`ph`.`id_habilidade` = `prh`.`id_habilidade`))) join `pedidos` `pe` on((`prh`.`id_problema` = `pe`.`id_problema`))) join `cliente` `c` on((`c`.`id_cliente` = `pe`.`id_cliente`))) join `problemas` `p` on((`prh`.`id_problema` = `p`.`id_problema`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `list_servicos`  AS SELECT `pr`.`id_profissional` AS `id_profissional`, `pe`.`id_profissional` AS `id_profissional_vinculado`, `pe`.`id_pedido` AS `id_pedido`, `pe`.`id_cliente` AS `id_cliente`, concat(`c`.`nome`,' ',`c`.`sobrenome`) AS `nome_completo`, `p`.`nome` AS `problema`, `pe`.`descricao` AS `descricao`, `pe`.`endereco` AS `endereco`, `pe`.`data_solicitacao` AS `data_solicitacao` FROM (((((`profissional` `pr` join `profissional_habilidades` `ph` on((`pr`.`id_profissional` = `ph`.`id_profissional`))) join `problema_habilidades` `prh` on((`ph`.`id_habilidade` = `prh`.`id_habilidade`))) join `pedidos` `pe` on((`prh`.`id_problema` = `pe`.`id_problema`))) join `cliente` `c` on((`c`.`id_cliente` = `pe`.`id_cliente`))) join `problemas` `p` on((`prh`.`id_problema` = `p`.`id_problema`))) WHERE (`pe`.`id_status` <> 0) ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

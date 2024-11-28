@@ -1,29 +1,29 @@
 <div class="m-0 p-0 text-center my-5 row">
-    <h1 class="mb-5 display-2">Ver detalhes do pedido</h1>
+    <h1 class="mb-5 h1">Ver detalhes do pedido</h1>
 
-    <form action="vincular_pedido?id=<?=$this->view->info['id']?>" method="POST" class="row container col col-sm-4 col-11 m-auto py-2 h5 border px-5 border-5 rounded-3 border-dark mt-3">
+    <form action="vincular_pedido?id=<?=$this->view->info['id']?>" method="POST" class="row container col col-sm-4 col-11 m-auto py-2 h5 border rounded-3 mt-3">
 
         <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="div_problemas" >
             <label for="id_problema" class="col mb-2 p-0 my-auto text-start">Problema:</label>
-            <input type="text" class="p-1 my-auto text-start" value="<?=$this->view->info['nome']?>" disabled>
+            <input type="text" class="p-1 my-auto text-start form-control rounded-3" value="<?=$this->view->info['nome']?>" disabled>
         </div>
             
         <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="descricao">
             <label for="descricao" class="col mb-2 p-0 my-auto text-start">Descreva seu problema:</label>
-            <textarea name="descricao" class="p-1 my-auto text-start" style="max-height: 150px; min-height: 48px;" disabled><?=$this->view->info['descricao']?></textarea>
+            <textarea name="descricao" class="p-1 my-auto text-start h6 rounded-3 fw-normal" style="max-height: 150px; min-height: 48px;" disabled><?=$this->view->info['descricao']?></textarea>
         </div>
 
         <div class="mt-2 mb-3 col-12 mx-auto row p-0" id="endereco">
             <label for="endereco" class="col mb-2 p-0 my-auto text-start" >Endereço:</label>
-            <input name="endereco" type="text" class="p-1 my-auto text-start" value="<?=$this->view->info['endereco']?>" disabled>
+            <input name="endereco" type="text" class="p-1 my-auto text-start form-control rounded-3" value="<?=$this->view->info['endereco']?>" disabled>
         </div>
 
         <div>
-            <button type="submit" class="btn btn-success w-25" id="btnpedido"> Atender</button>
+            <button type="submit" class="btn btn-dark w-25" id="btnpedido">Atender</button>
         </div>
     </form>
 
     <div>
-        <a href="/profissional" class="mt-5 btn btn-primary"> Voltar </a>
+        <a href="/profissional" class="mt-5 btn btn-dark"> Voltar </a>
     </div>
 </div>

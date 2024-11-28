@@ -2,6 +2,7 @@
 
 namespace App\Models;
 use MF\Model\Model;
+use App\Models\Funcoes_gerais;
 
 class Cliente extends Model{
 
@@ -16,7 +17,13 @@ class Cliente extends Model{
         $indice = "";
         $valor = "";
     
-        if(md5($dados['senha']) == md5($dados['senha2'])) {
+        $resp_senha = Funcoes_gerais::validasenha($dados['senha']);
+        if(md5($dados['senha']) != md5($dados['senha2'])) {
+            $resp_senha['valida'] = false;
+            $resp_senha['msg'] = "As Senhas Não São Iguais";
+        } elseif(!$resp_senha['valida']) {
+            $resp_senha['msg'];
+        } else {
             foreach($dados as $key => $value) {
                 if($key == 'senha') {
                     $indice .= $key.", tipo";
@@ -29,10 +36,9 @@ class Cliente extends Model{
             }
             
             $this->insert($this->tb,$indice,$valor);
-            return true;
-        } else {
-            return false;
-        }
+            $resp_senha['valida'] = true;
+        }  
+        return $resp_senha;
     }
 }
 /**/

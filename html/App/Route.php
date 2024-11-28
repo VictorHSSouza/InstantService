@@ -138,6 +138,12 @@ Class Route extends Bootstrap {
             'action' => 'cad_pedido'
         );
 
+        $routes['ver_pedido_finalizado'] = array(
+            'route' => '/ver_pedido_finalizado',
+            'controller' => 'pedidoController',
+            'action' => 'ver_pedido_finalizado'
+        );
+
         $routes['ver_pedido'] = array(
             'route' => '/ver_pedido',
             'controller' => 'pedidoController',

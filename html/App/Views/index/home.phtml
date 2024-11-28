@@ -14,8 +14,29 @@
     }
 ?>
 
+    <?php if(isset($_SESSION['id'])) { ?>
+        <div class="text-start m-auto display-4 col col-sm-8 col-11 p-0 mb-3 fw-bold mt-5">
+            <span>Olá, <?=$this->view->nome?>!</span>
+        </div>
+    <?php } else { ?>
+        <div class="text-start m-auto display-4 col col-sm-8 col-11 p-0 mb-3 fw-bold mt-5">
+            <span>Bem-vindo à InstantService!</span>
+        </div>
+    <?php } ?>
+
+    <div class="text-start m-auto h4 col col-sm-8 col-11 p-0 mb-4 roboto-300">
+        <span>Encontre profissionais e contrate serviços para tudo o que precisar!</span>
+    </div>
+
+    <div class="text-start m-auto col col-sm-8 col-11 p-0 mb-3">
+        <a href="fazer_pedido" class="btn btn-success-light rounded-4 px-4 py-3 fw-bold shadow">
+            <i class="fas fa-cart-plus me-2 text-dark"></i>
+            <span class="h6">Fazer Pedido</span>
+        </a>
+    </div>
+
 <div class="row p-0 m-0 my-5">
-    <div class="text-start m-auto display-4 col col-sm-8 col-11 p-0 mb-4 fw-bold"> Localização </div>
+    <div class="text-start m-auto h1 col col-sm-8 col-11 p-0 mb-4 fw-bold"> Localização </div>
 
     <div class="mb-5 d-flex p-0 justify-content-center">    
         <div class="col col-sm-8 col-11 d-flex align-items-center bg-secondary-subtle justify-content-center rounded-2 shadow" style="height: 400px;">
@@ -27,9 +48,9 @@
 
     if(isset($this->view->pedidos) and $this->view->pedidos) { ?> 
     
-        <div class="text-start m-auto display-4 col col-sm-8 col-11 p-0 mb-4 fw-bold"> Pedidos em Andamento </div>
+        <div class="text-start m-auto h1 col col-sm-8 col-11 p-0 mb-4 fw-bold"> Pedidos em Andamento </div>
 
-        <div class="mb-5 d-flex p-0 justify-content-center"> 
+        <div class="mb-3 d-flex p-0 justify-content-center"> 
 
             <div class="col col-sm-8 col-11 align-items-center justify-content-center">
                 <?php foreach($this->view->pedidos as $value) { 
@@ -66,23 +87,12 @@
             </div>
             
         </div>
-    <?php } ?>
-
-    <?php if(isset($_SESSION['id'])) { ?>
-        <div class="text-start m-auto display-4 col col-sm-8 col-11 p-0 mb-3 fw-bold">
-            <span>Olá, <?=$this->view->nome?>!</span>
+        <div class="text-start m-auto col col-sm-8 col-11 p-0 mb-5">
+            <a href="ver_pedido_finalizado" class="btn btn-success-light rounded-4 px-4 py-3 fw-bold shadow">
+                <i class="<i fa-solid fa-folder me-2 text-dark"></i>
+                <span class="h6">Ver Pedidos Finalizados</span>
+            </a>
         </div>
     <?php } ?>
-
-    <div class="text-start m-auto h5 col col-sm-8 col-11 p-0 mb-4 roboto-300">
-        <span>Encontre profissionais e contrate serviços para tudo o que precisar!</span>
-    </div>
-
-    <div class="text-start m-auto col col-sm-8 col-11 p-0 mb-3">
-        <a href="fazer_pedido" class="btn btn-success-light rounded-4 px-4 py-3 fw-bold shadow">
-            <i class="fas fa-cart-plus me-2 text-dark"></i>
-            <span class="h6">Fazer Pedido</span>
-        </a>
-    </div>
 </div>
 

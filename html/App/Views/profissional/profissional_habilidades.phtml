@@ -5,7 +5,7 @@
 <div class="m-0 p-0 text-center my-5">
     <h1 class="mb-5">Cadastro de Profissional</h1>
 
-    <form action="/profissional_habilidades" method="POST" class="row container w-40 m-auto py-2 h5 border px-5 border-5 rounded-3 border-dark" enctype="multipart/form-data"> 
+    <form action="/profissional_habilidades" method="POST" class="row container w-40 m-auto py-2 h5 border rounded-3" enctype="multipart/form-data"> 
         
         <div id="habilidades" class="mt-2 mb-3 col-12 mx-auto row p-0">
             <div class="fw-bold"> Habilidades </div>
@@ -16,7 +16,7 @@
                     foreach($habilidades['habilidades'] as $values) {
                         $stts = (isset($habilidades['habilidades_prof'][$values['id_habilidade']]))?'none':'true';
                         ?>
-                            <div class="m-1 btn btn-success col" id="habilidade<?=$values['id_habilidade']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id']?>,<?=$values['id_habilidade']?>,'0')"><?=$values['habilidade']?></div>
+                            <div class="m-1 btn btn-dark rounded-3 col-3 m-0 p-2" id="habilidade<?=$values['id_habilidade']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id']?>,<?=$values['id_habilidade']?>,'0')"><?=$values['habilidade']?></div>
                         <?php
                     }
                 ?>
@@ -28,7 +28,7 @@
                     foreach($habilidades['habilidades'] as $values) {
                         $stts = (!isset($habilidades['habilidades_prof'][$values['id_habilidade']]))?'none':'true';
                         ?>
-                            <div class="m-1 btn btn-success col" id="habilidade_cad<?=$values['id_habilidade']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id']?>,<?=$values['id_habilidade']?>,'1')"><?=$values['habilidade']?></div>
+                            <div class="m-1 btn btn-dark rounded-3 col-3 m-0 p-2" id="habilidade_cad<?=$values['id_habilidade']?>" style="display:<?=$stts?>;" onclick="cad_habilidade( <?=$_SESSION['id']?>,<?=$values['id_habilidade']?>,'1')"><?=$values['habilidade']?></div>
                         <?php
                     }
                 ?>
@@ -41,7 +41,7 @@
         </div>
     
         <div class="my-3 mx-auto p-0 text-center cad2">
-            <button type="submit" class="w-75 btn btn-success">Enviar</button>
+            <button type="submit" class="w-40 btn btn-dark rounded-4 ">Enviar</button>
         </div>
 
     </form>

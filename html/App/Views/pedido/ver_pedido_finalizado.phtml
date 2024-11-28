@@ -1,0 +1,30 @@
+<div class=" container-fluid">
+    <div class="text-start m-auto h1 col col-sm-8 col-11 p-0 mb-4 fw-bold mt-4"> Pedidos Finalizados </div>
+
+    <div class="mb-3 d-flex p-0 justify-content-center"> 
+
+        <div class="col col-sm-8 col-11 align-items-center justify-content-center">
+            <?php foreach($this->view->pedidos as $value) { 
+                ?>
+                <a href="/ver_pedido?id=<?=$value['id_pedido']?>" class="btn btn-danger-light justify-content-between rounded-4 mb-3 w-100 shadow pt-3 pb-2 px-4 d-flex align-items-center">
+                    <div class="d-flex align-items-center">
+                        <!-- Ícone de verificação -->
+                        <i class="fa-solid fa-check me-3 text-dark"></i>
+                        <div class="text-start">
+                            <div class="flex-grow-1 h5 text-capitalize"><?=$value['descricao']?></div>
+                            <div class="mt-2 h6"><?=$value['descricao_status']?></div>
+                        </div>
+                    </div>
+                </a>
+            <?php } ?>
+        </div>
+        
+    </div>
+
+    <div class="text-start m-auto col col-sm-8 col-11 p-0 mb-5">
+        <a href="/" class="btn btn-dark rounded-4 px-4 py-3 fw-bold shadow">
+            <i class="fa-solid fa-backward me-2 text-light"></i>
+            <span class="h6 text-light">Voltar</span>
+        </a>
+    </div>
+</div>
